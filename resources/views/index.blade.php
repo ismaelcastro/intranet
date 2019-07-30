@@ -4,8 +4,52 @@
     <h1>Dashboard</h1>
 @stop
 @section('content')
+
+	<h2 class="page-header">Informativos</h2>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Avisos Importantes</h3>
+				</div>
+				<dic class="box-body">
+					<div class="row">
+						<div class="col-md-12">
+							
+						</div>
+					</div>
+				</dic>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Aniversariantes do Mês</h3>
+				</div>
+				<dic class="box-body">
+					<div class="row">
+						<div class="col-md-8">
+							<!-- widget -->
+							<div class="box box-widget widget-user-2">
+								<div class="widget-user-header bg-yellow">
+									<div class="widget-user-image">
+										<img src="{{url('storage/users/ismael_castro.jpeg')}}" class="img-circle" alt="">
+									</div>
+									<h3 class="widget-user-username">Ismael Castro</h3>
+									<h5 class="widget-user-desc">Setor de TI</h5>
+								</div>
+							</div>
+							<!-- end widget -->
+						</div>
+					</div>
+				</dic>
+			</div>
+		</div>
+	</div>
+	<h2 class="page-header">Departamento Pessoal</h2>
     <div class="row">	
-		<div class="col-md-6">	
+		<div class="col-md-6">
+			<small>Calendário de Férias</small>	
 			<div class="box box-primary">	
 				<div class="box box-body no-padding">	
 						<div id="calendar">	
@@ -27,29 +71,30 @@
     	var d    = date.getDate(),
         	m    = date.getMonth(),
         	y    = date.getFullYear()
-		$('#calendar').fullCalendar({
-			header    : {
-        		left  : 'prev,next today',
-        		center: 'title',
-        		right : 'month,agendaWeek,agendaDay'
-      		},
-      		buttonText:{
-      			today:"Hoje",
-      			month:"Mês",
-      			week:"Semana",
-      			day:"Dia",
-      		},
-      		events: [
-      			{
-      				title: "Férias Ismael Castro",
-      				start: "2019-07-30",
-      				end:"2019-08-29",
-      				backgroundColor: "#f39c12",
-      				boderColor: "#f39c12",
-      			},
 
-      		],
-      		displayEventTime:false,
-		});
+
+        $.getJSON("{{url('events')}}", function(data){
+        	// alert(JSON.stringify(data));
+        	$('#calendar').fullCalendar({
+				header    : {
+	        		left  : 'prev,next today',
+	        		center: 'title',
+	        		right : 'month,agendaWeek,agendaDay'
+	      		},
+	      		buttonText:{
+	      			today:"Hoje",
+	      			month:"Mês",
+	      			week:"Semana",
+	      			day:"Dia",
+	      		},
+	      		events: data,
+	      		displayEventTime:false,
+			});
+
+        });
+			
+
+
+
 	</script>
 @endpush
