@@ -10,15 +10,25 @@
 		<div class="col-md-6">
 			<div class="box box-primary">
 				<div class="box-header">
+					<i class="fa fa-warning"></i>
 					<h3 class="box-title">Avisos Importantes</h3>
 				</div>
-				<dic class="box-body">
-					<div class="row">
-						<div class="col-md-12">
-							
-						</div>
-					</div>
-				</dic>
+				<div class="box-body">
+					
+						
+					<div class="alert alert-danger alert-dismissible">
+		                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		                <h4><i class="icon fa fa-warning"></i> Atualização do Callisto</h4>
+		                Atualização do Callisto acontecerá as 16h30min, durante a atualização o sitema poderá apresentar instabilidade!
+	  				</div>
+	  				<div class="alert alert-warning alert-dismissible">
+		                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		                <h4><i class="icon fa fa-warning"></i> Other fake warning</h4>
+		                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+	  				</div>
+						
+					
+				</div>
 			</div>
 		</div>
 		<div class="col-md-6">
@@ -26,23 +36,16 @@
 				<div class="box-header">
 					<h3 class="box-title">Aniversariantes do Mês</h3>
 				</div>
-				<dic class="box-body">
+				<div class="box-body">
 					<div class="row">
-						<div class="col-md-8">
-							<!-- widget -->
-							<div class="box box-widget widget-user-2">
-								<div class="widget-user-header bg-yellow">
-									<div class="widget-user-image">
-										<img src="{{url('storage/users/ismael_castro.jpeg')}}" class="img-circle" alt="">
-									</div>
-									<h3 class="widget-user-username">Ismael Castro</h3>
-									<h5 class="widget-user-desc">Setor de TI</h5>
-								</div>
-							</div>
-							<!-- end widget -->
-						</div>
+						
+							
+						<!-- widget -->
+
+						<!-- end widget -->
+						
 					</div>
-				</dic>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -52,8 +55,7 @@
 			<small>Calendário de Férias</small>	
 			<div class="box box-primary">	
 				<div class="box box-body no-padding">	
-						<div id="calendar">	
-						</div>
+						<div id="calendar"></div>
 				</div>
 			</div>
 		</div>
