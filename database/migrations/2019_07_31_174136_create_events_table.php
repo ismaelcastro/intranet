@@ -21,7 +21,7 @@ class CreateEventsTable extends Migration
             $table->date('dateStart');
             $table->date('dateEnd')->nullable();
             $table->boolean('allDay');
-            $table->boolean('ativo', 1);
+            $table->boolean('active', 1);
         });
     }
 
