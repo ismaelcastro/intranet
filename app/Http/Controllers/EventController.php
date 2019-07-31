@@ -27,6 +27,7 @@ class EventController extends Controller
                 'end'   => '2019-08-05',
                 'backgroundColor' => '#3c8dbc',
                 'borderColor'   => '#3c8dbc',
+                'allDay'=> true,
             )
 
         );
