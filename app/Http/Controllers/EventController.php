@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Events;
 
 class EventController extends Controller
 {
@@ -13,7 +14,27 @@ class EventController extends Controller
      */
     public function index( Request $request)
     {
-       
+        $events = array();
+
+
+        $evt_query = Events::all();
+
+        foreach ($evt_query as $evt) {
+            
+            array_push($events,
+                array(
+                    'id'    => $evt->id,
+                    'title' => $evt->title,
+                    'start' => $evt->dateStart,
+                    'end'   => $evt->dateEnd,
+                    'backgroundColor' => $evt->color,
+                    'borderColor' => $evt->color,
+                )
+            );
+            
+        }
+
+        
         if($request->type == 'Ferias'){
              $events_arr = array(
                 array(
