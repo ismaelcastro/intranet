@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\actionPlan;
+use Yajra\Datatables\Datatables;
 
 class actionPlansController extends Controller
 {
@@ -80,5 +82,8 @@ class actionPlansController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function datatables(){
+        return Datatables::of(actionPlan::query())->toJson();
     }
 }

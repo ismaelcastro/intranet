@@ -66,7 +66,18 @@
 				</div>
 				<div class="box-body">
 					<div class="row">
-						
+						<div class="col-md-12">
+							<table id="actionplans" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Desc.</th>
+										<th>Data de abertura</th>
+										<th>Status</th>
+										<th>Tipo de ação</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
 						
 					</div>
 				</div>
@@ -78,10 +89,13 @@
 @push('css')
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.print.min.css') }}" media="print">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 @endpush
 @push('js')
 	<script src="{{ URL::asset('plugins/moment/moment.js') }}"></script>
 	<script src="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.js')}}"></script>
+	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+	<script src="/vendor/datatables/buttons.server-side.js"></script>
 	<script>
 		var date = new Date()
     	var d    = date.getDate(),
@@ -145,5 +159,23 @@
         }
 
 
+	</script>
+	<script>
+		$(document).ready(function(){
+			$('#actionplans').DataTable({
+				processing:true,
+				serverSide:true,
+				ajax:'{{url('actionplans/datatables')}}',
+				columns:[
+					{data: 'label', name: 'label'},
+					{data: 'openingDate', name:'openingDate'},
+					{data: 'status', name: 'status'},
+					{data: 'typeAction', name: 'typeAction'}
+				],
+
+
+			});
+
+		});
 	</script>
 @endpush

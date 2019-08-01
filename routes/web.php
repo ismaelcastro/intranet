@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('actionplans/datatables', 'actionPlansController@datatables');
+
 Route::resource('events', 'EventController');
