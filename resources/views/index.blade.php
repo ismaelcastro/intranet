@@ -95,7 +95,7 @@
 	<script src="{{ URL::asset('plugins/moment/moment.js') }}"></script>
 	<script src="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.js')}}"></script>
 	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-	<script src="/vendor/datatables/buttons.server-side.js"></script>
+	
 	<script>
 		var date = new Date()
     	var d    = date.getDate(),
