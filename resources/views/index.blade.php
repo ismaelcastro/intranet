@@ -56,7 +56,23 @@
 			</div>
 		</div>
 	</div>
-	<h2 class="page-header">Departamento Pessoal</h2>
+	<h2 class="page-header">Qualidade</h2>
+	
+	<div class="row">		
+		<div class="col-md-8">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Últimos planos de ação abertos</h3>
+				</div>
+				<div class="box-body">
+					<div class="row">
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
     
 @stop
 @push('css')

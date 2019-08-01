@@ -29,12 +29,12 @@ class EventController extends Controller
                     'end'   => $evt->dateEnd,
                     'backgroundColor' => $evt->color,
                     'borderColor' => $evt->color,
+                    'recurrence'    => $evt->recurrence,
                 )
             );
             
         }
 
-        
         if($request->type == 'Ferias'){
              $events_arr = array(
                 array(
