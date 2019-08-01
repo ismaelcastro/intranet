@@ -4,17 +4,22 @@
     <h1>Dashboard</h1>
 @stop
 @section('content')
-
-	<h2 class="page-header">Informativos</h2>
-	<div class="row">
+	<div class="row">	
+		<div class="col-md-6">
+				
+			<div class="box box-primary">	
+				<div class="box box-body no-padding">	
+						<div id="calendar"></div>
+				</div>
+			</div>
+		</div>
 		<div class="col-md-6">
 			<div class="box box-primary">
 				<div class="box-header">
 					<i class="fa fa-warning"></i>
 					<h3 class="box-title">Avisos Importantes</h3>
 				</div>
-				<div class="box-body">
-					
+				<div class="box-body">				
 						
 					<div class="alert alert-danger alert-dismissible">
 		                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -25,12 +30,14 @@
 		                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		                <h4><i class="icon fa fa-warning"></i> Other fake warning</h4>
 		                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-	  				</div>
-						
+	  				</div>					
 					
 				</div>
 			</div>
 		</div>
+		
+    </div>
+	<div class="row">		
 		<div class="col-md-6">
 			<div class="box box-primary">
 				<div class="box-header">
@@ -50,16 +57,7 @@
 		</div>
 	</div>
 	<h2 class="page-header">Departamento Pessoal</h2>
-    <div class="row">	
-		<div class="col-md-6">
-			<small>Calendário de Férias</small>	
-			<div class="box box-primary">	
-				<div class="box box-body no-padding">	
-						<div id="calendar"></div>
-				</div>
-			</div>
-		</div>
-    </div>
+    
 @stop
 @push('css')
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.css') }}">
@@ -78,6 +76,40 @@
         $.getJSON("{{url('events')}}", function(data){
         	// alert(JSON.stringify(data));
         	$('#calendar').fullCalendar({
+        		customButtons:{
+	      			filterFerias:{
+	      				text:'Férias',
+	      				click: function(){
+	      					$('#calendar').fullCalendar('removeEvents');
+	      					$.ajax(
+
+	      						{
+	      							url:'{{url('events')}}',
+	      							type:'JSON',
+	      							method:'GET',
+	      							data:{type: 'Ferias'},
+	      							success:function(events){
+	      								$('#calendar').fullCalendar('renderEvents', JSON.parse(events));      								
+	      							},
+	      						}
+
+	      					);
+	      					
+	      					
+
+	      					// $('#calendar').fullCalendar('renderEvents',);
+	      				}
+	      			},
+	      			filterFiscal:{
+	      				text:'Calendário Fiscal',
+	      				click: function(){
+
+	      				}
+	      			}
+	      		},
+	      		footer:{
+	      			left:'filterFerias',
+	      		},
 				header    : {
 	        		left  : 'prev,next today',
 	        		center: 'title',
@@ -89,6 +121,7 @@
 	      			week:"Semana",
 	      			day:"Dia",
 	      		},
+	      		
 	      		events: data,
 	      		displayEventTime:false,
 			});

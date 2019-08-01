@@ -15,6 +15,7 @@ class CreateQualityactionsTable extends Migration
     {
         Schema::create('qualityactions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('label');
             $table->integer('action_plans_id')->unsigned();
             $table->date('DTprevEnd');
             $table->date('newDTforEnd')->nullable();

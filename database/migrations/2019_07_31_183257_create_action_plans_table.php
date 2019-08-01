@@ -15,6 +15,7 @@ class CreateActionPlansTable extends Migration
     {
         Schema::create('action_plans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('label');
             $table->dateTime('openingDate');
             $table->enum('typeAction', ['Melhoria', 'Corretiva']);
             $table->enum('source', ['Auditoria Interna', 'Auditoria Externa', 'Monitoramento de Processo']);
