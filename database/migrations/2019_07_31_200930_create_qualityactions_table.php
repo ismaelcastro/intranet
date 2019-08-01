@@ -14,12 +14,12 @@ class CreateQualityactionsTable extends Migration
     public function up()
     {
         Schema::create('qualityactions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('label');
-            $table->integer('action_plans_id')->unsigned();
+            $table->integer('actionplans_id')->unsigned();
             $table->date('DTprevEnd');
             $table->date('newDTforEnd')->nullable();
-            $table->foreign('action_plans_id')->references('id')->on('action_plans');
+            $table->foreign('actionplans_id')->references('id')->on('actionplans');
         });
     }
 

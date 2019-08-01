@@ -13,8 +13,8 @@ class CreateActionPlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('action_plans', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('actionplans', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('label');
             $table->dateTime('openingDate');
             $table->enum('typeAction', ['Melhoria', 'Corretiva']);
@@ -30,6 +30,6 @@ class CreateActionPlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('action_plans');
+        Schema::dropIfExists('actionplans');
     }
 }

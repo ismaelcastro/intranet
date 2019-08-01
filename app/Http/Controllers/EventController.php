@@ -17,14 +17,14 @@ class EventController extends Controller
         if($request->type == 'Ferias'){
              $events_arr = array(
                 array(
-                    'title' => 'Ferias Ismael Castro',
+                    'title' => 'Férias Ismael Castro',
                     'start' => '2019-07-30',
                     'end'   => '2019-08-05',
                     'backgroundColor' => '#f39c12',
                     'borderColor'   => '#f39c12',
                 ),
                 array(
-                    'title' => 'Ferias Funcionario teste',
+                    'title' => 'Férias Funcionario teste',
                     'start' => '2019-07-30',
                     'end'   => '2019-08-05',
                     'backgroundColor' => '#3c8dbc',

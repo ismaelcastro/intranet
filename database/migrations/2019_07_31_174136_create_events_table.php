@@ -14,15 +14,16 @@ class CreateEventsTable extends Migration
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->timestamps();
             $table->string('title');
             $table->enum('type', ['Férias', 'Evento', 'Evento Fiscal', 'Reuniões', 'lembrete']);
             $table->date('dateStart');
             $table->date('dateEnd')->nullable();
-            $table->boolean('allDay');
+            $table->boolean('allDay')->nullable();
             $table->boolean('active', 1);
             $table->string('color');
+            $table->enum('recurrence', ['weekly', 'biweekly', 'monthly', 'Yearly'])->nullable();
         });
     }
 
