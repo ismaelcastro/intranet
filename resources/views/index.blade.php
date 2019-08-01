@@ -81,23 +81,8 @@
 	      				text:'Férias',
 	      				click: function(){
 	      					$('#calendar').fullCalendar('removeEvents');
-	      					$.ajax(
-
-	      						{
-	      							url:'{{url('events')}}',
-	      							type:'JSON',
-	      							method:'GET',
-	      							data:{type: 'Ferias'},
-	      							success:function(events){
-	      								$('#calendar').fullCalendar('renderEvents', JSON.parse(events));      								
-	      							},
-	      						}
-
-	      					);
+	      					eventAjax('Ferias');
 	      					
-	      					
-
-	      					// $('#calendar').fullCalendar('renderEvents',);
 	      				}
 	      			},
 	      			filterFiscal:{
@@ -128,7 +113,20 @@
 
         });
 			
+        function eventAjax(eventType){
+        	$.ajax(
+				{
+					url:'{{url('events')}}',
+					type:'JSON',
+					method:'GET',
+					data:{type: eventType},
+					success:function(events){
+						$('#calendar').fullCalendar('renderEvents', JSON.parse(events));      								
+					},
+				}
 
+			);
+        }
 
 
 	</script>

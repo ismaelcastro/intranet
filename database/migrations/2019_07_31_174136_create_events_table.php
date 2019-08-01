@@ -22,6 +22,7 @@ class CreateEventsTable extends Migration
             $table->date('dateEnd')->nullable();
             $table->boolean('allDay');
             $table->boolean('active', 1);
+            $table->string('color');
         });
     }
 
