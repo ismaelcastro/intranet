@@ -18,3 +18,4 @@ Route::get('/', function () {
 Route::get('actionplans/datatables', 'actionPlansController@datatables');
 
 Route::resource('events', 'EventController');
+Route::resource('actionplans', 'actionPlansController');

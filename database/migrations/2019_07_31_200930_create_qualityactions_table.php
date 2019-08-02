@@ -19,6 +19,11 @@ class CreateQualityactionsTable extends Migration
             $table->integer('actionplans_id')->unsigned();
             $table->date('DTprevEnd');
             $table->date('newDTforEnd')->nullable();
+            $table->date('DTend')->nullable();
+            $table->date('DTverify');
+            $table->boolean('effective')->nullable();
+            $table->boolean('duplicate');
+            $table->string('beforeaction')->nullable();
             $table->foreign('actionplans_id')->references('id')->on('actionplans');
         });
     }
