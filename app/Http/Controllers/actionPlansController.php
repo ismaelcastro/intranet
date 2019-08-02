@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\actionPlan;
 use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
 
 class actionPlansController extends Controller
 {
@@ -84,6 +85,22 @@ class actionPlansController extends Controller
         //
     }
     public function datatables(){
-        return Datatables::of(actionPlan::query())->toJson();
+        return Datatables::of(actionPlan::query())
+            ->editColumn('label', function(actionPlan $actionPlan){
+                return "<a href='#'>{$actionPlan->label}</a>";
+            })
+            ->editColumn('openingDate', function(actionPlan $actionPlan){
+               return Carbon::parse($actionPlan->openingDate)->format('d/m/Y');
+            })
+            ->editColumn('status', function(actionPlan $actionPlan){
+                if($actionPlan->status == "Aberto"){
+                    return "<span class='label label-success'>{$actionPlan->status}</span>";
+                }else{
+                    return "<span class='label label-danger'>{$actionPlan->status}</span>";   
+                }
+                
+            })
+            ->rawColumns(['label', 'status'])
+            ->toJson();
     }
 }

@@ -35,9 +35,6 @@
 				</div>
 			</div>
 		</div>
-		
-    </div>
-	<div class="row">		
 		<div class="col-md-6">
 			<div class="box box-primary">
 				<div class="box-header">
@@ -55,7 +52,10 @@
 				</div>
 			</div>
 		</div>
-	</div>
+		
+    </div>
+	
+
 	<h2 class="page-header">Qualidade</h2>
 	
 	<div class="row">		
