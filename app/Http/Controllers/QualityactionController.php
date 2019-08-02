@@ -82,7 +82,8 @@ class QualityactionController extends Controller
         //
     }
     public function datatables(){
-        return Datatables::of(actionPlan::query())
+        $model = null;
+        return Datatables::eloquent($model)
             
             ->rawColumns(['label', 'status'])
             ->toJson();
