@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('actionplans/datatables', 'actionPlansController@datatables');
-Route::get('actions/datatables', 'QualityactionController@datatables');
+Route::get('actions/datatables/{id}', 'QualityactionController@datatables');
 
 Route::resource('events', 'EventController');
 Route::resource('actionplans', 'actionPlansController');

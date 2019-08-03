@@ -48,7 +48,7 @@ class actionPlansController extends Controller
      */
     public function show($id)
     {
-        return view('actionplans.index');
+        return view('actionplans.index', compact('id'));
     }
 
     /**

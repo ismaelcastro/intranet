@@ -44,12 +44,20 @@
 	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			$('#actionplans').DataTable({
+
+			$('#actions').DataTable({
 				processing:true,
 				serverSide:true,
-				ajax:'{{url('actionplans/datatables')}}',
+				ajax:"{{url('actions/datatables/{$id}')}}",
 				columns:[
 					{data: 'label', name: 'label'},
+					{data: 'DTprevEnd', name: 'DTprevEnd'},
+					{data: 'DTend', name: 'DTend'},
+					{data: 'deadline', name:'deadline'},
+					{data: 'DTverify', name:'DTverify'},
+					{data: 'effective', name:'effective'},
+					{data: 'duplicate', name:'duplicate'},
+					{data: 'beforeaction', name:'beforeaction'}
 					
 				],
 

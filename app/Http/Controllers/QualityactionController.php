@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\qualityaction;
+use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
 
 class QualityactionController extends Controller
 {
@@ -81,11 +84,50 @@ class QualityactionController extends Controller
     {
         //
     }
-    public function datatables(){
-        $model = null;
-        return Datatables::eloquent($model)
-            
-            ->rawColumns(['label', 'status'])
+    public function datatables($id, Datatables $DataTables){
+        $model = qualityaction::where('actionplans_id', 1);
+        return $DataTables->eloquent($model)            
+            ->editColumn('DTend', function(qualityaction $QA){
+                if($QA->DTend == null){
+                    return "Em aberto";
+                }else{
+                    return $QA->DTend;
+                }
+                
+            })
+            ->addColumn('deadline', function(qualityaction $QA){
+                if($QA->DTend == null && $QA->newDTforEnd == null){
+                    return "Em aberto";
+                }elseif($QA->DTend != null && $QA->newDTforEnd == null){
+                    return "<i class='fa fw fa-thumbs-up text-success'></i>";
+                }else{
+                    return "<i class='fa fw fa-thumbs-down text-danger'></i>";
+                };
+            })
+            ->editColumn('effective', function(qualityaction $QA){
+                if($QA->effective == null){
+                    return "Não avaliado !";
+                }elseif($QA->effective == 0 ){
+                    return "<i class='fa fw fa-thumbs-down text-danger'></i>"; 
+                }else{
+                    return "<i class='fa fw fa-thumbs-up text-success'></i>";
+                }
+            })
+            ->editColumn('duplicate', function(qualityaction $QA){
+                if($QA->duplicate == 1){
+                    return "<i class='fa fw fa-thumbs-up text-success'></i>";
+                }else{
+                    return "<i class='fa fw fa-thumbs-down text-danger'></i>"; 
+                }
+            })
+            ->editColumn('beforeaction', function(qualityaction $QA){
+                if($QA->beforeaction == null){
+                    return '-';
+                }else{
+                    return $QA->beforeaction;
+                }
+            })           
+            ->rawColumns(['deadline', 'effective', 'duplicate'])
             ->toJson();
     }
 }
