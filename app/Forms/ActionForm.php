@@ -17,7 +17,7 @@ class ActionForm extends Form
         	'rules' => 'required',
         ])
         ->add('DTprevEnd', 'date', [
-        	'label' => 'Data prevista para conclusão'
+        	'label' => 'Data prevista para conclusão',
         	'rules' => 'required',
         ])
         ->add('DTverify', 'date', [
@@ -25,12 +25,12 @@ class ActionForm extends Form
         	'rules' => 'required',
         ])
         ->add('effective', 'checkbox', [
-        	'label' => 'Efetivo ?'
+        	'label' => 'Efetivo ?',
         	'checked' => false,
         ])
         ->add('duplicate', 'hidden', [
-        	'value' = 0,
-        ])
+        	'value' => 0,
+        ]);
 
     }
 }
