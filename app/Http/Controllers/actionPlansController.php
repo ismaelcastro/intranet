@@ -55,7 +55,7 @@ class actionPlansController extends Controller
     {
         $form = $FormBuilder->create(ActionForm::class, [
             'method' => 'post',
-            'url'    => route('actions.store');
+            'url'    => route('actions.store')
         ]);
         return view('actionplans.index', compact('id'));
     }
