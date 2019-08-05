@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\actionPlan;
+use App\Forms\ActionForm;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
+use Illuminate\Routing\Controller as BaseController;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Kris\LaravelFormBuilder\FormBuilderTrait;
+
 
 class actionPlansController extends Controller
 {
@@ -46,8 +51,12 @@ class actionPlansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, FormBuilder $FormBuilder)
     {
+        $form = $FormBuilder->create(ActionForm::class, [
+            'method' => 'post',
+            'url'    => route('actions.store');
+        ]);
         return view('actionplans.index', compact('id'));
     }
 

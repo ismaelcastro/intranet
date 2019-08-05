@@ -81,6 +81,10 @@
 						
 					</div>
 				</div>
+				<div class="box-footer clearfix">
+					<a href="" class="btn btn-sm btn-info btn-flat pull-left">Inserir novo P.A</a>
+					<a href="" class="btn btn-sm btn-default btn-flat pull-right">Ver todos</a>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -6,38 +6,77 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box box-primary">
+			<div class="box box-info">
 				<div class="box box-body no-padding">
 					<div class="row">
 						<div class="col-md-12">
-							
-							<div class="table-responsive">
-								<table id="actions" class="table table-bordered table-striped">
-									<thead>
-										<tr>
-											<th>Desc.</th>
-											<th>Previsão para conclusão</th>
-											<th>Data de conclusão</th>
-											<th>Encerrado no prazo ?</th>
-											<th>Data para verificação</th>
-											<th>Eficaz ?</th>
-											<th>Necessidade de nova abertura ?</th>
-											<th>Nº do novo plano</th>
-										</tr>
-									</thead>
-								</table>
+							<div class="jumbotron padding-40-left-rigth bg-white">
+								<div class="table-responsive">
+									<table id="actions" class="table table-bordered table-striped">
+										<thead>
+											<tr>
+												<th>Desc.</th>
+												<th>Previsão para conclusão</th>
+												<th>Data de conclusão</th>
+												<th>Encerrado no prazo ?</th>
+												<th>Data para verificação</th>
+												<th>Eficaz ?</th>
+												<th>Necessidade de nova abertura ?</th>
+												<th>Nº do novo plano</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
 							</div>
-
 						</div>
 					</div>				
-				
+					
 				</div>
+				<div class="box-footer clearfix">
+					<a href="" class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#new-action">Inserir nova ação</a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="modal fade" id="new-action">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  	<span aria-hidden="true">&times;</span></button>
+                	<h4 class="modal-title">Default Modal</h4>
+				</div>
+				<div class="modal-body">
+					<p>One fine body&hellip;</p>
+				</div>
+				<div class="modal-footer">
+                	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                	<button type="button" class="btn btn-info">Save changes</button>
+              	</div>
 			</div>
 		</div>
 	</div>
+
 @stop
 @push('css')
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+	<style>
+		.bg-white{
+			background: #fff;
+
+		}
+		.no-border-radius{
+			border-radius: 0px !important;
+		}
+		.padding-40-left-rigth{
+			padding-left:40px !important;
+			padding-right: 40px !important;
+			padding-bottom: 0px !important;
+			padding-top:10px !important;
+		}
+	</style>
 @endpush
 
 @push('js')
