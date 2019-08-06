@@ -20,17 +20,13 @@ class ActionForm extends Form
         	'label' => 'Data prevista para conclusão',
         	'rules' => 'required',
         ])
-        ->add('DTverify', 'date', [
-        	'label' => 'Data da verificação',
-        	'rules' => 'required',
-        ])
-        ->add('effective', 'checkbox', [
-        	'label' => 'Efetivo ?',
-        	'checked' => false,
-        ])
-        ->add('duplicate', 'hidden', [
-        	'value' => 0,
+        ->add('submit', 'submit',[
+            'label' => 'Salvar',
+            'attr' => [
+                'class' => 'btn btn-info pull-rigth'
+            ]
         ]);
+        
 
     }
 }

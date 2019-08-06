@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\qualityaction;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
+use App\Forms\ActionForm;
+use Illuminate\Routing\Controller as BaseController;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Kris\LaravelFormBuilder\FormBuilderTrait;
 
 class QualityactionController extends Controller
 {
@@ -35,9 +39,20 @@ class QualityactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormBuilder $FormBuilder, Request $request)
     {
-        //
+        $form = $FormBuilder->create(ActionForm::class);
+
+        if( !$form->isValid() ){
+            return redirect()
+                    ->back()
+                    ->withErrors( $form->getErrors() )
+                    ->withInput();
+
+        };
+
+        $data = $form->getFieldValues();
+        dd($data);
     }
 
     /**
@@ -46,9 +61,18 @@ class QualityactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, FormBuilder $FormBuilder)
     {
-        return view('actionplans.index');
+        $form = $FormBuilder->create(ActionForm::class, [
+            'method' => 'post',
+            'url'    => route('actions.store')
+        ]);
+
+        $form->modify('actionplans_id', 'hidden',[
+            'value' => $id,
+        ]);
+        return view('actionplans.index', compact('id', 'form'));
+        
     }
 
     /**

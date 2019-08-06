@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\actionPlan;
-use App\Forms\ActionForm;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 use Illuminate\Routing\Controller as BaseController;
@@ -40,9 +39,9 @@ class actionPlansController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormBuilder $FormBuilder, Request $request)
     {
-        //
+        
     }
 
     /**
@@ -51,13 +50,9 @@ class actionPlansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, FormBuilder $FormBuilder)
+    public function show($id)
     {
-        $form = $FormBuilder->create(ActionForm::class, [
-            'method' => 'post',
-            'url'    => route('actions.store')
-        ]);
-        return view('actionplans.index', compact('id'));
+
     }
 
     /**
@@ -96,7 +91,7 @@ class actionPlansController extends Controller
     public function datatables(){
         return Datatables::of(actionPlan::query())
             ->editColumn('label', function(actionPlan $actionPlan){
-                $link = route('actionplans.show', ['id' => $actionPlan->id]);
+                $link = route('actions.show', ['id' => $actionPlan->id]);
                 return "<a href='{$link}'>{$actionPlan->label}</a>";
             })
             ->editColumn('openingDate', function(actionPlan $actionPlan){
