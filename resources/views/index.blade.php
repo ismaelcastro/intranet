@@ -82,9 +82,43 @@
 					</div>
 				</div>
 				<div class="box-footer clearfix">
-					<a href="" class="btn btn-sm btn-info btn-flat pull-left">Inserir novo P.A</a>
+					<a href="" class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#new-actionplan">Inserir novo P.A</a>
 					<a href="" class="btn btn-sm btn-default btn-flat pull-right">Ver todos</a>
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="new-actionplan">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				{!! form_start($form) !!}
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  	<span aria-hidden="true">&times;</span></button>
+                	<h4 class="modal-title">Novo plano de ação</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							{!! form_row($form->label) !!}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							{!! form_row($form->typeAction) !!}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							{!! form_row($form->source) !!}
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+					{!! form_row($form->submit) !!}
+				</div>
+				{!! form_end($form, $renderRest = false) !!}
 			</div>
 		</div>
 	</div>

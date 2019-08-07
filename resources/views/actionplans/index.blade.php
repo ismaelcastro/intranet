@@ -119,5 +119,5 @@
 
 		});
 	</script>
-	@include('sweetalert::alert)
+	@include('sweetalert::alert')
 @endpush

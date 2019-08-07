@@ -58,9 +58,8 @@ class QualityactionController extends Controller
             ->add(60, 'days')
             ->format('Y-m-d');
         $data['duplicate'] = 0;
-        // qualityaction::create($data);
+        qualityaction::create($data);
         Alert::success('Success Title', 'Success Message');
-
         return redirect()->back();
         
     }
