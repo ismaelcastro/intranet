@@ -10,6 +10,8 @@ use App\Forms\ActionForm;
 use Illuminate\Routing\Controller as BaseController;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class QualityactionController extends Controller
 {
@@ -52,7 +54,15 @@ class QualityactionController extends Controller
         };
 
         $data = $form->getFieldValues();
-        dd($data);
+        $data['DTverify'] = Carbon::parse($data['DTprevEnd'])
+            ->add(60, 'days')
+            ->format('Y-m-d');
+        $data['duplicate'] = 0;
+        // qualityaction::create($data);
+        Alert::success('Success Title', 'Success Message');
+
+        return redirect()->back();
+        
     }
 
     /**

@@ -178,6 +178,9 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
 
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        
+
     ],
 
     /*
@@ -230,7 +233,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
-
-    ],
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        ],
+        
 
 ];

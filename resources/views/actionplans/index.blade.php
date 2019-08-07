@@ -38,6 +38,7 @@
 			</div>
 			
 		</div>
+		
 	</div>
 
 	<div class="modal fade" id="new-action">
@@ -65,9 +66,13 @@
 			{!! form_end($form, $renderRest = false) !!}
 		</div>
 	</div>
+	
+	
+	
 
 @stop
 @push('css')
+	
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 	<style>
 		.bg-white{
@@ -84,10 +89,12 @@
 			padding-top:10px !important;
 		}
 	</style>
+	
 @endpush
 
 @push('js')
 	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+	
 	<script>
 		$(document).ready(function(){
 
@@ -112,4 +119,5 @@
 
 		});
 	</script>
+	@include('sweetalert::alert)
 @endpush
