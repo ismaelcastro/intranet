@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\actionPlan;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
+use App\Forms\ActionPlanForm;
 use Illuminate\Routing\Controller as BaseController;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -41,7 +42,21 @@ class actionPlansController extends Controller
      */
     public function store(FormBuilder $FormBuilder, Request $request)
     {
-        
+        $form = $FormBuilder->create(ActionPlanForm::class);
+
+        if(!$form->isValid()){
+            return redirect()
+                    ->back()
+                    ->withErrors( $form->getErrors() )
+                    ->withInput();
+        };
+
+        $data = $form->getFieldValues();
+        $data['openingDate'] = Carbon::toDay();
+        $data['status'] = 1;
+        actionPlan::create($data); 
+        return redirect()->back();       
+
     }
 
     /**

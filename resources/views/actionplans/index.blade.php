@@ -65,10 +65,7 @@
 			</div>
 			{!! form_end($form, $renderRest = false) !!}
 		</div>
-	</div>
-	
-	
-	
+	</div>	
 
 @stop
 @push('css')
@@ -96,12 +93,12 @@
 	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
 	
 	<script>
-		$(document).ready(function(){
 
+		$(document).ready(function(){
 			$('#actions').DataTable({
 				processing:true,
 				serverSide:true,
-				ajax:"{{url('actions/datatables/{$id}')}}",
+				ajax:'{{url("actions/datatables", [$id])}}',
 				columns:[
 					{data: 'label', name: 'label'},
 					{data: 'DTprevEnd', name: 'DTprevEnd'},

@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
 Route::get('actionplans/datatables', 'actionPlansController@datatables');
 Route::get('actions/datatables/{id}', 'QualityactionController@datatables');
 

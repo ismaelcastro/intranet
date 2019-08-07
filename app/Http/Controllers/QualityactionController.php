@@ -117,8 +117,8 @@ class QualityactionController extends Controller
     {
         //
     }
-    public function datatables($id, Datatables $DataTables){
-        $model = qualityaction::where('actionplans_id', 1);
+    public function datatables(Request $Request, Datatables $DataTables){
+        $model = qualityaction::where('actionplans_id', $Request->id);
         return $DataTables->eloquent($model)            
             ->editColumn('DTend', function(qualityaction $QA){
                 if($QA->DTend == null){
