@@ -43,6 +43,7 @@ class QualityactionController extends Controller
      */
     public function store(FormBuilder $FormBuilder, Request $request)
     {
+        $eventData = array();
         $form = $FormBuilder->create(ActionForm::class);
 
         if( !$form->isValid() ){
@@ -52,12 +53,15 @@ class QualityactionController extends Controller
                     ->withInput();
 
         };
-
         $data = $form->getFieldValues();
         $data['DTverify'] = Carbon::parse($data['DTprevEnd'])
             ->add(60, 'days')
             ->format('Y-m-d');
         $data['duplicate'] = 0;
+
+        $eventData['dateStart'] = $data['DTverify'];
+        $eventData['tile'] = "Verificação da ação " . $data['label'];     
+
         qualityaction::create($data);
         Alert::success('Success Title', 'Success Message');
         return redirect()->back();
