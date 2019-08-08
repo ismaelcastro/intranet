@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\qualityaction;
+use App\Events;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 use App\Forms\ActionForm;
@@ -41,7 +42,7 @@ class QualityactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FormBuilder $FormBuilder, Request $request)
+    public function store(FormBuilder $FormBuilder, Request $request, Events $Events )
     {
         $eventData = array();
         $form = $FormBuilder->create(ActionForm::class);
@@ -60,9 +61,9 @@ class QualityactionController extends Controller
         $data['duplicate'] = 0;
 
         $eventData['dateStart'] = $data['DTverify'];
-        $eventData['tile'] = "Verificação da ação " . $data['label'];     
-
-        qualityaction::create($data);
+        $eventData['title'] = "Verificação da ação " . $data['label'];     
+        $Events->createReminder($eventData);
+        // qualityaction::create($data);
         Alert::success('Success Title', 'Success Message');
         return redirect()->back();
         
@@ -123,18 +124,21 @@ class QualityactionController extends Controller
     }
     public function datatables(Request $Request, Datatables $DataTables){
         $model = qualityaction::where('actionplans_id', $Request->id);
-        return $DataTables->eloquent($model)            
+        return $DataTables->eloquent($model)
+            ->editColumn('DTprevEnd', function(qualityaction $QA){
+                return Carbon::parse($QA->DTprevEnd)->format('d/m/Y');
+            })            
             ->editColumn('DTend', function(qualityaction $QA){
                 if($QA->DTend == null){
-                    return "Em aberto";
+                    return "<small class='label bg-aqua'>Em aberto</small>";
                 }else{
-                    return $QA->DTend;
+                    return Carbon::parse($QA->DTend)->format('d/m/Y');
                 }
                 
             })
             ->addColumn('deadline', function(qualityaction $QA){
                 if($QA->DTend == null && $QA->newDTforEnd == null){
-                    return "Em aberto";
+                    return "<small class='label bg-aqua'>Em aberto</small>";
                 }elseif($QA->DTend != null && $QA->newDTforEnd == null){
                     return "<i class='fa fw fa-thumbs-up text-success'></i>";
                 }else{
@@ -143,18 +147,21 @@ class QualityactionController extends Controller
             })
             ->editColumn('effective', function(qualityaction $QA){
                 if($QA->effective == null){
-                    return "Não avaliado !";
+                    return "<small class='label bg-yellow'>Em processo de avaliação !</small>";
                 }elseif($QA->effective == 0 ){
                     return "<i class='fa fw fa-thumbs-down text-danger'></i>"; 
                 }else{
                     return "<i class='fa fw fa-thumbs-up text-success'></i>";
                 }
             })
+            ->editColumn('DTverify', function(qualityaction $QA){
+                return Carbon::parse($QA->DTverify)->format('d/m/Y');
+            })
             ->editColumn('duplicate', function(qualityaction $QA){
                 if($QA->duplicate == 1){
-                    return "<i class='fa fw fa-thumbs-up text-success'></i>";
+                    return "<small class='label bg-green'>SIM !</small>";
                 }else{
-                    return "<i class='fa fw fa-thumbs-down text-danger'></i>"; 
+                    return "<small class='label bg-red'>NÃO !</small>"; 
                 }
             })
             ->editColumn('beforeaction', function(qualityaction $QA){
@@ -163,8 +170,15 @@ class QualityactionController extends Controller
                 }else{
                     return $QA->beforeaction;
                 }
+            })
+            ->addColumn('action', function(qualityaction $QA){
+                return " 
+                <form method='POST' style='display:inline' action='{$QA->id}'>
+                <input type='hidden' name='_method' value='delete'>".
+                csrf_field()
+                ."<button class='btn btn-danger'><i class='fa fw fa-trash'></i> Del</button></form>";
             })           
-            ->rawColumns(['deadline', 'effective', 'duplicate'])
+            ->rawColumns(['deadline', 'effective', 'duplicate', 'DTend', 'action'])
             ->toJson();
     }
 }

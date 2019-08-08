@@ -23,6 +23,7 @@
 												<th>Eficaz ?</th>
 												<th>Necessidade de nova abertura ?</th>
 												<th>Nº do novo plano</th>
+												<th>Ações</th>
 											</tr>
 										</thead>
 									</table>
@@ -107,7 +108,8 @@
 					{data: 'DTverify', name:'DTverify'},
 					{data: 'effective', name:'effective'},
 					{data: 'duplicate', name:'duplicate'},
-					{data: 'beforeaction', name:'beforeaction'}
+					{data: 'beforeaction', name:'beforeaction'},
+					{data: 'action', name:'action'},
 					
 				],
 
