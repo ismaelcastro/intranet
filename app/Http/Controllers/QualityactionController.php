@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\qualityaction;
 use App\Events;
+use App\actionPlan;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 use App\Forms\ActionForm;
@@ -77,15 +78,20 @@ class QualityactionController extends Controller
      */
     public function show($id, FormBuilder $FormBuilder)
     {
-        $form = $FormBuilder->create(ActionForm::class, [
-            'method' => 'post',
-            'url'    => route('actions.store')
-        ]);
+        if($PAname = actionPlan::findOrFail($id)->label){
+            $form = $FormBuilder->create(ActionForm::class, [
+                'method' => 'post',
+                'url'    => route('actions.store')
+            ]);
 
-        $form->modify('actionplans_id', 'hidden',[
-            'value' => $id,
-        ]);
-        return view('actionplans.index', compact('id', 'form'));
+             $form->modify('actionplans_id', 'hidden',[
+                'value' => $id,
+            ]);
+            return view('actionplans.index', compact('id', 'form', 'PAname'));
+        };
+        return abort(404);
+
+        
         
     }
 

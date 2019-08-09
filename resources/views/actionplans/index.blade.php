@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Planos de Ação')
 @section('content_header')
-    <h1><small>Ações abertas para o plano de ação</small> Melhoria do processo de treinamento</h1>
+    <h1><small>Ações abertas para o plano de ação</small> {{$PAname}}</h1>
 @stop
 @section('content')
 	<div class="row">
