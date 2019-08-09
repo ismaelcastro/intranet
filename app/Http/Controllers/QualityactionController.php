@@ -109,7 +109,17 @@ class QualityactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        if( isset($request->action) && $request->action == 'encerrar' ){
+            $QA = qualityaction::find($id);
+            $QA->DTend = Carbon::today();
+            $QA->effective= 1;
+            $QA->save();
+
+        }elseif( isset($request->action) && $request->action == 'duplicar' ){
+
+        }
+        
     }
 
     /**
@@ -172,11 +182,29 @@ class QualityactionController extends Controller
                 }
             })
             ->addColumn('action', function(qualityaction $QA){
-                return " 
-                <form method='POST' style='display:inline' action='{$QA->id}'>
-                <input type='hidden' name='_method' value='delete'>".
-                csrf_field()
-                ."<button class='btn btn-danger'><i class='fa fw fa-trash'></i> Del</button></form>";
+                if($QA->DTend == NULL){
+                return "<form method='POST' style='display:inline' action='$QA->id'>
+                    <input type='hidden' name='_method' value='PUT'>
+                    
+                    ".
+                    csrf_field()."
+                    <button class='btn btn-success' name='action' value='encerrar'>Encerrar/Eficaz</button>
+                    
+                    <button class='btn btn-default' name='action' value='duplicar'>Não eficaz</button>                        
+                    </form>";
+                }else{
+                    return "<form method='POST' style='display:inline' action='$QA->id'>
+                    <input type='hidden' name='_method' value='PUT'>
+                    
+                    ".
+                    csrf_field()."
+                    <button class='btn btn-success' name='action' disabled >Encerrar/Eficaz</button>
+                    
+                    <button class='btn btn-default' name='action' disabled >Não eficaz</button>                        
+                    </form>";
+
+
+                };
             })           
             ->rawColumns(['deadline', 'effective', 'duplicate', 'DTend', 'action'])
             ->toJson();

@@ -7,10 +7,10 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-info">
-				<div class="box box-body no-padding">
+				<div class="box box-body">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="jumbotron padding-40-left-rigth bg-white">
+							<div class="bg-white">
 								<div class="table-responsive">
 									<table id="actions" class="table table-bordered table-striped">
 										<thead>
@@ -23,7 +23,7 @@
 												<th>Eficaz ?</th>
 												<th>Necessidade de nova abertura ?</th>
 												<th>Nº do novo plano</th>
-												<th>Ações</th>
+												<th>Ecerrar</th>
 											</tr>
 										</thead>
 									</table>
@@ -77,15 +77,7 @@
 			background: #fff;
 
 		}
-		.no-border-radius{
-			border-radius: 0px !important;
-		}
-		.padding-40-left-rigth{
-			padding-left:40px !important;
-			padding-right: 40px !important;
-			padding-bottom: 0px !important;
-			padding-top:10px !important;
-		}
+	
 	</style>
 	
 @endpush
@@ -117,6 +109,13 @@
 			});
 
 		});
+	</script>
+	<script>
+		$(document).ready(function(){
+			$('body').bind('contextmenu', function(e){
+				return false;
+			})
+		});	
 	</script>
 	@include('sweetalert::alert')
 @endpush
