@@ -64,7 +64,7 @@ class QualityactionController extends Controller
         $eventData['dateStart'] = $data['DTverify'];
         $eventData['title'] = "Verificação da ação " . $data['label'];     
         $Events->createReminder($eventData);
-        // qualityaction::create($data);
+        qualityaction::create($data);
         Alert::success('Success Title', 'Success Message');
         return redirect()->back();
         
@@ -84,9 +84,10 @@ class QualityactionController extends Controller
                 'url'    => route('actions.store')
             ]);
 
-             $form->modify('actionplans_id', 'hidden',[
+            $form->modify('actionplans_id', 'hidden',[
                 'value' => $id,
             ]);
+
             return view('actionplans.index', compact('id', 'form', 'PAname'));
         };
         return abort(404);
@@ -115,16 +116,20 @@ class QualityactionController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         
         if( isset($request->action) && $request->action == 'encerrar' ){
             $QA = qualityaction::find($id);
             $QA->DTend = Carbon::today();
             $QA->effective= 1;
             $QA->save();
-
-        }elseif( isset($request->action) && $request->action == 'duplicar' ){
-
+        }elseif(isset($request->action) && $request->action == 'duplicate'){
+            // $QA = qualityaction::find($id);
+            // $newQA = $QA->replicate();
+            // $newQA->save();
+            
         }
+        return redirect()->back();
         
     }
 
@@ -195,8 +200,9 @@ class QualityactionController extends Controller
                     ".
                     csrf_field()."
                     <button class='btn btn-success' name='action' value='encerrar'>Encerrar/Eficaz</button>
-                    
-                    <button class='btn btn-default' name='action' value='duplicar'>Não eficaz</button>                        
+                    <button class='btn btn-default' name='action' value='duplicate'>Não eficaz
+                    </button>
+                                            
                     </form>";
                 }else{
                     return "<form method='POST' style='display:inline' action='$QA->id'>

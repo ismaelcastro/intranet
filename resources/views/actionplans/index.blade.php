@@ -41,7 +41,7 @@
 		</div>
 		
 	</div>
-
+	<!-- modal new action -->
 	<div class="modal fade" id="new-action">
 		<div class="modal-dialog">
 			{!! form_start($form) !!}
@@ -66,8 +66,9 @@
 			</div>
 			{!! form_end($form, $renderRest = false) !!}
 		</div>
-	</div>	
-
+	</div>
+	<!-- end -->
+	
 @stop
 @push('css')
 	
@@ -113,9 +114,11 @@
 	<script>
 		$(document).ready(function(){
 			$('body').bind('contextmenu', function(e){
-				return false;
-			})
+				return false;	
+			});
+
+			
 		});	
-	</script>
+	</script>	
 	@include('sweetalert::alert')
 @endpush

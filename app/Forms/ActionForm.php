@@ -25,6 +25,11 @@ class ActionForm extends Form
             'attr' => [
                 'class' => 'btn btn-info pull-rigth'
             ]
+        ])
+        ->add('beforeactionLabel', 'hidden', [
+            'attr' => [
+                'id' => 'beforeactionLabel',
+            ]
         ]);
         
 
