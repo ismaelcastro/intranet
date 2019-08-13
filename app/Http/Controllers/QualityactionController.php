@@ -124,9 +124,16 @@ class QualityactionController extends Controller
             $QA->effective= 1;
             $QA->save();
         }elseif(isset($request->action) && $request->action == 'duplicate'){
-            // $QA = qualityaction::find($id);
-            // $newQA = $QA->replicate();
-            // $newQA->save();
+            $QA = qualityaction::find($id);
+            $data = array(
+               'label' => $QA->label ." ". Carbon::today()->format('d-m-Y'),
+               'actionplans_id' => $QA->actionplans_id,
+               'DTprevEnd' => Carbon::today()->add(15, 'days')->format('Y-m-d'),
+               'DTverify' => Carbon::today()->add(60, 'days')->format('Y-m-d'),
+               'duplicate' => 0,
+            );
+
+            dd($data);
             
         }
         return redirect()->back();
