@@ -114,7 +114,7 @@ class QualityactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, Events $Events)
     {
 
         
@@ -123,10 +123,11 @@ class QualityactionController extends Controller
             $QA->DTend = Carbon::today();
             $QA->effective= 1;
             $QA->save();
+
         }elseif(isset($request->action) && $request->action == 'duplicate'){
             $QA = qualityaction::find($id);
             $data = array(
-               'label' => $QA->label . "-(Reabertura)",
+               'label' => $QA->label . "-" . Carbon::today()->format('d-m-Y'),
                'actionplans_id' => $QA->actionplans_id,
                'DTprevEnd' => Carbon::today()->add(15, 'days')->format('Y-m-d'),
                'DTverify' => Carbon::today()->add(60, 'days')->format('Y-m-d'),
@@ -134,6 +135,13 @@ class QualityactionController extends Controller
             );
 
             $newQA = qualityaction::create($data);
+            // Events create
+            $eventData = array();
+            $eventData['dateStart'] = $data['DTverify'];
+            $eventData['title'] = "Verificação da ação " . $data['label'];
+            $Events->createReminder($eventData);
+            // end Evend create
+             
             $QA->effective = 0;
             $QA->DTend = Carbon::today();
             $QA->beforeaction = $newQA->id;
@@ -180,7 +188,7 @@ class QualityactionController extends Controller
             })
             ->editColumn('effective', function(qualityaction $QA){
                 if($QA->effective === null){
-                    return "<small class='label bg-yellow'>Em processo de avaliação !</small>";
+                    return "<small class='label bg-yellow'>Em avaliação !</small>";
                 }elseif($QA->effective == 0 ){
                     return "<i class='fa fw fa-thumbs-down text-danger'></i>"; 
                 }else{
@@ -203,6 +211,9 @@ class QualityactionController extends Controller
                 }else{
                     return $QA->beforeaction;
                 }
+            })
+            ->editColumn('created_at', function(qualityaction $QA){
+                return Carbon::parse($QA->created_at)->format('d/m/Y');
             })
             ->addColumn('action', function(qualityaction $QA){
                 if($QA->DTend === NULL){

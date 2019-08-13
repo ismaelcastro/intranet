@@ -15,6 +15,7 @@
 									<table id="actions" class="table table-bordered table-striped">
 										<thead>
 											<tr>
+												<th>ID</th>
 												<th>Desc.</th>
 												<th>Previsão para conclusão</th>
 												<th>Data de conclusão</th>
@@ -94,6 +95,7 @@
 				serverSide:true,
 				ajax:'{{url("actions/datatables", [$id])}}',
 				columns:[
+					{data: 'id', name: 'id'},
 					{data: 'label', name: 'label'},
 					{data: 'DTprevEnd', name: 'DTprevEnd'},
 					{data: 'DTend', name: 'DTend'},
@@ -105,7 +107,9 @@
 					{data: 'action', name:'action'},
 					
 				],
-
+				"language": {
+                	"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            	}
 
 			});
 

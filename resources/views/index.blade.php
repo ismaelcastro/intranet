@@ -210,6 +210,9 @@
 					{data: 'status', name: 'status'},
 					{data: 'typeAction', name: 'typeAction'}
 				],
+				"language": {
+                	"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            	}
 
 
 			});
