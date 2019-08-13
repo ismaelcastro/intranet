@@ -141,4 +141,7 @@ class EventController extends Controller
         
         
     }
+    public function fiscal(){
+         $evt_query = Events::all();   
+    }
 }

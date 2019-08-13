@@ -132,6 +132,7 @@
 @push('js')
 	<script src="{{ URL::asset('plugins/moment/moment.js') }}"></script>
 	<script src="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.js')}}"></script>
+	<script src="{{ URL::asset('plugins/fullcalendar/dist/locale/pt-br.js')}}"></script>
 	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
 	
 	<script>
@@ -144,6 +145,11 @@
         $.getJSON("{{url('events')}}", function(data){
         	// alert(JSON.stringify(data));
         	$('#calendar').fullCalendar({
+        		lang: 'pt-br' ,
+        		viewRender: function(view, element){
+					teste = $('#calendar').fullCalendar('getDate');
+					alert(teste.month());
+				},
         		customButtons:{
 	      			filterFerias:{
 	      				text:'Férias',
@@ -181,20 +187,7 @@
 
         });
 			
-        function eventAjax(eventType){
-        	$.ajax(
-				{
-					url:'{{url('events')}}',
-					type:'JSON',
-					method:'GET',
-					data:{type: eventType},
-					success:function(events){
-						$('#calendar').fullCalendar('renderEvents', JSON.parse(events));      								
-					},
-				}
-
-			);
-        }
+        
 
 
 	</script>
@@ -219,4 +212,5 @@
 
 		});
 	</script>
+	<script src="{{URL::asset('js/fullcalendar/fullcalendarController.js')}}"></script>
 @endpush
