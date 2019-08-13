@@ -147,8 +147,9 @@
         	$('#calendar').fullCalendar({
         		lang: 'pt-br' ,
         		viewRender: function(view, element){
-					teste = $('#calendar').fullCalendar('getDate');
-					alert(teste.month());
+					dateCalendar = $('#calendar').fullCalendar('getDate');
+					dateCalendar.month();
+					alert(view.intervalStart.format());
 				},
         		customButtons:{
 	      			filterFerias:{
