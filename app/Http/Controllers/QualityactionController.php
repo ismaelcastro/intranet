@@ -126,15 +126,20 @@ class QualityactionController extends Controller
         }elseif(isset($request->action) && $request->action == 'duplicate'){
             $QA = qualityaction::find($id);
             $data = array(
-               'label' => $QA->label ." ". Carbon::today()->format('d-m-Y'),
+               'label' => $QA->label . "-(Reabertura)",
                'actionplans_id' => $QA->actionplans_id,
                'DTprevEnd' => Carbon::today()->add(15, 'days')->format('Y-m-d'),
                'DTverify' => Carbon::today()->add(60, 'days')->format('Y-m-d'),
                'duplicate' => 0,
             );
 
-            dd($data);
-            
+            $newQA = qualityaction::create($data);
+            $QA->effective = 0;
+            $QA->DTend = Carbon::today();
+            $QA->beforeaction = $newQA->id;
+            $QA->duplicate = 1;
+            $QA->save();
+
         }
         return redirect()->back();
         
@@ -174,7 +179,7 @@ class QualityactionController extends Controller
                 };
             })
             ->editColumn('effective', function(qualityaction $QA){
-                if($QA->effective == null){
+                if($QA->effective === null){
                     return "<small class='label bg-yellow'>Em processo de avaliação !</small>";
                 }elseif($QA->effective == 0 ){
                     return "<i class='fa fw fa-thumbs-down text-danger'></i>"; 
@@ -200,7 +205,7 @@ class QualityactionController extends Controller
                 }
             })
             ->addColumn('action', function(qualityaction $QA){
-                if($QA->DTend == NULL){
+                if($QA->DTend === NULL){
                 return "<form method='POST' style='display:inline' action='$QA->id'>
                     <input type='hidden' name='_method' value='PUT'>
                     
