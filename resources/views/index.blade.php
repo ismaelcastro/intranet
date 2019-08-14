@@ -162,19 +162,19 @@
         	y    = date.getFullYear();
 
 
-        $.getJSON("{{url('events')}}", function(data){
-        	// alert(JSON.stringify(data));
-        	$('#calendar').fullCalendar({
-        		lang: 'pt-br' ,
-        		viewRender: function(view, element){
+        $(document).ready(function(){
+	    	// alert(JSON.stringify(data));
+	    	$('#calendar').fullCalendar({
+	    		lang: 'pt-br' ,
+	    		viewRender: function(view, element){
 					dateCalendar = $('#calendar').fullCalendar('getDate');
-					month = dateCalendar.month();
+					month = 7+1;
 					monthStart = view.intervalStart.format();
 					monthEnd = view.intervalEnd.format();
 
-					getEventsmonthly(monthStart, monthEnd);
+					getEventsmonthly(monthStart, monthEnd, month);
 				},
-        		customButtons:{
+	    		customButtons:{
 	      			filterFerias:{
 	      				text:'Férias',
 	      				click: function(){
@@ -204,8 +204,6 @@
 	      			week:"Semana",
 	      			day:"Dia",
 	      		},
-	      		
-	      		events: [],
 	      		displayEventTime:false,
 			});
 
@@ -216,12 +214,13 @@
 
 	</script>
 	<script>
+		
 		function getEventsmonthly(start, end){
 			$.ajax({
 				url:"{{url('events')}}",
 				type:'JSON',
 				method:'GET',
-				data:{start:start, end: end},
+				data:{start:start, end: end, month:month},
 				success: function(events){
 					
 					$('#calendar').fullCalendar('renderEvents', JSON.parse(events));			
@@ -229,6 +228,7 @@
 				},
 			});
 		}
+
 	</script>
 	
 	<script src="{{URL::asset('js/fullcalendar/fullcalendarController.js')}}"></script>
