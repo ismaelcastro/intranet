@@ -134,7 +134,27 @@
 	<script src="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.js')}}"></script>
 	<script src="{{ URL::asset('plugins/fullcalendar/dist/locale/pt-br.js')}}"></script>
 	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-	
+	<script>
+		$(document).ready(function(){
+			$('#actionplans').DataTable({
+				processing:true,
+				serverSide:true,
+				ajax:'{{url('actionplans/datatables')}}',
+				columns:[
+					{data: 'label', name: 'label'},
+					{data: 'openingDate', name:'openingDate'},
+					{data: 'status', name: 'status'},
+					{data: 'typeAction', name: 'typeAction'}
+				],
+				"language": {
+                	"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            	}
+
+
+			});
+
+		});
+	</script>
 	<script>
 		var date = new Date()
     	var d    = date.getDate(),
@@ -148,8 +168,11 @@
         		lang: 'pt-br' ,
         		viewRender: function(view, element){
 					dateCalendar = $('#calendar').fullCalendar('getDate');
-					dateCalendar.month();
-					alert(view.intervalStart.format());
+					month = dateCalendar.month();
+					monthStart = view.intervalStart.format();
+					monthEnd = view.intervalEnd.format();
+
+					getEventsmonthly(monthStart, monthEnd);
 				},
         		customButtons:{
 	      			filterFerias:{
@@ -193,25 +216,19 @@
 
 	</script>
 	<script>
-		$(document).ready(function(){
-			$('#actionplans').DataTable({
-				processing:true,
-				serverSide:true,
-				ajax:'{{url('actionplans/datatables')}}',
-				columns:[
-					{data: 'label', name: 'label'},
-					{data: 'openingDate', name:'openingDate'},
-					{data: 'status', name: 'status'},
-					{data: 'typeAction', name: 'typeAction'}
-				],
-				"language": {
-                	"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
-            	}
-
-
+		function getEventsmonthly(start, end){
+			$.ajax({
+				url:"{{url('events')}}",
+				type:'GET',
+				dataType:'JSON',
+				data:{start:start, end: end},
+				success: function(events){
+					
+					
+				},
 			});
-
-		});
+		}
 	</script>
+	
 	<script src="{{URL::asset('js/fullcalendar/fullcalendarController.js')}}"></script>
 @endpush
