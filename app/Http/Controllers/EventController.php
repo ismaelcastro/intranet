@@ -136,8 +136,7 @@ class EventController extends Controller
         //
     }
     public function eventAJAX(){
-
-
+            
         
         
     }

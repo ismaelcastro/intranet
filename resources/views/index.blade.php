@@ -159,7 +159,7 @@
 		var date = new Date()
     	var d    = date.getDate(),
         	m    = date.getMonth(),
-        	y    = date.getFullYear()
+        	y    = date.getFullYear();
 
 
         $.getJSON("{{url('events')}}", function(data){
@@ -205,7 +205,7 @@
 	      			day:"Dia",
 	      		},
 	      		
-	      		events: data,
+	      		events: [],
 	      		displayEventTime:false,
 			});
 
@@ -219,11 +219,12 @@
 		function getEventsmonthly(start, end){
 			$.ajax({
 				url:"{{url('events')}}",
-				type:'GET',
-				dataType:'JSON',
+				type:'JSON',
+				method:'GET',
 				data:{start:start, end: end},
 				success: function(events){
 					
+					$('#calendar').fullCalendar('renderEvents', JSON.parse(events));			
 					
 				},
 			});
@@ -232,3 +233,4 @@
 	
 	<script src="{{URL::asset('js/fullcalendar/fullcalendarController.js')}}"></script>
 @endpush
+
