@@ -21,7 +21,7 @@ class EventController extends Controller
         $month = $request->month < 10 ? '0'.$request->month : $request->month;
 
 
-        $evt_query = Events::whereRaw("dateStart >= ? or dateEnd <= ? ")->setBindings([$DTstart, $DTend])->get();
+        $evt_query = Events::whereRaw("dateStart >= ? or dateEnd <= ? or recurrence IS NOT NULL")->setBindings([$DTstart, $DTend])->get();
         foreach ($evt_query as $evt) {
             list($ano,$mes,$dia) = explode('-', $evt->dateStart);
             array_push($events_arr,
