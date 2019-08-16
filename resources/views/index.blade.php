@@ -127,6 +127,7 @@
 @push('css')
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.print.min.css') }}" media="print">
+	<link rel="stylesheet" href="{{ URL::asset('css/fullcalendar/customFullcalendar.css') }}">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 @endpush
 @push('js')
@@ -168,11 +169,12 @@
 	    		lang: 'pt-br' ,
 	    		viewRender: function(view, element){
 					dateCalendar = $('#calendar').fullCalendar('getDate');
-					month = 7+1;
+					year = dateCalendar.year();
+					month = dateCalendar.month() + 1;
 					monthStart = view.intervalStart.format();
 					monthEnd = view.intervalEnd.format();
 
-					getEventsmonthly(monthStart, monthEnd, month);
+					getEventsmonthly(monthStart, monthEnd, month, year);
 				},
 	    		customButtons:{
 	      			filterFerias:{
@@ -189,6 +191,12 @@
 
 	      				}
 	      			}
+	      		},
+	      		eventMouseover: function(event, jsEvent, view){
+	      			$(this).addClass('eventMouseover');
+	      		},
+	      		eventMouseout: function(event, jsEvent, view){
+	      			$(this).removeClass('eventMouseover');
 	      		},
 	      		footer:{
 	      			left:'filterFerias',
@@ -220,7 +228,7 @@
 				url:"{{url('events')}}",
 				type:'JSON',
 				method:'GET',
-				data:{start:start, end: end, month:month},
+				data:{start:start, end: end, month:month, year: year},
 				success: function(events){
 					
 					$('#calendar').fullCalendar('renderEvents', JSON.parse(events));			

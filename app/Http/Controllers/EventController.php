@@ -19,16 +19,24 @@ class EventController extends Controller
         $DTstart = $request->start;
         $DTend = $request->end;
         $month = $request->month < 10 ? '0'.$request->month : $request->month;
-
+        $year = $request->year;
 
         $evt_query = Events::whereRaw("dateStart >= ? or dateEnd <= ? or recurrence IS NOT NULL")->setBindings([$DTstart, $DTend])->get();
         foreach ($evt_query as $evt) {
-            list($ano,$mes,$dia) = explode('-', $evt->dateStart);
+            list($evtYear,$evtMonth,$evtDay) = explode('-', $evt->dateStart);
+            if($evt->recurrence == 'monthly'){
+               $dateStart = $year.'-'.$month.'-'.$evtDay;
+            }
+            else if($evt->recurrence == 'Yearly'){
+                $dateStart = $year.'-'.$evtMonth.'-'.$evtDay;
+            }else{
+                $dateStart = $evt->dateStart;
+            }
             array_push($events_arr,
                 array(
                     'id'    => $evt->id,
                     'title' => $evt->title,
-                    'start' => $evt->recurrence == 'monthly' ? $ano.'-'.$month.'-'.$dia : $evt->dateStart,
+                    'start' => $dateStart,
                     'end'   => $evt->dateEnd,
                     'backgroundColor' => $evt->color,
                     'borderColor' => $evt->color,
