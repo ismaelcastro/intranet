@@ -230,7 +230,7 @@
 				method:'GET',
 				data:{start:start, end: end, month:month, year: year},
 				success: function(events){
-					
+					$('#calendar').fullCalendar('removeEvents')
 					$('#calendar').fullCalendar('renderEvents', JSON.parse(events));			
 					
 				},
