@@ -19,8 +19,12 @@
 										<thead>
 											<tr>
 												<th>Cliente</th>
+												<th>Número de visitas</th>
 											</tr>
 										</thead>
+										<tbody>
+											
+										</tbody>
 									</table>
 								</div>
 							</div>
@@ -64,7 +68,11 @@
 				method:'GET',
 				success: function(data){
 					$.each(data, function(index, el) {
-						link = ;	
+						
+						link = "visitacliente/"+el.idCliente;
+						visitaTotal = el.qtdV;	
+						html = '<tr> <td><a href="'+link+'">'+el.cliente+'</a></td> <td><span class="badge bg-light-blue">'+visitaTotal+'</span></td> </tr>';
+						$('table#visitas tbody').append(html);
 					});		
 					
 				},

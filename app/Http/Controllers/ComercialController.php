@@ -8,6 +8,9 @@ use Yajra\Datatables\Datatables;
 
 class ComercialController extends Controller
 {
+    public function __construct(){
+        header('Acess-Control-Allow-Origin: *');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -84,7 +87,14 @@ class ComercialController extends Controller
     {
         //
     }
-    public function datatableVisitas(){
-       
+    public function visitasPorClien(){
+        $url = "http://127.0.0.1:8000/api/visitasComerciais";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $resp = curl_exec($ch);
+        curl_close($ch);
+        dd($resp);        
+
     }
 }
