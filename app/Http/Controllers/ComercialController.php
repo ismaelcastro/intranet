@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Yajra\Datatables\Datatables;
+use GuzzleHttp\Client;
 
 class ComercialController extends Controller
 {
@@ -88,13 +89,16 @@ class ComercialController extends Controller
         //
     }
     public function visitasPorClien(){
-        $url = "http://127.0.0.1:8000/api/visitasComerciais";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $resp = curl_exec($ch);
-        curl_close($ch);
-        dd($resp);        
+        // $url = "http://127.0.0.1:8000/api/visitasComerciais";
+        // $ch = curl_init();
+        // curl_setopt($ch, CURLOPT_URL, $url);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        // $resp = curl_exec($ch);
+        // curl_close($ch);
+        // dd($resp);
+        $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
+        $resp = $client->request('GET', 'visitasComerciais'); 
+        dd($resp->getBody()->getContents());       
 
     }
 }
