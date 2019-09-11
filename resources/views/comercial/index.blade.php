@@ -22,9 +22,7 @@
 												<th>Número de visitas</th>
 											</tr>
 										</thead>
-										<tbody>
-											
-										</tbody>
+										
 									</table>
 								</div>
 							</div>
@@ -62,21 +60,22 @@
 			$('body').bind('contextmenu', function(e){
 				return false;	
 			});
-			$.ajax({
-				url: 'http://localhost/callistoapi/public/api/visitasComerciais',
-				type:'JSON',
-				method:'GET',
-				success: function(data){
-					$.each(data, function(index, el) {
-						
-						link = "visitacliente/"+el.idCliente;
-						visitaTotal = el.qtdV;	
-						html = '<tr> <td><a href="'+link+'">'+el.cliente+'</a></td> <td><span class="badge bg-light-blue">'+visitaTotal+'</span></td> </tr>';
-						$('table#visitas tbody').append(html);
-					});		
+			
+
+			$('#visitas').DataTable({
+				processing:true,
+				serverSide:true,
+				ajax:'{{url('teste')}}',
+				columns:[
+					{data: 'cliente', name: 'cliente'},
+					{data: 'qtdV', name:'qtdV'},
 					
-				},
-			})
+				],
+				"language": {
+                	"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            	},
+
+			});
 			
 		});	
 	</script>	

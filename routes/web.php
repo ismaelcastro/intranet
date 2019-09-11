@@ -21,3 +21,4 @@ Route::resource('actionplans', 'actionPlansController');
 Route::resource('actions', 'QualityactionController');
 Route::resource('comercial', 'ComercialController');
 
+

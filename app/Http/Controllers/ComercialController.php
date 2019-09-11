@@ -98,7 +98,23 @@ class ComercialController extends Controller
         // dd($resp);
         $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
         $resp = $client->request('GET', 'visitasComerciais'); 
-        dd($resp->getBody()->getContents());       
+        $visitas = $resp->getBody()->getContents();
+
+
+        $data = json_decode($visitas);
+        
+        return Datatables::of($data)
+            ->editColumn('cliente', function($row){
+                return "<a href='google.com'>{$row->cliente}</a>";
+
+            })
+            ->editColumn('qtdV', function($row){
+                return "<span class='badge bg-red'>{$row->qtdV}</span>";
+            })
+            ->rawColumns(['cliente', 'qtdV'])
+            ->filter(function(){})
+            ->make(true); 
+           
 
     }
 }
