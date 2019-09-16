@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Yajra\Datatables\Datatables;
 use GuzzleHttp\Client;
+use Illuminate\Cache\CacheManager;
+
 
 class ComercialController extends Controller
 {
-    public function __construct(){
-        header('Acess-Control-Allow-Origin: *');
+    private $cache;
+
+    public function __construct(CacheManager $cache){
+        
+        $this->cache = $cache;
     }
     /**
      * Display a listing of the resource.
@@ -89,13 +94,6 @@ class ComercialController extends Controller
         //
     }
     public function visitasPorClien(){
-        // $url = "http://127.0.0.1:8000/api/visitasComerciais";
-        // $ch = curl_init();
-        // curl_setopt($ch, CURLOPT_URL, $url);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        // $resp = curl_exec($ch);
-        // curl_close($ch);
-        // dd($resp);
         $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
         $resp = $client->request('GET', 'visitasComerciais'); 
         $visitas = $resp->getBody()->getContents();
@@ -116,5 +114,14 @@ class ComercialController extends Controller
             ->make(true); 
            
 
+    }
+
+    public function getFaturamentoC123(Request $request){
+        $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
+        $resp = $client->request('GET', 'faturamento');
+        $data = json_decode($resp->getBody()->getContents());
+        
+        //retorno formatar number_format($vtTotal, 2,',','.');
+        $data->data;
     }
 }
