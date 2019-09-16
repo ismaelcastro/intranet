@@ -94,9 +94,14 @@ class ComercialController extends Controller
         //
     }
     public function visitasPorClien(){
-        $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
-        $resp = $client->request('GET', 'visitasComerciais'); 
-        $visitas = $resp->getBody()->getContents();
+        
+        $visitas = $this->cache->get('visitas', function(){
+            $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
+            $resp = $client->request('GET', 'visitasComerciais');
+            $visitas = $resp->getBody()->getContents();
+            $this->cache->put('visitas', $visitas, 60);           
+            return $visitas;
+        });     
 
 
         $data = json_decode($visitas);

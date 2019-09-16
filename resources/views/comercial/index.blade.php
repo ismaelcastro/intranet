@@ -46,15 +46,24 @@
 	</div>
 	<h2 class="page-header">Ações Comerciais</h2>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<div class="box box-info">
 				<div class="box-header">
 					<h3 class="box-title">Registro de Visitas</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
+						<div class="col-xs-6">							
+							<input type="text" class="datepicker" placeholder="Data Inicial">							 
+						</div>
+						<div class="col-xs-6">							
+							<input type="text" class="datepicker" placeholder="Data Final">
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-12">
 							<div class="bg-white">
+								
 								<div class="table-responsive">
 									<table id="visitas" class="table table-bordered table-striped">
 										<thead>
@@ -88,9 +97,13 @@
 			background: #fff;
 
 		}
+		.datepicker-modal{
+			max-height: 349px !important;
+		}
 	
 	</style>
 	<link rel="stylesheet" href="{{url('plugins/bower_components/morrisjs/morris.css')}}">
+	<link rel="stylesheet" href="{{url('plugins/materialize/css/materialize.min.css')}}">
 	
 @endpush
 
@@ -100,9 +113,9 @@
 	
 	<script>
 		$(document).ready(function(){
-			$('body').bind('contextmenu', function(e){
-				return false;	
-			});
+			// $('body').bind('contextmenu', function(e){
+			// 	return false;	
+			// });
 			
 
 			$('#visitas').DataTable({
@@ -119,9 +132,14 @@
             	},
 
 			});
+
+			$('.datepicker').datepicker({
+				format: 'dd/mm/yyyy',
+			});
 			
 		});	
 	</script>	
 	<script src="{{url('plugins/bower_components/jquery-knob/dist/jquery.knob.min.js')}}"></script>
+	<script src="{{url('plugins/materialize/js/materialize.min.js')}}"></script>
 	@include('sweetalert::alert')
 @endpush
