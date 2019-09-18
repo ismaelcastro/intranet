@@ -122,11 +122,17 @@ class ComercialController extends Controller
     }
 
     public function getFaturamentoC123(Request $request){
-        $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
-        $resp = $client->request('GET', 'faturamento');
-        $data = json_decode($resp->getBody()->getContents());
+        $faturamento = $this->cache->get('faturamento', function(){
+            $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
+            $resp = $client->request('GET', 'faturamento'); 
+            $faturamento = $resp->getBody()->getContents();
+            $this->cache->put('faturamento', $faturamento, 180);
+            return $faturamento;
+        });
+        
+        $data = json_decode($faturamento);
         
         //retorno formatar number_format($vtTotal, 2,',','.');
-        $data->data;
+        dd($data);
     }
 }
