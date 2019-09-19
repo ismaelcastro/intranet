@@ -24,8 +24,15 @@ class ComercialController extends Controller
      */
     public function index()
     {
+        $arr_faturamento = $this->getFaturamentoC123();
 
-        return view('comercial.index');
+        $total = 
+            $arr_faturamento->faturamentoProel + 
+            $arr_faturamento->faturamentoSH + 
+            $arr_faturamento->faturamentoSelect+
+            $arr_faturamento->faturamentoRep;
+
+        return view('comercial.index', compact('arr_faturamento', 'total'));
     }
 
     /**
@@ -121,7 +128,7 @@ class ComercialController extends Controller
 
     }
 
-    public function getFaturamentoC123(Request $request){
+    public function getFaturamentoC123(){
         $faturamento = $this->cache->get('faturamento', function(){
             $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
             $resp = $client->request('GET', 'faturamento'); 
@@ -133,6 +140,6 @@ class ComercialController extends Controller
         $data = json_decode($faturamento);
         
         //retorno formatar number_format($vtTotal, 2,',','.');
-        dd($data);
+       return $data;
     }
 }

@@ -6,7 +6,7 @@
 @section('content')
 	<h2 class="page-header">Faturamento/Financeiro</h2>
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-12">
 			<div class="box box-solid bg-teal-gradient">
 				<div class="box-header">
 					<i class="fa fa-th"></i>
@@ -24,24 +24,55 @@
 				<div class="box-footer no-border">
 					<h5 class="box-title" style="color:black">Faturamento Hoje</h5>
 					<div class="row">
-						<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-							<input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-                         <div class="knob-label">Proel Hospitalar</div>
+						<div class="col-sm-3 col-xs-6">
+							<div class="description-block border-right">
+								<h5 class="description-header text-dark">
+									R$ {{ number_format($arr_faturamento->faturamentoProel,2)}}
+								</h5>
+								<span class="description-text text-dark">Proel Hospitalar</span>
+							</div>
 						</div>
-						<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-							<input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-                         <div class="knob-label">SH</div>
+						<div class="col-sm-3 col-xs-6">
+							<div class="description-block border-rigth">
+								<h5 class="description-header text-dark">
+									R$ {{ number_format($arr_faturamento->faturamentoSH,2)}}
+								</h5>
+								<span class="description-text text-dark">SH Hospitalar</span>
+							</div>
 						</div>
-						<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-							<input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-                         <div class="knob-label">Proel Rep.</div>
+						<div class="col-sm-3 col-xs-6">
+							<div class="description-block border-rigth">
+								<h5 class="description-header text-dark">
+									R$ {{ number_format($arr_faturamento->faturamentoRep,2)}}
+								</h5>
+								<span class="description-text text-dark">Proel Repre.</span>
+							</div>
 						</div>
+						<div class="col-sm-3 col-xs-6">
+							<div class="description-block border-rigth">
+								<h5 class="description-header text-dark">
+									R$ {{ number_format($arr_faturamento->faturamentoSelect,2)}}
+								</h5>
+								<span class="description-text text-dark">Select</span>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="info-box">
+	            <span class="info-box-icon bg-green"><i class="fa fa-fw fa-dollar"></i></span>
+
+	            <div class="info-box-content">
+	             	<span class="info-box-text">Faturamento do Grupo</span>
+	             	<span class="info-box-number">R$ {{number_format($total, 2)}}</span>
+	            </div>
+	            <!-- /.info-box-content -->
+          	</div>
 		</div>
 	</div>
 	<h2 class="page-header">Ações Comerciais</h2>
@@ -99,6 +130,9 @@
 		}
 		.datepicker-modal{
 			max-height: 349px !important;
+		}
+		.text-dark{
+			color: #000 !important;
 		}
 	
 	</style>

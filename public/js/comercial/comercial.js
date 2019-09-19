@@ -31,6 +31,11 @@ $(document).ready(function(){
 
 	$('.knob').knob();
 
+  
+
+
+  //faturamento
+
 	/*var line = new Morris.Line({
       element: 'faturamento',
       resize: true,
