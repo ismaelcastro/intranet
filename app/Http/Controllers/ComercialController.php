@@ -129,6 +129,7 @@ class ComercialController extends Controller
     }
 
     public function getFaturamentoC123(){
+        set_time_limit(60);
         $faturamento = $this->cache->get('faturamento', function(){
             $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
             $resp = $client->request('GET', 'faturamento'); 

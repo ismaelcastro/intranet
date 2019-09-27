@@ -1,0 +1,40 @@
+	.bg-white{
+		background: #fff;
+
+	}
+	.datepicker-modal{
+		max-height: 349px !important;
+	}
+	.text-dark{
+		color: #000 !important;
+	}
+	.preload{
+		width: unset !important;
+		max-height: unset !important;
+	}
+	.preload .content{
+		text-align: center;
+		margin-top: 20%;
+	}
+	.navbar-static-top{
+		height: 50px !important;
+	}
+	.sidebar-toggle{
+
+	}
+	.main-header{
+		box-sizing: border-box;
+	}
+	nav{
+		width: unset !important;
+		line-height: unset !important;
+		box-shadow: none !important;
+		wibkit-box-shadow: none !important;
+	}
+	b{
+		font-weight: 700;
+	}
+	.navbar-custom-menu{
+		height: 50px !important;
+		overflow: hidden;
+	}

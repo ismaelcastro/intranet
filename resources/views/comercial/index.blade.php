@@ -116,42 +116,42 @@
 			
 		</div>
 		
+	</div>	
+	<div class="modal fade in preload" style="display: block;">
+	    <div class="content">
+	        <div class="preloader-wrapper big active">
+	            <div class="spinner-layer spinner-blue-only">
+	                <div class="circle-clipper left">
+	                    <div class="circle"></div>
+	                </div>
+	                <div class="gap-patch">
+	                    <div class="circle"></div>
+	                </div>
+	                <div class="circle-clipper right">
+	                    <div class="circle"></div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="row">
+	        	<div class="col-md-12">
+	        		<strong class="text-center">Por favor aguarde!</strong>
+	        	</div>
+	        </div>
+	    </div>
 	</div>
-	
-	
 @stop
 @push('css')
 	
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
-	<style>
-		.bg-white{
-			background: #fff;
-
-		}
-		.datepicker-modal{
-			max-height: 349px !important;
-		}
-		.text-dark{
-			color: #000 !important;
-		}
-	
-	</style>
-	<link rel="stylesheet" href="{{url('plugins/bower_components/morrisjs/morris.css')}}">
 	<link rel="stylesheet" href="{{url('plugins/materialize/css/materialize.min.css')}}">
-	
+	<link rel="stylesheet" href="{{url('plugins/bower_components/morrisjs/morris.css')}}">	
 @endpush
 
 @push('js')
 	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-	
-	
+	<script src="{{url('plugins/materialize/js/materialize.min.js')}}"></script>	
 	<script>
 		$(document).ready(function(){
-			// $('body').bind('contextmenu', function(e){
-			// 	return false;	
-			// });
-			
-
 			$('#visitas').DataTable({
 				processing:true,
 				serverSide:true,
@@ -162,18 +162,19 @@
 					
 				],
 				"language": {
-                	"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
-            	},
+			    	"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+				},
 
-			});
+		});
 
-			$('.datepicker').datepicker({
-				format: 'dd/mm/yyyy',
-			});
+		$('.datepicker').datepicker({
+			format: 'dd/mm/yyyy',
+		});
 			
-		});	
-	</script>	
+});
+		
+	</script>
 	<script src="{{url('plugins/bower_components/jquery-knob/dist/jquery.knob.min.js')}}"></script>
-	<script src="{{url('plugins/materialize/js/materialize.min.js')}}"></script>
+	
 	@include('sweetalert::alert')
 @endpush
