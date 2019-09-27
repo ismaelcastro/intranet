@@ -16,6 +16,21 @@
 		<div class="col-md-6">
 			<div class="box box-primary">
 				<div class="box-header">
+					<i class="fa fa-fw fa-file-text-o"></i>
+					<h3 class="box-title">Emitir Relatórios</h3>
+				</div>
+				<div class="box-body">
+					<div class="col-md-3">
+						<button class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-default">
+						Emitir F212
+						</button>
+					</div>
+					
+				</div>
+			</div>
+			<!-- Avisos 
+			<div class="box box-primary">
+				<div class="box-header">
 					<i class="fa fa-warning"></i>
 					<h3 class="box-title">Avisos Importantes</h3>
 				</div>
@@ -34,8 +49,11 @@
 					
 				</div>
 			</div>
+			-->
 		</div>
 		<div class="col-md-6">
+
+			<!-- Birthday 
 			<div class="box box-primary">
 				<div class="box-header">
 					<h3 class="box-title">Aniversariantes do Mês</h3>
@@ -44,13 +62,12 @@
 					<div class="row">
 						
 							
-						<!-- widget -->
-
-						<!-- end widget -->
+						
 						
 					</div>
 				</div>
 			</div>
+			-->
 		</div>
 		
     </div>
@@ -122,6 +139,59 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" id="modal-default">
+    	<div class="modal-dialog">
+        	<div class="modal-content">
+            	<div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                  <span aria-hidden="true">&times;</span></button>
+                	<h4 class="modal-title">Emitir F212</h4>
+              	</div>
+
+	              <div class="modal-body">
+	            	<form action="#">
+	            		<div class="row">
+	            			<div class="col-md-4">
+	            				<div class="form-group">
+	            					<label for="">Data Inicial</label>
+	            					<input type="date" class="form-control" required placeholder="Data Inicial">
+	            				</div>
+	            			</div>
+	            			<div class="col-md-4">
+	            				<div class="form-group">
+	            					<label for="">Data Final</label>
+	            					<input class="form-control" type="date" required placeholder="Data Final">
+	            				</div>
+	            			</div>
+	            			<div class="col-md-4">
+	            				<div class="form-group">
+	            					<label>Baixar em:</label>
+                					<select class="form-control select2" data-placeholder="Baixar em:"
+                        			style="width: 100%;">
+					                  <option value="EXCEL">Excel</option>
+					                  <option value="PDF">PDF</option>
+                  
+                					</select>
+	            				</div>
+	            			</div>
+	            		</div>
+	            		
+	            	</form>    
+	              </div>
+	              <div class="modal-footer">
+	                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+	                <button type="button" class="btn btn-primary">
+	                	<i class="fa fa-fw fa-cloud-download"></i>
+	                	Download
+	            	</button>
+	              </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+          <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
     
 @stop
 @push('css')
@@ -129,6 +199,7 @@
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.print.min.css') }}" media="print">
 	<link rel="stylesheet" href="{{ URL::asset('css/fullcalendar/customFullcalendar.css') }}">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+
 @endpush
 @push('js')
 	<script src="{{ URL::asset('plugins/moment/moment.js') }}"></script>
@@ -215,6 +286,8 @@
 	      		displayEventTime:false,
 			});
 
+			$('.select2').select2();
+
         });
 			
         
@@ -240,5 +313,6 @@
 	</script>
 	
 	<script src="{{URL::asset('js/fullcalendar/fullcalendarController.js')}}"></script>
+	
 @endpush
 

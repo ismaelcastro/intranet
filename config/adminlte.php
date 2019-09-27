@@ -119,17 +119,13 @@ return [
             'url'         => '/comercial',
             'icon'        => 'shopping-cart',
         ],
-        'ACCOUNT SETTINGS',
+        /*'Emitir Relatórios',
         [
-            'text' => 'Profile',
-            'url'  => 'admin/settings',
-            'icon' => 'user',
+            'text' => 'Financiro F212',
+            'icon' => 'file-text-o',
+            
         ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
+        
         [
             'text'    => 'Multilevel',
             'icon'    => 'share',
@@ -167,7 +163,7 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],
+        ],*/
         'LABELS',
         [
             'text'       => 'Important',
