@@ -21,6 +21,10 @@ class actionPlansController extends Controller
      */
     public function index()
     {
+        $filename = 'temp-excel.xls';
+        $tempExcel = tempnam(sys_get_temp_dir(), $filename);
+        copy('http://192.168.1.103:7492/Armazenagem/Relatorio/2019-10-04/20191004_110054_9094878_8edcfe90-0499-429e-9316-6e43f781a057.xls',$tempExcel );
+        return response()->download($tempExcel, $filename);
         
     }
 
