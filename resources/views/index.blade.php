@@ -148,51 +148,73 @@
 	                  <span aria-hidden="true">&times;</span></button>
                 	<h4 class="modal-title">Emitir F212</h4>
               	</div>
-
+				<form action="{{url('f212')}}" method="GET" id="f212">
 	              <div class="modal-body">
-	            	<form action="#">
-	            		<div class="row">
-	            			<div class="col-md-4">
+	            		
+	            		
+
+					<div class="row">
+	            		<div class="col-md-6">
 	            				<div class="form-group">
-	            					<label for="">Data Inicial</label>
-	            					<input type="date" class="form-control" required placeholder="Data Inicial">
+	            					<label>Filial:</label>
+                					<select class="form-control select2" name="filial" id='filial' 
+                					data-placeholder="Escolha uma Filial:"
+                        			style="width: 100%;">
+					                  <option value="0">Proel Comércio</option>
+					                  <option value="1">SH Hospitalar</option>
+					                  <option value="2">Proel Representações</option>
+					                  <option value="3">Select</option>
+                  
+                					</select>
 	            				</div>
-	            			</div>
-	            			<div class="col-md-4">
-	            				<div class="form-group">
-	            					<label for="">Data Final</label>
-	            					<input class="form-control" type="date" required placeholder="Data Final">
-	            				</div>
-	            			</div>
-	            			<div class="col-md-4">
+	            		</div>
+	            		<div class="col-md-6">
 	            				<div class="form-group">
 	            					<label>Baixar em:</label>
-                					<select class="form-control select2" data-placeholder="Baixar em:"
+                					<select class="form-control select2" name="ext" id='ext' data-placeholder="Baixar em:"
                         			style="width: 100%;">
 					                  <option value="EXCEL">Excel</option>
 					                  <option value="PDF">PDF</option>
                   
                 					</select>
 	            				</div>
-	            			</div>
 	            		</div>
-	            		
-	            	</form>    
+	            	</div>
+
+					<div class="row">
+            			<div class="col-md-6">
+            				<div class="form-group">
+            					<label for="">Data Inicial</label>
+            					<input type="date" class="form-control" name="dtInicial" id="dtInicial" required placeholder="Data Inicial">
+            				</div>
+            			</div>
+            			<div class="col-md-6">
+            				<div class="form-group">
+            					<label for="">Data Final</label>
+            					<input class="form-control" type="date" name="dtFinal" id="dtFinal" required placeholder="Data Final">
+            				</div>
+            			</div>
+	            			
+	            	</div>
+
+
+	            	    
 	              </div>
 	              <div class="modal-footer">
 	                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-	                <button type="button" class="btn btn-primary">
-	                	<i class="fa fa-fw fa-cloud-download"></i>
-	                	Download
-	            	</button>
+	                <input type="submit" id="download" class="btn btn-primary" value="Download">                	
+	            	
 	              </div>
+	              </form>
             </div>
             <!-- /.modal-content -->
         </div>
           <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-    
+    <div class="download">
+    	
+    </div>
 @stop
 @push('css')
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.css') }}">
@@ -301,6 +323,7 @@
 				url:"{{url('events')}}",
 				type:'JSON',
 				method:'GET',
+
 				data:{start:start, end: end, month:month, year: year},
 				success: function(events){
 					$('#calendar').fullCalendar('removeEvents')
@@ -309,6 +332,8 @@
 				},
 			});
 		}
+
+		
 
 	</script>
 	
