@@ -16,7 +16,7 @@ class F212Controller extends Controller
     	
 		$json_string = json_encode(
 			array(
-				
+				"filialCodigo" => $request->filial,
 				"relatorioId" => "7f4f8d7f-310e-49f0-a021-36ee7fb1a9e5",
 				"relatorioFormato" => $request->ext,
 				"relatorioParametroLista" => array(
