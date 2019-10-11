@@ -221,6 +221,11 @@
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.print.min.css') }}" media="print">
 	<link rel="stylesheet" href="{{ URL::asset('css/fullcalendar/customFullcalendar.css') }}">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+	<style>
+		span.select2-container{
+			width: 100% !important;
+		}
+	</style>
 
 @endpush
 @push('js')
