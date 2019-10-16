@@ -185,13 +185,13 @@
             			<div class="col-md-6">
             				<div class="form-group">
             					<label for="">Data Inicial</label>
-            					<input type="date" class="form-control" name="dtInicial" id="dtInicial" required placeholder="Data Inicial">
+            					<input  class="form-control datepicker" name="dtInicial" id="dtInicial" required placeholder="Data Inicial" value="">
             				</div>
             			</div>
             			<div class="col-md-6">
             				<div class="form-group">
             					<label for="">Data Final</label>
-            					<input class="form-control" type="date" name="dtFinal" id="dtFinal" required placeholder="Data Final">
+            					<input class="form-control datepicker" name="dtFinal" id="dtFinal" required placeholder="Data Final">
             				</div>
             			</div>
 	            			
@@ -220,6 +220,7 @@
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.print.min.css') }}" media="print">
 	<link rel="stylesheet" href="{{ URL::asset('css/fullcalendar/customFullcalendar.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 	<style>
 		span.select2-container{
@@ -233,6 +234,10 @@
 	<script src="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.js')}}"></script>
 	<script src="{{ URL::asset('plugins/fullcalendar/dist/locale/pt-br.js')}}"></script>
 	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+	<script src="{{ URL::asset('plugins/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+<!-- bootstrap datepicker -->
+	<script src="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+	<script src="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js') }}"></script>
 	<script>
 		$(document).ready(function(){
 			$('#actionplans').DataTable({
@@ -252,6 +257,10 @@
 
 			});
 
+			
+
+			
+
 		});
 	</script>
 	<script>
@@ -262,6 +271,8 @@
 
 
         $(document).ready(function(){
+		
+
 	    	// alert(JSON.stringify(data));
 	    	$('#calendar').fullCalendar({
 	    		lang: 'pt-br' ,
@@ -315,6 +326,8 @@
 
 			$('.select2').select2();
 
+
+
         });
 			
         
@@ -339,7 +352,19 @@
 		}
 
 		
+		$(".datepicker").datepicker({	
+			language: 'pt-BR',	
+			autoclose: true,
+			
+		});
+		
 
+		var date = new Date();
+		var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+		var lastDay = new Date(date.getFullYear(), date.getMonth()+1, 0);
+		$('#dtInicial').val(firstDay.toLocaleDateString());
+		$('#dtFinal').val(lastDay.toLocaleDateString());
+		
 	</script>
 	
 	<script src="{{URL::asset('js/fullcalendar/fullcalendarController.js')}}"></script>
