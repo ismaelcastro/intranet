@@ -180,7 +180,7 @@
 	            				</div>
 	            		</div>
 	            	</div>
-
+					
 					<div class="row">
             			<div class="col-md-6">
             				<div class="form-group">
@@ -188,6 +188,7 @@
             					<input  class="form-control datepicker" name="dtInicial" id="dtInicial" required placeholder="Data Inicial" value="">
             				</div>
             			</div>
+
             			<div class="col-md-6">
             				<div class="form-group">
             					<label for="">Data Final</label>
@@ -196,8 +197,20 @@
             			</div>
 	            			
 	            	</div>
+	            	<div class="row">
+						<div class="col-md-6">
+							
+							<div class="input-group">
+				                <button type="button" class="btn btn-default pull-right" id="daterange-btn">
+				                    <span>
+				                    	<i class="fa fa-calendar"></i> Datas pré-definidas
+				                    </span>
+				                    <i class="fa fa-caret-down"></i>
+				                </button>
+			                </div>
 
-
+						</div>
+					</div>
 	            	    
 	              </div>
 	              <div class="modal-footer">
@@ -362,8 +375,8 @@
 		var date = new Date();
 		var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
 		var lastDay = new Date(date.getFullYear(), date.getMonth()+1, 0);
-		$('#dtInicial').val(firstDay.toLocaleDateString());
-		$('#dtFinal').val(lastDay.toLocaleDateString());
+		$('#dtInicial').val(firstDay.toLocaleDateString('pt-BR'));
+		$('#dtFinal').val(lastDay.toLocaleDateString('pt-BR'));
 		
 	</script>
 	
