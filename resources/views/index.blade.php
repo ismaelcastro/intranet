@@ -375,8 +375,13 @@
 		var date = new Date();
 		var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
 		var lastDay = new Date(date.getFullYear(), date.getMonth()+1, 0);
+<<<<<<< HEAD
 		$('#dtInicial').val(firstDay.toLocaleDateString('pt-BR'));
 		$('#dtFinal').val(lastDay.toLocaleDateString('pt-BR'));
+=======
+		$('#dtInicial').val(firstDay.toLocaleDateString("pt-BR"));
+		$('#dtFinal').val(lastDay.toLocaleDateString("pt-BR"));
+>>>>>>> ac5f67b463a6ca4c67ae721909ccdf36b305560e
 		
 	</script>
 	

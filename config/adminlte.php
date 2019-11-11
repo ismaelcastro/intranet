@@ -114,11 +114,11 @@ return [
             'url'         => '/dashboard',
             'icon'        => 'dashboard',
         ],
-        [
-            'text'        => 'Comercial',
-            'url'         => '/comercial',
-            'icon'        => 'shopping-cart',
-        ],
+        // [
+        //     'text'        => 'Comercial',
+        //     'url'         => '/comercial',
+        //     'icon'        => 'shopping-cart',
+        // ],
         /*'Emitir Relatórios',
         [
             'text' => 'Financiro F212',
