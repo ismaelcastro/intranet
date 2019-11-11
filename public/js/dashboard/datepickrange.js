@@ -1,5 +1,5 @@
 
-	$("#teste").daterangepicker(
+	$("#F212daterangepicker").daterangepicker(
 	{
 		ranges   : {
           'Hoje'       : [moment(), moment()],
@@ -16,3 +16,10 @@
 		$('#dtFinal').val(end.format('DD/MM/YYYY'));
 	}
 	);
+$('#download').on('click', function() {
+    var $this = $(this);
+  $this.button('loading');
+    setTimeout(function() {
+       $this.button('reset');
+   }, 8000);
+});

@@ -201,7 +201,7 @@
 						<div class="col-md-6">
 							
 							<div class="input-group">
-				                <button type="button" class="btn btn-default pull-right" id="teste">
+				                <button type="button" class="btn btn-default pull-right" id="F212daterangepicker">
 				                    <span>
 				                    	<i class="fa fa-calendar"></i> Datas pré-definidas
 				                    </span>
@@ -215,7 +215,7 @@
 	              </div>
 	              <div class="modal-footer">
 	                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-	                <input type="submit" id="download" class="btn btn-primary" value="Download">                	
+	                <input type="submit" id="download" class="btn btn-primary" value="Download" data-loading-text="Aguarde...">                	
 	            	
 	              </div>
 	              </form>
