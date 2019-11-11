@@ -201,7 +201,7 @@
 						<div class="col-md-6">
 							
 							<div class="input-group">
-				                <button type="button" class="btn btn-default pull-right" id="daterange-btn">
+				                <button type="button" class="btn btn-default pull-right" id="teste">
 				                    <span>
 				                    	<i class="fa fa-calendar"></i> Datas pré-definidas
 				                    </span>
@@ -233,6 +233,7 @@
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/dist/fullcalendar.print.min.css') }}" media="print">
 	<link rel="stylesheet" href="{{ URL::asset('css/fullcalendar/customFullcalendar.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('plugins/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
 	<link rel="stylesheet" href="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 	<style>
@@ -251,6 +252,7 @@
 <!-- bootstrap datepicker -->
 	<script src="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 	<script src="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js') }}"></script>
+	<script src="{{ URL::asset('js/dashboard/datepickrange.js')}}"></script>
 	<script>
 		$(document).ready(function(){
 			$('#actionplans').DataTable({
