@@ -13,7 +13,8 @@ class F212Controller extends Controller
     
 
 
-    public function index(Request $request){	
+    public function index(Request $request){
+    	set_time_limit(120);	
     	$dtInicial = Carbon::createFromFormat('d/m/Y', $request->dtInicial)->format('Y-m-d');
     	$dtFinal = Carbon::createFromFormat('d/m/Y', $request->dtFinal)->format('Y-m-d');
 		$json_string = json_encode(
