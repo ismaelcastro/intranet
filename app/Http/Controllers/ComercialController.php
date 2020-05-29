@@ -13,7 +13,8 @@ class ComercialController extends Controller
 {
     private $cache;
 
-    public function __construct(CacheManager $cache){
+    public function __construct(CacheManager $cache)
+    {
         
         $this->cache = $cache;
     }
@@ -24,15 +25,7 @@ class ComercialController extends Controller
      */
     public function index()
     {
-        $arr_faturamento = $this->getFaturamentoC123();
-
-        $total = 
-            $arr_faturamento->faturamentoProel + 
-            $arr_faturamento->faturamentoSH + 
-            $arr_faturamento->faturamentoSelect+
-            $arr_faturamento->faturamentoRep;
-
-        return view('comercial.index', compact('arr_faturamento', 'total'));
+        return view('comercial.index');
     }
 
     /**
@@ -100,47 +93,37 @@ class ComercialController extends Controller
     {
         //
     }
-    public function visitasPorClien(){
-        
-        $visitas = $this->cache->get('visitas', function(){
-            $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
-            $resp = $client->request('GET', 'visitasComerciais');
-            $visitas = $resp->getBody()->getContents();
-            $this->cache->put('visitas', $visitas, 60);           
-            return $visitas;
-        });     
+    
+    public function sugestaoCompra(){
+         
 
-
-        $data = json_decode($visitas);
-        
-        return Datatables::of($data)
-            ->editColumn('cliente', function($row){
-                return "<a href='google.com'>{$row->cliente}</a>";
-
-            })
-            ->editColumn('qtdV', function($row){
-                return "<span class='badge bg-red'>{$row->qtdV}</span>";
-            })
-            ->rawColumns(['cliente', 'qtdV'])
-            ->filter(function(){})
-            ->make(true); 
+        $data_string = array(
+            'cdFilial'=> $_GET['cdFilial'],
+            'dtInicial'=> $_GET['dtInicial'],
+            'dtFinal'=> $_GET['dtFinal'],
+            'prazoEntrega'=> $_GET['prazoEntrega'],
+            'centroCusto'=> $_GET['centroCusto'],
+            'diasReposicao'=> $_GET['diasReposicao']
+        );    
            
+        $client = new Client(['base_uri' => 'https://localhost:44353/api/',
+        'verify' => false]);
+        $resp = $client->request('post', 'RelS005v2', [
+            'headers' => [        
+                'Content-type'     => 'application/json',
+                'Accept' => 'application/json',
+                ],
+            'body' => json_encode($data_string) 
+                
+        ]); 
 
-    }
+        $sugestaoCompra = $resp->getBody()->getContents();
 
-    public function getFaturamentoC123(){
-        set_time_limit(60);
-        $faturamento = $this->cache->get('faturamento', function(){
-            $client = new Client(['base_uri' => 'http://localhost:8000/api/']);
-            $resp = $client->request('GET', 'faturamento'); 
-            $faturamento = $resp->getBody()->getContents();
-            $this->cache->put('faturamento', $faturamento, 180);
-            return $faturamento;
-        });
-        
-        $data = json_decode($faturamento);
+        $data = json_decode($sugestaoCompra);
         
         //retorno formatar number_format($vtTotal, 2,',','.');
-       return $data;
+       return Datatables::of($data)->make(true);
+
+
     }
 }

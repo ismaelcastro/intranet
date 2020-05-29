@@ -13,8 +13,7 @@
 
 Route::get('actionplans/datatables', 'actionPlansController@datatables');
 Route::get('actions/datatables/{id}', 'QualityactionController@datatables');
-Route::get('teste', 'ComercialController@visitasPorClien');
-Route::get('c123', 'ComercialController@getFaturamentoC123');
+Route::get('comercial/sugestaoCompra', 'ComercialController@sugestaoCompra');
 
 
 Route::resource('dashboard', 'DashboardController');

@@ -4,177 +4,269 @@
     <h1>Comercial</h1>
 @stop
 @section('content')
-	<h2 class="page-header">Faturamento/Financeiro</h2>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box box-solid bg-teal-gradient">
+			<div class="box box-solid">
 				<div class="box-header">
 					<i class="fa fa-th"></i>
-					<h3 class="box-title">Faturamento</h3>
-					<div class="box-tools pull-right">
-						<button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                		</button>
-                		<button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                		</button>
-					</div>
+					<h3 class="box-title">Suguestão de Compra</h3>
 				</div>
-				<div class="box-body border-radius-none">
-					<div class="chart" id="faturamento" style="height: 250px;"></div>
-				</div>
-				<div class="box-footer no-border">
-					<h5 class="box-title" style="color:black">Faturamento Hoje</h5>
-					<div class="row">
-						<div class="col-sm-3 col-xs-6">
-							<div class="description-block border-right">
-								<h5 class="description-header text-dark">
-									R$ {{ number_format($arr_faturamento->faturamentoProel,2)}}
-								</h5>
-								<span class="description-text text-dark">Proel Hospitalar</span>
+				<form class="needs-validation">
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<div class="input-group">
+						                <button type="button" class="btn btn-default pull-right" id="DTAnaliseCompra">
+						                    <span>
+						                    	<i class="fa fa-calendar"></i> Escolha um Período
+						                    </span>
+						                    <i class="fa fa-caret-down"></i>
+						                </button>
+					                </div>
+				            	</div>
 							</div>
-						</div>
-						<div class="col-sm-3 col-xs-6">
-							<div class="description-block border-rigth">
-								<h5 class="description-header text-dark">
-									R$ {{ number_format($arr_faturamento->faturamentoSH,2)}}
-								</h5>
-								<span class="description-text text-dark">SH Hospitalar</span>
-							</div>
-						</div>
-						<div class="col-sm-3 col-xs-6">
-							<div class="description-block border-rigth">
-								<h5 class="description-header text-dark">
-									R$ {{ number_format($arr_faturamento->faturamentoRep,2)}}
-								</h5>
-								<span class="description-text text-dark">Proel Repre.</span>
-							</div>
-						</div>
-						<div class="col-sm-3 col-xs-6">
-							<div class="description-block border-rigth">
-								<h5 class="description-header text-dark">
-									R$ {{ number_format($arr_faturamento->faturamentoSelect,2)}}
-								</h5>
-								<span class="description-text text-dark">Select</span>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="info-box">
-	            <span class="info-box-icon bg-green"><i class="fa fa-fw fa-dollar"></i></span>
-
-	            <div class="info-box-content">
-	             	<span class="info-box-text">Faturamento do Grupo</span>
-	             	<span class="info-box-number">R$ {{number_format($total, 2)}}</span>
-	            </div>
-	            <!-- /.info-box-content -->
-          	</div>
-		</div>
-	</div>
-	<h2 class="page-header">Ações Comerciais</h2>
-	<div class="row">
-		<div class="col-md-8">
-			<div class="box box-info">
-				<div class="box-header">
-					<h3 class="box-title">Registro de Visitas</h3>
-				</div>
-				<div class="box-body">
-					<div class="row">
-						<div class="col-xs-6">							
-							<input type="text" class="datepicker" placeholder="Data Inicial">							 
-						</div>
-						<div class="col-xs-6">							
-							<input type="text" class="datepicker" placeholder="Data Final">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="bg-white">
-								
-								<div class="table-responsive">
-									<table id="visitas" class="table table-bordered table-striped">
-										<thead>
-											<tr>
-												<th>Cliente</th>
-												<th>Número de visitas</th>
-											</tr>
-										</thead>
-										
-									</table>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="col-sm-5 control-label">Centro de Custo</label>
+									<div class="col-sm-7">
+										<select id="centroCusto" class="form-control">
+											<option value="-1">Ambos</option>
+											<option value="3">Assistência Técnica</option>
+											<option value="4">Comercial</option>
+										</select>
+									</div>
+									
 								</div>
 							</div>
 						</div>
-					</div>				
+						<div class="row">						
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="diasReposicao" class="col-sm-4 control-label">Dias de Reposição</label>
+									<div class="col-sm-8">
+										<input type="number" class="form-control required" id="diasReposicao" placeholder="30">
+										<div class="invalid-feedback">Ops! Este campo precisa ser preenchido.</div>	
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="prazoEntrega" class="col-sm-4 control-label">Prazo Entrega</label>
+									<div class="col-sm-8">
+										<input type="number" class="form-control required" id="prazoEntrega" placeholder="30" >	
+										<div class="invalid-feedback">Ops! Este campo precisa ser preenchido.</div>	
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<button id="submitT" type="submit" class="btn btn-primary">Consultar</button>
+								</div>
+							</div>
+							<div class="col-md-3 text-right">
+								<div class="form-group">
+									
+									<div class="btn-group">
+					                  <button type="button" class="btn btn-info">Exibir</button>
+					                  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+					                    <span class="caret"></span>
+					                    <span class="sr-only">Toggle Dropdown</span>
+					                  </button>
+					                  <ul class="dropdown-menu collunm-list" role="menu">
+					                    
+					                  </ul>
+					                </div>
+						            
+					            </div>
+							</div>
+							
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table id="analiseCompras" class="table table-bordered table-striped">
+										<thead>
+											<th>Cod.</th>
+											<th>Cod. Alternativo</th>
+											<th>Nome do Produto</th>
+											<th>UND</th>
+											<th>Qtd. Total Saída</th>
+											<th>Valor Total Saída</th>
+											<th>Saída Média Mensal</th>
+											<th>Estoque Mínimo</th>
+											<th>Saldo Atual</th>
+											<th>Dias de Cobertura</th>
+											<th>Sugestão de Compra</th>
+											<th>Data para Próxima Compra</th>
+											<th>Classificação ABC %</th>
+											<th>Fornecedor</th>
+											<th>Custo Unitário Última Compra</th>
+											<th>Qtd. Última Compra</th>	
+											<th>Data Última Compra</th>
+											<th>NF Última Compra</th>
+											<th>Valor Total da NF</th>						
+										</thead>	
+									</table>
+									
+								</div>							
+
+							</div>
+						</div>
+					</div>
+					<div class="box-footer no-border">
+				</form>
 					
 				</div>
-				
 			</div>
-			
 		</div>
-		
-	</div>	
-	<div class="modal fade in preload" style="display: block;">
-	    <div class="content">
-	        <div class="preloader-wrapper big active">
-	            <div class="spinner-layer spinner-blue-only">
-	                <div class="circle-clipper left">
-	                    <div class="circle"></div>
-	                </div>
-	                <div class="gap-patch">
-	                    <div class="circle"></div>
-	                </div>
-	                <div class="circle-clipper right">
-	                    <div class="circle"></div>
-	                </div>
-	            </div>
-	        </div>
-	        <div class="row">
-	        	<div class="col-md-12">
-	        		<strong class="text-center">Por favor aguarde!</strong>
-	        	</div>
-	        </div>
-	    </div>
 	</div>
+	
 @stop
 @push('css')
 	
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
-	<link rel="stylesheet" href="{{url('plugins/materialize/css/materialize.min.css')}}">
-	<link rel="stylesheet" href="{{url('plugins/bower_components/morrisjs/morris.css')}}">	
+	<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
+	<link rel="stylesheet" href="{{url('plugins/bower_components/morrisjs/morris.css')}}">
+	<link rel="stylesheet" href="{{ URL::asset('plugins/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
+	<link rel="stylesheet" href="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+	<link rel="stylesheet" href="{{ URL::asset('css/comercial/table.css')}}">
+	<style type="text/css">
+		.collunm-list{
+			left: -150px !important;
+			max-height: 300px;
+			overflow-y: scroll;
+		}
+
+		
+		.invalid-feedback{
+			display: none;
+			color: #dd4b39;
+		}
+	</style>	
 @endpush
 
 @push('js')
-	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-	<script src="{{url('plugins/materialize/js/materialize.min.js')}}"></script>	
+	<script src="{{ URL::asset('plugins/moment/moment.js') }}"></script>
+	<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
+	<script src="{{ URL::asset('plugins/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+	<!-- bootstrap datepicker -->
+	<script src="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+	<script src="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js') }}"></script>
+	<script src="{{ URL::asset('js/comercial/datepickrange.js')}}"></script>
+	<script src="{{ URL::asset('js/comercial/validate.js')}}"></script>
 	<script>
-		$(document).ready(function(){
-			$('#visitas').DataTable({
-				processing:true,
-				serverSide:true,
-				ajax:'{{url('teste')}}',
-				columns:[
-					{data: 'cliente', name: 'cliente'},
-					{data: 'qtdV', name:'qtdV'},
+		$("#submitT").on('click', function(e){
+				e.preventDefault();
+				var startDate = $("#DTAnaliseCompra").data('daterangepicker').startDate.format('YYYY-MM-DD');
+				var endDate   = $("#DTAnaliseCompra").data('daterangepicker').endDate.format('YYYY-MM-DD');
+
+				validate()
+				if($.fn.dataTable.isDataTable('#analiseCompras'))
+				{
+					$('#analiseCompras').DataTable().clear().destroy();
+				}
+
+				if(!validate()){
+
+
+					var table = $('#analiseCompras').DataTable({
+					dom: 'lBfrtip',
+					"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "Todos"] ],
+					retrieve: true,
+					destroy: true,				
+					processing:true,
+					serverSide:true,
+					ajax:{
+						'url':'{{url('comercial/sugestaoCompra')}}',
+						'contentType': 'application/json',
+						'type': "get",
+						'data' : 
+							{
+							"cdFilial": 0,
+							"dtInicial": startDate,
+							"dtFinal": endDate,
+							"prazoEntrega": $("#prazoEntrega").val(),
+							"centroCusto" : $("#centroCusto").val(),
+							"diasReposicao" : $("#diasReposicao").val()
+							}
+
+						},
+						columns:[
+							{data: 'codp', name: 'codp'},
+							{data: 'codigoAlternativo', name:'codigoAlternativo', visible: false},
+							{data: 'nmProduto', name:'nmProduto'},
+							{data: 'nmUnidade', name: 'nmUnidade'},
+							{data: 'qtMovSaida', name: 'qtMovSaida'},
+							{data: 'vlMovSaida', name: 'vlMovSaida', visible: false},
+							{data: 'SaidaMediaMensal', name: 'SaidaMediaMensal'}, 
+							{data: 'EstoqueMinimo', name: 'EstoqueMinimo'}, 
+							{data: 'SaldoAtual', name: 'SaldoAtual'}, 
+							{data: 'diasCoberturaAtual', name: 'diasCoberturaAtual'}, 
+							{data: 'Sugestao', name: 'Sugestao'}, 
+							{data: 'dtProximaCompra', name: 'dtProximaCompra'}, 
+							{data: 'ABC', name: 'ABC', visible: false}, 
+							{data: 'Fornecedor', name: 'Fornecedor'}, 
+							{data: 'ValorUltimaCompra', name: 'ValorUltimaCompra'}, 
+							{data: 'qtdUltimaCompra', name: 'qtdUltimaCompra'}, 
+							{data: 'dtUltimaCompra', name: 'dtUltimaCompra', visible: false}, 
+							{data: 'NF', name: 'NF'}, 
+							{data: 'vlTotalNF', name: 'vlTotalNF', visible: false},					
+
 					
-				],
-				"language": {
-			    	"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
-				},
+						],
 
-		});
+						"language": {
+                			"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            			},
+            			"order" : [[12, "desc"]],
+            			buttons: [
+            				'copyHtml5',
+            				{
+            					extend:'excelHtml5',
+            					title: 'Suguestão de Compras'
+            				},
+            		
+            				'csvHtml5',
+            				{
+            					extend: 'pdfHtml5',
+            					title: 'Suguestão de Compras',
+                				orientation: 'landscape',
+                				pageSize: 'A3'
+            				}
+        				]
 
-		$('.datepicker').datepicker({
-			format: 'dd/mm/yyyy',
-		});
+
+
+					});
+
+
+				}	
+					
+
+				$("#analiseCompras thead th").each(function(index){
+
+					var visible = table.column(index).visible() === true ? "checked" : ""; 
+					var html = '<li><a href="#"><label><input class="toggle-vis" '+visible+' data-column='+index+' type="checkbox" class="flat-red">'+$(this).text()+'</label></a></li>';
+					$(".collunm-list").append(html);
+					});				
+
+				$(".collunm-list li .toggle-vis").on('click', function(e){
+				
+
+					var column = table.column($(this).attr('data-column'));
+					column.visible( !column.visible() );
+
+				});
+				
 			
-});
-		
+			});
 	</script>
-	<script src="{{url('plugins/bower_components/jquery-knob/dist/jquery.knob.min.js')}}"></script>
-	
 	@include('sweetalert::alert')
 @endpush
