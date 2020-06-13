@@ -9,7 +9,7 @@
 			<div class="box box-solid">
 				<div class="box-header">
 					<i class="fa fa-th"></i>
-					<h3 class="box-title">Suguestão de Compra</h3>
+					<h3 class="box-title">Sugestão de Compra</h3>
 				</div>
 				<form class="needs-validation">
 					<div class="box-body">
@@ -45,7 +45,7 @@
 								<div class="form-group">
 									<label for="diasReposicao" class="col-sm-4 control-label">Dias de Reposição</label>
 									<div class="col-sm-8">
-										<input type="number" class="form-control required" id="diasReposicao" placeholder="30">
+										<input type="number" class="form-control required" id="diasReposicao" placeholder="Ex.: 30">
 										<div class="invalid-feedback">Ops! Este campo precisa ser preenchido.</div>	
 									</div>
 								</div>
@@ -54,7 +54,7 @@
 								<div class="form-group">
 									<label for="prazoEntrega" class="col-sm-4 control-label">Prazo Entrega</label>
 									<div class="col-sm-8">
-										<input type="number" class="form-control required" id="prazoEntrega" placeholder="30" >	
+										<input type="number" class="form-control required" id="prazoEntrega" placeholder="Ex.: 30" >	
 										<div class="invalid-feedback">Ops! Este campo precisa ser preenchido.</div>	
 									</div>
 								</div>
@@ -97,6 +97,7 @@
 											<th>Saída Média Mensal</th>
 											<th>Estoque Mínimo</th>
 											<th>Saldo Atual</th>
+											<th>Disponível</th>
 											<th>Dias de Cobertura</th>
 											<th>Sugestão de Compra</th>
 											<th>Data para Próxima Compra</th>
@@ -144,6 +145,9 @@
 			display: none;
 			color: #dd4b39;
 		}
+		.MyColumn{
+			background: whitesmoke ;
+		}
 	</style>	
 @endpush
 
@@ -182,7 +186,7 @@
 					retrieve: true,
 					destroy: true,				
 					processing:true,
-					serverSide:true,
+					serverSide:false,
 					ajax:{
 						'url':'{{url('comercial/sugestaoCompra')}}',
 						'contentType': 'application/json',
@@ -199,24 +203,25 @@
 
 						},
 						columns:[
-							{data: 'codp', name: 'codp'},
-							{data: 'codigoAlternativo', name:'codigoAlternativo', visible: false},
+							{data: 'codp', name: 'codp', visible: false},
+							{data: 'codigoAlternativo', name:'codigoAlternativo'},
 							{data: 'nmProduto', name:'nmProduto'},
-							{data: 'nmUnidade', name: 'nmUnidade'},
+							{data: 'nmUnidade', name: 'nmUnidade', visible: false},
 							{data: 'qtMovSaida', name: 'qtMovSaida'},
 							{data: 'vlMovSaida', name: 'vlMovSaida', visible: false},
 							{data: 'SaidaMediaMensal', name: 'SaidaMediaMensal'}, 
 							{data: 'EstoqueMinimo', name: 'EstoqueMinimo'}, 
-							{data: 'SaldoAtual', name: 'SaldoAtual'}, 
+							{data: 'SaldoAtual', name: 'SaldoAtual', visible: false},
+							{data: 'EstAtual', name: 'EstAtual'}, 
 							{data: 'diasCoberturaAtual', name: 'diasCoberturaAtual'}, 
-							{data: 'Sugestao', name: 'Sugestao'}, 
-							{data: 'dtProximaCompra', name: 'dtProximaCompra'}, 
+							{data: 'Sugestao', name: 'Sugestao', className: 'MyColumn'}, 
+							{data: 'dtProximaCompra', name: 'dtProximaCompra',}, 
 							{data: 'ABC', name: 'ABC', visible: false}, 
 							{data: 'Fornecedor', name: 'Fornecedor'}, 
 							{data: 'ValorUltimaCompra', name: 'ValorUltimaCompra'}, 
 							{data: 'qtdUltimaCompra', name: 'qtdUltimaCompra'}, 
 							{data: 'dtUltimaCompra', name: 'dtUltimaCompra', visible: false}, 
-							{data: 'NF', name: 'NF'}, 
+							{data: 'NF', name: 'NF', visible: false}, 
 							{data: 'vlTotalNF', name: 'vlTotalNF', visible: false},					
 
 					
@@ -225,7 +230,7 @@
 						"language": {
                 			"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
             			},
-            			"order" : [[12, "desc"]],
+            			"order" : [[13, "desc"]],
             			buttons: [
             				'copyHtml5',
             				{
