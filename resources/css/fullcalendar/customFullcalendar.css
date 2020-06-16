@@ -1,0 +1,9 @@
+.eventMouseover{
+	position: absolute;
+	z-index: 999999999;
+	box-shadow: 1px 1px 2px #000;
+	cursor: pointer;
+	clear: both;
+	margin-top: -20px;
+	padding: 5px;
+}

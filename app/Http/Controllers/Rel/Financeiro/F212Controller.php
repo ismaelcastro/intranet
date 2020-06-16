@@ -59,7 +59,7 @@ class F212Controller extends Controller
 		curl_close($ch);
 
 		
-		$response = json_decode($result);	
+		$response = json_decode($result);
 		$filename = $dtInicial."-".$dtFinal.'F212.xls';
 		$tempExcel = tempnam(sys_get_temp_dir(), $filename);
 		copy(self::$url_base . $response->RelatorioEndereco, $tempExcel);	

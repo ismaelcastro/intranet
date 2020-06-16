@@ -17,6 +17,7 @@
 			<div class="box box-primary">
 				<div class="box-header">
 					<i class="fa fa-fw fa-file-text-o"></i>
+
 					<h3 class="box-title">Emitir Relatórios</h3>
 				</div>
 				<div class="box-body">
@@ -148,7 +149,7 @@
 	                  <span aria-hidden="true">&times;</span></button>
                 	<h4 class="modal-title">Emitir F212</h4>
               	</div>
-				<form action="{{url('f212')}}" method="GET" id="f212">
+				<form action="index.php/f212" method="GET" id="f212">
 	              <div class="modal-body">
 	            		
 	            		
@@ -258,7 +259,7 @@
 			$('#actionplans').DataTable({
 				processing:true,
 				serverSide:true,
-				ajax:'{{url('actionplans/datatables')}}',
+				ajax:'index.php/actionplans/datatables',
 				columns:[
 					{data: 'label', name: 'label'},
 					{data: 'openingDate', name:'openingDate'},
@@ -353,7 +354,7 @@
 		
 		function getEventsmonthly(start, end){
 			$.ajax({
-				url:"{{url('events')}}",
+				url:"index.php/events",
 				type:'JSON',
 				method:'GET',
 

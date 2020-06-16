@@ -16,10 +16,10 @@ Route::get('actions/datatables/{id}', 'QualityactionController@datatables');
 Route::get('comercial/sugestaoCompra', 'ComercialController@sugestaoCompra');
 
 
-Route::resource('dashboard', 'DashboardController');
+Route::resource('/', 'DashboardController');
 Route::resource('events', 'EventController');
 Route::resource('actionplans', 'actionPlansController');
 Route::resource('actions', 'QualityactionController');
-Route::resource('comercial', 'ComercialController');
+Route::resource('/comercial', 'ComercialController');
 Route::resource('f212', 'Rel\Financeiro\F212Controller');
 

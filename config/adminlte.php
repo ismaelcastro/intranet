@@ -111,12 +111,12 @@ return [
         'MAIN NAVIGATION',
         [
             'text'        => 'Dashboard',
-            'url'         => '/dashboard',
+            'url'         => '/',
             'icon'        => 'dashboard',
         ],
         [
             'text'        => 'Comercial',
-            'url'         => '/comercial',
+            'url'         => 'index.php/comercial',
             'icon'        => 'shopping-cart',
         ],
         /*'Emitir Relatórios',
