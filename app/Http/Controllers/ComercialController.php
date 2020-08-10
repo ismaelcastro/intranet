@@ -95,7 +95,7 @@ class ComercialController extends Controller
     }
     
     public function sugestaoCompra(){
-         
+        set_time_limit(8000000);
 
         $data_string = array(
             'cdFilial'=> $_GET['cdFilial'],
@@ -106,9 +106,9 @@ class ComercialController extends Controller
             'diasReposicao'=> $_GET['diasReposicao']
         );    
            
-        $client = new Client(['base_uri' => 'https://localhost:44353/api/',
+        $client = new Client(['base_uri' => 'http://api.proel.local/api/',
         'verify' => false]);
-        $resp = $client->request('post', 'RelS005v2', [
+        $resp = $client->request('post', 'RelS005', [
             'headers' => [        
                 'Content-type'     => 'application/json',
                 'Accept' => 'application/json',
