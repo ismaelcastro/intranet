@@ -96,7 +96,7 @@
 											<th>Valor Total Saída</th>
 											<th>Saída Média Mensal</th>
 											<th>Estoque Mínimo</th>
-											<th>Saldo Atual</th>
+											<th>Estoque Atual</th>
 											<th>Disponível</th>
 											<th>Dias de Cobertura</th>
 											<th>Sugestão de Compra</th>
