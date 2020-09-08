@@ -5,6 +5,7 @@
 @stop
 @section('content')
 	<div class="row">
+
 		<div class="col-md-12">
 			<div class="box box-solid">
 				<div class="box-header">
@@ -14,7 +15,7 @@
 				<form class="needs-validation">
 					<div class="box-body">
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<div class="form-group">
 									<div class="input-group">
 						                <button type="button" class="btn btn-default pull-right" id="DTAnaliseCompra">
@@ -26,10 +27,26 @@
 					                </div>
 				            	</div>
 							</div>
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="col-sm-5 control-label">Centro de Custo</label>
-									<div class="col-sm-7">
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<div class="col-md-6">
+								
+									<label class="col-sm-4 control-label">Filial</label>
+									<div class="col-sm-8">
+										<select id="filial" class="form-control">
+											<option value="0">Proel Comercio e Serviço</option>
+											<option value="1">SH Hospitalar</option>
+										</select>
+									</div>
+									
+								</div>
+							
+								<div class="col-md-6">
+								
+									<label class="col-sm-4 control-label">Centro de Custo</label>
+									<div class="col-sm-8">
 										<select id="centroCusto" class="form-control">
 											<option value="-1">Ambos</option>
 											<option value="3">Assistência Técnica</option>
@@ -40,31 +57,39 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">						
-							<div class="col-md-3">
-								<div class="form-group">
+						<br>
+						<div class="row">	
+							<div class="form-group">					
+								<div class="col-md-6">
+								
 									<label for="diasReposicao" class="col-sm-4 control-label">Dias de Reposição</label>
 									<div class="col-sm-8">
 										<input type="number" class="form-control required" id="diasReposicao" placeholder="Ex.: 30">
 										<div class="invalid-feedback">Ops! Este campo precisa ser preenchido.</div>	
 									</div>
 								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group">
+							
+							
+								<div class="col-md-6">
+								
 									<label for="prazoEntrega" class="col-sm-4 control-label">Prazo Entrega</label>
 									<div class="col-sm-8">
 										<input type="number" class="form-control required" id="prazoEntrega" placeholder="Ex.: 30" >	
 										<div class="invalid-feedback">Ops! Este campo precisa ser preenchido.</div>	
 									</div>
 								</div>
-							</div>
+							</div>													
+							
+						</div>
+						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
 									<button id="submitT" type="submit" class="btn btn-primary">Consultar</button>
 								</div>
 							</div>
-							<div class="col-md-3 text-right">
+						</div>
+						<div class="row">
+							<div class="col-md-3 text-right pull-right">
 								<div class="form-group">
 									
 									<div class="btn-group">
@@ -80,7 +105,6 @@
 						            
 					            </div>
 							</div>
-							
 						</div>
 						
 						<div class="row">
@@ -193,7 +217,7 @@
 						'type': "get",
 						'data' : 
 							{
-							"cdFilial": 0,
+							"cdFilial": $("#filial").val(),
 							"dtInicial": startDate,
 							"dtFinal": endDate,
 							"prazoEntrega": $("#prazoEntrega").val(),
