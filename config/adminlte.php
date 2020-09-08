@@ -116,7 +116,7 @@ return [
         ],
         [
             'text'        => 'Comercial',
-            'url'         => 'index.php/comercial',
+            'url'         => 'comercial',
             'icon'        => 'shopping-cart',
         ],
         /*'Emitir Relatórios',

@@ -41,6 +41,7 @@ class F212Controller extends Controller
 				)			
 
 		);
+		
 	
 		//Requisição API
 		$ch = curl_init(self::$url_base.self::$json_url);
