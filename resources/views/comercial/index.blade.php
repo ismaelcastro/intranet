@@ -37,7 +37,7 @@
 									<div class="col-sm-8">
 										<select id="filial" class="form-control">
 											<option value="0">Proel Comercio e Serviço</option>
-											<option value="1">SH Hospitalar</option>
+											
 										</select>
 									</div>
 									
@@ -182,6 +182,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>	
 	<script src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
 	<script src="{{ URL::asset('plugins/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 	<!-- bootstrap datepicker -->
@@ -239,7 +240,7 @@
 							{data: 'EstAtual', name: 'EstAtual'}, 
 							{data: 'diasCoberturaAtual', name: 'diasCoberturaAtual'}, 
 							{data: 'Sugestao', name: 'Sugestao', className: 'MyColumn'}, 
-							{data: 'dtProximaCompra', name: 'dtProximaCompra',}, 
+							{data: 'dtProximaCompra', name: 'dtProximaCompra', "type":'date-eu'}, 
 							{data: 'ABC', name: 'ABC', visible: false}, 
 							{data: 'Fornecedor', name: 'Fornecedor'}, 
 							{data: 'ValorUltimaCompra', name: 'ValorUltimaCompra'}, 
