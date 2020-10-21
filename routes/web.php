@@ -21,5 +21,7 @@ Route::resource('events', 'EventController');
 Route::resource('actionplans', 'actionPlansController');
 Route::resource('actions', 'QualityactionController');
 Route::resource('comercial', 'ComercialController');
+Route::resource('estoque', 'EstoqueController');
 Route::resource('f212', 'Rel\Financeiro\F212Controller');
+Route::resource('RelS016', 'Rel\Estoque\RelS016');
 

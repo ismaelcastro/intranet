@@ -32,19 +32,19 @@
 						<div class="row">
 							<div class="form-group">
 								<div class="col-md-6">
-								
+
 									<label class="col-sm-4 control-label">Filial</label>
 									<div class="col-sm-8">
 										<select id="filial" class="form-control">
 											<option value="0">Proel Comercio e Serviço</option>
-											
+
 										</select>
 									</div>
-									
+
 								</div>
-							
+
 								<div class="col-md-6">
-								
+
 									<label class="col-sm-4 control-label">Centro de Custo</label>
 									<div class="col-sm-8">
 										<select id="centroCusto" class="form-control">
@@ -53,33 +53,33 @@
 											<option value="4">Comercial</option>
 										</select>
 									</div>
-									
+
 								</div>
 							</div>
 						</div>
 						<br>
-						<div class="row">	
-							<div class="form-group">					
+						<div class="row">
+							<div class="form-group">
 								<div class="col-md-6">
-								
+
 									<label for="diasReposicao" class="col-sm-4 control-label">Dias de Reposição</label>
 									<div class="col-sm-8">
 										<input type="number" class="form-control required" id="diasReposicao" placeholder="Ex.: 30">
-										<div class="invalid-feedback">Ops! Este campo precisa ser preenchido.</div>	
+										<div class="invalid-feedback">Ops! Este campo precisa ser preenchido.</div>
 									</div>
 								</div>
-							
-							
+
+
 								<div class="col-md-6">
-								
+
 									<label for="prazoEntrega" class="col-sm-4 control-label">Prazo Entrega</label>
 									<div class="col-sm-8">
-										<input type="number" class="form-control required" id="prazoEntrega" placeholder="Ex.: 30" >	
-										<div class="invalid-feedback">Ops! Este campo precisa ser preenchido.</div>	
+										<input type="number" class="form-control required" id="prazoEntrega" placeholder="Ex.: 30" >
+										<div class="invalid-feedback">Ops! Este campo precisa ser preenchido.</div>
 									</div>
 								</div>
-							</div>													
-							
+							</div>
+
 						</div>
 						<div class="row">
 							<div class="col-md-3">
@@ -91,7 +91,7 @@
 						<div class="row">
 							<div class="col-md-3 text-right pull-right">
 								<div class="form-group">
-									
+
 									<div class="btn-group">
 					                  <button type="button" class="btn btn-info">Exibir</button>
 					                  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -99,14 +99,14 @@
 					                    <span class="sr-only">Toggle Dropdown</span>
 					                  </button>
 					                  <ul class="dropdown-menu collunm-list" role="menu">
-					                    
+
 					                  </ul>
 					                </div>
-						            
+
 					            </div>
 							</div>
 						</div>
-						
+
 						<div class="row">
 							<div class="col-md-12">
 								<div class="table-responsive">
@@ -128,29 +128,29 @@
 											<th>Classificação ABC %</th>
 											<th>Fornecedor</th>
 											<th>Custo Unitário Última Compra</th>
-											<th>Qtd. Última Compra</th>	
+											<th>Qtd. Última Compra</th>
 											<th>Data Última Compra</th>
 											<th>NF Última Compra</th>
-											<th>Valor Total da NF</th>						
-										</thead>	
+											<th>Valor Total da NF</th>
+										</thead>
 									</table>
-									
-								</div>							
+
+								</div>
 
 							</div>
 						</div>
 					</div>
 					<div class="box-footer no-border">
 				</form>
-					
+
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 @stop
 @push('css')
-	
+
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
 	<link rel="stylesheet" href="{{url('plugins/bower_components/morrisjs/morris.css')}}">
@@ -164,7 +164,7 @@
 			overflow-y: scroll;
 		}
 
-		
+
 		.invalid-feedback{
 			display: none;
 			color: #dd4b39;
@@ -172,7 +172,7 @@
 		.MyColumn{
 			background: whitesmoke ;
 		}
-	</style>	
+	</style>
 @endpush
 
 @push('js')
@@ -182,7 +182,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
-	<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>	
+	<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
 	<script src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
 	<script src="{{ URL::asset('plugins/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 	<!-- bootstrap datepicker -->
@@ -209,14 +209,14 @@
 					dom: 'lBfrtip',
 					"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "Todos"] ],
 					retrieve: true,
-					destroy: true,				
+					destroy: true,
 					processing:true,
 					serverSide:false,
 					ajax:{
 						'url':'{{url('comercial/sugestaoCompra')}}',
 						'contentType': 'application/json',
 						'type': "get",
-						'data' : 
+						'data' :
 							{
 							"cdFilial": $("#filial").val(),
 							"dtInicial": startDate,
@@ -234,22 +234,22 @@
 							{data: 'nmUnidade', name: 'nmUnidade', visible: false},
 							{data: 'qtMovSaida', name: 'qtMovSaida'},
 							{data: 'vlMovSaida', name: 'vlMovSaida', visible: false},
-							{data: 'SaidaMediaMensal', name: 'SaidaMediaMensal'}, 
-							{data: 'EstoqueMinimo', name: 'EstoqueMinimo'}, 
+							{data: 'SaidaMediaMensal', name: 'SaidaMediaMensal'},
+							{data: 'EstoqueMinimo', name: 'EstoqueMinimo'},
 							{data: 'SaldoAtual', name: 'SaldoAtual', visible: false},
-							{data: 'EstAtual', name: 'EstAtual'}, 
-							{data: 'diasCoberturaAtual', name: 'diasCoberturaAtual'}, 
-							{data: 'Sugestao', name: 'Sugestao', className: 'MyColumn'}, 
-							{data: 'dtProximaCompra', name: 'dtProximaCompra', "type":'date-eu'}, 
-							{data: 'ABC', name: 'ABC', visible: false}, 
-							{data: 'Fornecedor', name: 'Fornecedor'}, 
-							{data: 'ValorUltimaCompra', name: 'ValorUltimaCompra'}, 
-							{data: 'qtdUltimaCompra', name: 'qtdUltimaCompra'}, 
-							{data: 'dtUltimaCompra', name: 'dtUltimaCompra', visible: false}, 
-							{data: 'NF', name: 'NF', visible: false}, 
-							{data: 'vlTotalNF', name: 'vlTotalNF', visible: false},					
+							{data: 'EstAtual', name: 'EstAtual'},
+							{data: 'diasCoberturaAtual', name: 'diasCoberturaAtual'},
+							{data: 'Sugestao', name: 'Sugestao', className: 'MyColumn'},
+							{data: 'dtProximaCompra', name: 'dtProximaCompra', "type":'date-eu'},
+							{data: 'ABC', name: 'ABC', visible: false},
+							{data: 'Fornecedor', name: 'Fornecedor'},
+							{data: 'ValorUltimaCompra', name: 'ValorUltimaCompra'},
+							{data: 'qtdUltimaCompra', name: 'qtdUltimaCompra'},
+							{data: 'dtUltimaCompra', name: 'dtUltimaCompra', visible: false},
+							{data: 'NF', name: 'NF', visible: false},
+							{data: 'vlTotalNF', name: 'vlTotalNF', visible: false},
 
-					
+
 						],
 
 						"language": {
@@ -262,7 +262,7 @@
             					extend:'excelHtml5',
             					title: 'Suguestão de Compras'
             				},
-            		
+
             				'csvHtml5',
             				{
             					extend: 'pdfHtml5',
@@ -277,25 +277,25 @@
 					});
 
 
-				}	
-					
+				}
+
 
 				$("#analiseCompras thead th").each(function(index){
 
-					var visible = table.column(index).visible() === true ? "checked" : ""; 
+					var visible = table.column(index).visible() === true ? "checked" : "";
 					var html = '<li><a href="#"><label><input class="toggle-vis" '+visible+' data-column='+index+' type="checkbox" class="flat-red">'+$(this).text()+'</label></a></li>';
 					$(".collunm-list").append(html);
-					});				
+					});
 
 				$(".collunm-list li .toggle-vis").on('click', function(e){
-				
+
 
 					var column = table.column($(this).attr('data-column'));
 					column.visible( !column.visible() );
 
 				});
-				
-			
+
+
 			});
 	</script>
 	@include('sweetalert::alert')

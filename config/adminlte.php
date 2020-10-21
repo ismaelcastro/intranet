@@ -117,15 +117,20 @@ return [
         [
             'text'        => 'Comercial',
             'url'         => 'comercial',
+            'icon'        => 'group',
+        ],
+        [
+            'text'        => 'Estoque',
+            'url'         => 'estoque',
             'icon'        => 'shopping-cart',
         ],
         /*'Emitir Relatórios',
         [
             'text' => 'Financiro F212',
             'icon' => 'file-text-o',
-            
+
         ],
-        
+
         [
             'text'    => 'Multilevel',
             'icon'    => 'share',
