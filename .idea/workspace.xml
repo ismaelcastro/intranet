@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0038fbd8-84f0-467e-9c49-e51884a699d7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Rel/Estoque/RelS016.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Rel/Estoque/RelS016.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/datepickReginalPTBR.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/datepickReginalPTBR.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/estoque/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/estoque/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -160,7 +157,7 @@
       <workItem from="1603289713053" duration="2574000" />
       <workItem from="1603298388767" duration="9716000" />
       <workItem from="1603371073153" duration="578000" />
-      <workItem from="1603384091102" duration="5902000" />
+      <workItem from="1603384091102" duration="6432000" />
     </task>
     <servers />
   </component>

@@ -171,6 +171,9 @@
                         'ClassificacaoProduto': $("#fvenda").val()
                     }
                 },
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                },
                 columns: [
                     {data:'nmClasse', name:'nmClasse'},
                     {data:'nmGrupo', name:'nmGrupo'},
