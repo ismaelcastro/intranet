@@ -34,7 +34,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="datepicker">
+                                            <input type="text" class="form-control pull-right" id="datepicker" autocomplete="off">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -146,12 +146,14 @@
 <script src="{{ URL::asset('js/comercial/validate.js')}}"></script>
 <script>
     $("#submitrel").click(function (e){
+        e.preventDefault();
+
         if($.fn.dataTable.isDataTable('#report'))
         {
             $('#report').DataTable().clear().destroy();
         }
 
-        e.preventDefault();
+
          $('#report').DataTable({
                 dom: 'lBfrtip',
                 "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "Todos"] ],
@@ -165,7 +167,7 @@
                     'type': "get",
                     'data':{
                         'cdFilial':$("#filial").val(),
-                        'dtBalanco': $("#datepicker").val(),
+                        'dtBalanco': moment($("#datepicker").datepicker('getDate')).format("YYYY-MM-DD"),
                         'ClassificacaoProduto': $("#fvenda").val()
                     }
                 },
@@ -206,7 +208,28 @@
     });
     $(document).ready(function (){
         $('#datepicker').datepicker({
-            autoclose: true
+            autoclose: true,
+            language:'pt-BR',
+            format:{
+                toDisplay:function (date){
+                    var date = new Date(date),
+                        month = '' + (date.getMonth() + 1),
+                        day = '' + date.getUTCDate(),
+                        year = date.getFullYear();
+                    if (month.length < 2) month = '0' + month;
+                    if (day.length < 2) day = '0' + day;
+                    return [day, month, year].join('/');
+                },
+                toValue: function(dt){
+                    var date = new Date(date),
+                        month = '' + (date.getMonth() + 1),
+                        day = '' + date.getUTCDate(),
+                        year = date.getFullYear();
+                    if (month.length < 2) month = '0' + month;
+                    if (day.length < 2) day = '0' + day;
+                    return [year, month, day].join('-');
+                }
+            }
         })
     })
 

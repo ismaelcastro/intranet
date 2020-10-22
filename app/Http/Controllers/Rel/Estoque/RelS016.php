@@ -34,7 +34,21 @@ class RelS016 extends Controller
                 'body' => json_encode($data_string)
                 ]);
         $data = json_decode( $res->getBody()->getContents() );
-        return Datatables::of($data)->make(true);
+        return Datatables::of($data)
+            ->editColumn('vlFinanceiro', function($data){
+            $valor = str_replace('.',',', $data->vlFinanceiro);
+            return "R$ " . "$valor";
+            })
+            ->editColumn('vlPrecoMedio', function ($data){
+                $valor = str_replace('.' ,',', $data->vlPrecoMedio);
+                return "R$ " . $valor;
+            })
+            ->editColumn('qtSaldo', function($data){
+                $valor  = number_format((int) $data->qtSaldo, 0);
+                return "$valor";
+            })
+            ->rawColumns(['vlFinanceiro'])
+            ->toJson();
 
 
     }
