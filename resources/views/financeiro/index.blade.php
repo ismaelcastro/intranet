@@ -260,13 +260,13 @@
                     'copyHtml5',
                     {
                         extend:'excelHtml5',
-                        title: 'Posição de Estoque - RelS016'
+                        title: 'Recebimentos - F212'
                     },
 
                     'csvHtml5',
                     {
                         extend: 'pdfHtml5',
-                        title: 'Posição de Estoque - RelS016',
+                        title: 'Recebimentos - F212',
                         orientation: 'landscape',
                         pageSize: 'A3'
                     }
