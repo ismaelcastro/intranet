@@ -66,6 +66,24 @@
                     </form>
                     <div class="content">
                         <div class="row">
+						    <div class="col-md-3 text-right pull-right">
+								<div class="form-group">
+
+									<div class="btn-group">
+					                  <button type="button" class="btn btn-info">Exibir</button>
+					                  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+					                    <span class="caret"></span>
+					                    <span class="sr-only">Toggle Dropdown</span>
+					                  </button>
+					                  <ul class="dropdown-menu collunm-list" role="menu">
+
+					                  </ul>
+					                </div>
+
+					            </div>
+							</div>
+						</div>
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="table-responsive">
                                     <table id="report" class="table table-bordered table-striped">
@@ -166,6 +184,7 @@
     <script src="{{ URL::asset('js/datepickReginalPTBR.js')}}"></script>
     <script src="{{ URL::asset('js/comercial/datepickrange.js')}}"></script>
     <script src="{{ URL::asset('js/comercial/validate.js')}}"></script>
+    <script src="{{ URL::asset('js/datatableColumnVisible/datatableColumnVisible.js')}}"></script>
     <script>
         $("#submitrel").click(function (e){
             e.preventDefault();
@@ -176,7 +195,7 @@
             }
 
 
-            var table = $('#report').DataTable({
+            table = $('#report').DataTable({
                 dom: 'lBfrtip',
                 "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "Todos"] ],
                 retrieve: true,
@@ -198,22 +217,22 @@
                 },
                 columns: [
                     {data:'cdRec', name:'cdRec', visible:false},
-                    {data:'cdRepres', name:'cdRepres'/*, visible: false*/},
+                    {data:'cdRepres', name:'cdRepres', visible: false},
                     {data:'nrDoc', name:'nrDoc'},
                     {data:'dtVencto', name:'dtVencto', "type":'date-eu'},
-                    {data:'dtLancto', name:'dtLancto', "type":'date-eu'/*, visible: false*/},
+                    {data:'dtLancto', name:'dtLancto', "type":'date-eu', visible: false},
                     {data:'dtEmissao', name:'dtEmissao', "type":'date-eu'},
                     {data:'dtPag', name:'dtPag'},
                     {data:'dtBaixa', name:'dtBaixa'},
                     {data:'vlBruto', name:'vlBruto'},
-                    {data:'Juros', name:'Juros'/*, visible: false*/},
-                    {data:'Multa', name:'Multa'/*, visible: false*/},
-                    {data:'vlDesc', name:'vlDesc'/*, visible: false*/},
-                    {data:'vlPago', name:'vlPago'/*, visible: false*/},
+                    {data:'Juros', name:'Juros', visible: false},
+                    {data:'Multa', name:'Multa', visible: false},
+                    {data:'vlDesc', name:'vlDesc', visible: false},
+                    {data:'vlPago', name:'vlPago', visible: false},
                     {data:'Cliente', name:'Cliente'},
                     {data:'nf', name:'nf'},
-                    {data:'dsCedente', name:'dsCedente'/*, visible: false*/},
-                    {data:'dsOp', name:'dsOp'/*, visible: false*/},
+                    {data:'dsCedente', name:'dsCedente', visible: false},
+                    {data:'dsOp', name:'dsOp', visible: false},
                     {data:'tpDoc', name:'tpDoc'},
                     {data:'stEstado', name:'stEstado'},
                     {data:'vlImpostos', name:'vlImpostos'},
@@ -221,20 +240,20 @@
                     {data:'vlISS', name:'vlISS'},
                     {data:'vlCSLL', name:'vlCSLL'},
                     {data:'vlPIS', name:'vlPIS'},
-                    {data:'vlINSS', name:'vlINSS'/*, visible: false*/},
+                    {data:'vlINSS', name:'vlINSS', visible: false},
                     {data:'vlCOFINS', name:'vlCOFINS'},
-                    {data:'EmissaoPedido', name:'EmissaoPedido',"type":'date-eu'/*, visible: false*/},
-                    {data:'dsNFSe', name:'dsNFSe'/*, visible: false*/},
+                    {data:'EmissaoPedido', name:'EmissaoPedido',"type":'date-eu', visible: false},
+                    {data:'dsNFSe', name:'dsNFSe', visible: false},
                     {data:'CNPJ', name:'CNPJ'},
-                    {data:'vlCOFINSRetidoMov', name:'vlCOFINSRetidoMov'/*, visible: false*/},
-                    {data:'vlCSRetidoMov', name:'vlCSRetidoMov'/*, visible: false*/},
-                    {data:'vlPISRetidoMov', name:'vlPISRetidoMov'/*, visible: false*/},
-                    {data:'vlICMSRetidoMov', name:'vlICMSRetidoMov'/*, visible: false*/},
+                    {data:'vlCOFINSRetidoMov', name:'vlCOFINSRetidoMov', visible: false},
+                    {data:'vlCSRetidoMov', name:'vlCSRetidoMov', visible: false},
+                    {data:'vlPISRetidoMov', name:'vlPISRetidoMov', visible: false},
+                    {data:'vlICMSRetidoMov', name:'vlICMSRetidoMov', visible: false},
                     {data:'vlISSRetidoMov', name:'vlISSRetidoMov'},
                     {data:'vlBrutoMov', name:'vlBrutoMov'},
-                    {data:'vlDescontoMov', name:'vlDescontoMov'/*, visible: false*/},
-                    {data:'vlLiquidoMov', name:'vlLiquidoMov'/*,visible: false*/},
-                    {data:'vlFinanceiroMov', name:'vlFinanceiroMov'/*, visible:false*/}
+                    {data:'vlDescontoMov', name:'vlDescontoMov', visible: false},
+                    {data:'vlLiquidoMov', name:'vlLiquidoMov',visible: false},
+                    {data:'vlFinanceiroMov', name:'vlFinanceiroMov', visible:false}
 
                 ],
                 buttons: [
@@ -255,7 +274,7 @@
 
             });
             
-
+            columnListVisible();
         });
 
 

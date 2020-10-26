@@ -124,6 +124,11 @@ return [
             'url'         => 'estoque',
             'icon'        => 'shopping-cart',
         ],
+        [
+            'text'        => 'Financeiro',
+            'url'         => 'financeiro',
+            'icon'        => 'file-text-o',
+        ],
         /*'Emitir Relatórios',
         [
             'text' => 'Financiro F212',

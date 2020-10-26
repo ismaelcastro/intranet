@@ -190,6 +190,7 @@
 	<script src="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js') }}"></script>
 	<script src="{{ URL::asset('js/comercial/datepickrange.js')}}"></script>
 	<script src="{{ URL::asset('js/comercial/validate.js')}}"></script>
+	<script src="{{ URL::asset('js/datatableColumnVisible/datatableColumnVisible.js')}}"></script>
 	<script>
 		$("#submitT").on('click', function(e){
 				e.preventDefault();
@@ -205,7 +206,7 @@
 				if(!validate()){
 
 
-					var table = $('#analiseCompras').DataTable({
+					table = $('#analiseCompras').DataTable({
 					dom: 'lBfrtip',
 					"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "Todos"] ],
 					retrieve: true,
@@ -279,22 +280,8 @@
 
 				}
 
-
-				$("#analiseCompras thead th").each(function(index){
-
-					var visible = table.column(index).visible() === true ? "checked" : "";
-					var html = '<li><a href="#"><label><input class="toggle-vis" '+visible+' data-column='+index+' type="checkbox" class="flat-red">'+$(this).text()+'</label></a></li>';
-					$(".collunm-list").append(html);
-					});
-
-				$(".collunm-list li .toggle-vis").on('click', function(e){
-
-
-					var column = table.column($(this).attr('data-column'));
-					column.visible( !column.visible() );
-
-				});
-
+				columnListVisible();
+				
 
 			});
 	</script>
