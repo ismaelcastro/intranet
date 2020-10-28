@@ -94,13 +94,13 @@
                                         <th>Vencimento</th>
                                         <th>Lançamento</th>
                                         <th>Emissão</th>
-                                        <th>Data Pagamento</th>
+                                        <th>Data Recebimento</th>
                                         <th>Baixa</th>
                                         <th>Valor Bruto</th>
                                         <th>Juros</th>
                                         <th>Multa</th>
                                         <th>Valor Desconto</th>
-                                        <th>Valor Pago</th>
+                                        <th>Valor Recebido</th>
                                         <th>Cliente</th>
                                         <th>NF</th>
                                         <th>Cedente</th>
@@ -188,7 +188,9 @@
     <script>
         $("#submitrel").click(function (e){
             e.preventDefault();
-
+            nomeFilial = $("#filial option:selected").html() ;
+            dtinicial = moment($("#dtInicial").datepicker('getDate'));
+            dtFim = moment($("#dtFinal").datepicker('getDate'));
             if($.fn.dataTable.isDataTable('#report'))
             {
                 $('#report').DataTable().clear().destroy();
@@ -208,8 +210,8 @@
                     'type': "get",
                     'data':{
                         'cdFilial':$("#filial").val(),
-                        'dtInicio': moment($("#dtInicial").datepicker('getDate')).format("YYYY-MM-DD"),
-                        'dtFim': moment($("#dtFinal").datepicker('getDate')).format("YYYY-MM-DD")
+                        'dtInicio': dtinicial.format("YYYY-MM-DD"),
+                        'dtFim': dtFim.format("YYYY-MM-DD"),
                     }
                 },
                 "language": {
@@ -234,7 +236,7 @@
                     {data:'dsCedente', name:'dsCedente', visible: false},
                     {data:'dsOp', name:'dsOp', visible: false},
                     {data:'tpDoc', name:'tpDoc'},
-                    {data:'stEstado', name:'stEstado'},
+                    {data:'stEstado', name:'stEstado', visible: false},
                     {data:'vlImpostos', name:'vlImpostos'},
                     {data:'vlIRRF', name:'vlIRRF'},
                     {data:'vlISS', name:'vlISS'},
@@ -260,12 +262,18 @@
                     'copyHtml5',
                     {
                         extend:'excelHtml5',
-                        title: 'Recebimentos - F212'
+                        title: 'Recebimentos - F212',
+                        messageTop: 'Filial:' + nomeFilial + 
+                                ' \n Data Inicial: '+ dtinicial.format("DD/MM/YYYY") + 
+                                '\n Data Final: ' +  dtFim.format("DD/MM/YYYY"),
                     },
 
                     'csvHtml5',
                     {
                         extend: 'pdfHtml5',
+                        messageTop: 'Filial:' + nomeFilial + 
+                                ' \n Data Inicial: '+ dtinicial.format("DD/MM/YYYY") + 
+                                '\n Data Final ' +  dtFim.format("DD/MM/YYYY"),
                         title: 'Recebimentos - F212',
                         orientation: 'landscape',
                         pageSize: 'A3'

@@ -36,16 +36,16 @@ class RelS016 extends Controller
         $data = json_decode( $res->getBody()->getContents() );
         return Datatables::of($data)
             ->editColumn('vlFinanceiro', function($data){
-            $valor = str_replace('.',',', $data->vlFinanceiro);
-            return "R$ " . "$valor";
+            $valor =  number_format((float)$data->vlFinanceiro, 2,'.','');
+            return $valor;
             })
             ->editColumn('vlPrecoMedio', function ($data){
-                $valor = str_replace('.' ,',', $data->vlPrecoMedio);
-                return "R$ " . $valor;
+                $valor = number_format((float)$data->vlPrecoMedio, 2,'.','');
+                return $valor ;
             })
             ->editColumn('qtSaldo', function($data){
-                $valor  = number_format((int) $data->qtSaldo, 0);
-                return "$valor";
+                $valor  = number_format((float)$data->qtSaldo, 0,'.', '');
+                return $valor;
             })
             ->rawColumns(['vlFinanceiro'])
             ->toJson();

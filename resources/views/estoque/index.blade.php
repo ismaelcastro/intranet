@@ -88,6 +88,14 @@
                                     <th>Valor Financeiro</th>
                                     <th>Preço Médio</th>
                                     </thead>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th class="text-right" colspan="11">Valor Total Estoque R$:</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
 
                             </div>
@@ -146,6 +154,9 @@
 <script src="{{ URL::asset('js/comercial/validate.js')}}"></script>
 <script>
     $("#submitrel").click(function (e){
+        nomeFilial = $("#filial option:selected").html();
+        dtBalanco = moment($("#datepicker").datepicker('getDate'));
+        classProdutoNome =$("#fvenda option:selected").html();
         e.preventDefault();
 
         if($.fn.dataTable.isDataTable('#report'))
@@ -167,7 +178,7 @@
                     'type': "get",
                     'data':{
                         'cdFilial':$("#filial").val(),
-                        'dtBalanco': moment($("#datepicker").datepicker('getDate')).format("YYYY-MM-DD"),
+                        'dtBalanco': dtBalanco.format("YYYY-MM-DD"),
                         'ClassificacaoProduto': $("#fvenda").val()
                     }
                 },
@@ -190,10 +201,23 @@
                     {data:'vlPrecoMedio', name:'vlPrecoMedio'},
 
                 ],
+                "footerCallback": function(row, data, start, end, display   ){
+                    var api = this.api();
+                    $(api.column(11).footer() ).html(
+                      api.column(11, {page: 'current'}).data().reduce(function(a, b){
+                        
+                        return parseFloat((a*1).toFixed(2)) +  parseFloat((b*1).toFixed(2));                        
+                      }, 0)
+                      
+                    );
+                },
                  buttons: [
                      'copyHtml5',
                      {
                          extend:'excelHtml5',
+                         messageTop: 'Filial: ' + nomeFilial + 
+                                ' \n Data Balanço: '+ dtBalanco.format("DD/MM/YYYY") + 
+                                ' \n Cassificação do Produto: ' + $("#fvenda").val(),
                          title: 'Posição de Estoque - RelS016'
                      },
 
@@ -202,7 +226,10 @@
                          extend: 'pdfHtml5',
                          title: 'Posição de Estoque - RelS016',
                          orientation: 'landscape',
-                         pageSize: 'A3'
+                         pageSize: 'A3',
+                         messageTop: 'Filial: ' + nomeFilial + 
+                                ' \n Data Balanço: '+ moment($("#datepicker").datepicker('getDate')).format("YYYY-MM-DD") + 
+                                ' \n Cassificação do Produto: ' + classProdutoNome,
                      }
                  ]
 

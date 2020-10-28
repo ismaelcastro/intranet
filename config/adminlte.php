@@ -109,11 +109,11 @@ return [
 
     'menu' => [
         'MAIN NAVIGATION',
-        [
+        /*[
             'text'        => 'Dashboard',
             'url'         => '/',
             'icon'        => 'dashboard',
-        ],
+        ],*/
         [
             'text'        => 'Comercial',
             'url'         => 'comercial',
