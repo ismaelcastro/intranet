@@ -228,7 +228,7 @@
                          orientation: 'landscape',
                          pageSize: 'A3',
                          messageTop: 'Filial: ' + nomeFilial + 
-                                ' \n Data Balanço: '+ moment($("#datepicker").datepicker('getDate')).format("YYYY-MM-DD") + 
+                                ' \n Data Balanço: '+ moment($("#datepicker").datepicker('getDate')).format("DD/MM/YYYY") + 
                                 ' \n Cassificação do Produto: ' + classProdutoNome,
                      }
                  ]
