@@ -217,7 +217,7 @@
                          extend:'excelHtml5',
                          messageTop: 'Filial: ' + nomeFilial + 
                                 ' \n Data Balanço: '+ dtBalanco.format("DD/MM/YYYY") + 
-                                ' \n Cassificação do Produto: ' + $("#fvenda").val(),
+                                ' \n Cassificação do Produto: ' + classProdutoNome,
                          title: 'Posição de Estoque - RelS016'
                      },
 
