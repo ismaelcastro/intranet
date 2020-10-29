@@ -206,7 +206,7 @@
                     $(api.column(11).footer() ).html(
                       api.column(11, {page: 'current'}).data().reduce(function(a, b){
                         
-                        return parseFloat((a*1).toFixed(2)) +  parseFloat((b*1).toFixed(2));                        
+                        return parseFloat((a*1) +  (b*1)).toFixed(2);                        
                       }, 0)
                       
                     );
