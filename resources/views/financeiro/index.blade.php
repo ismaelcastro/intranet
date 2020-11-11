@@ -23,6 +23,7 @@
                                         <select id="filial" class="form-control">
                                             <option value="0">Proel Comercio e Serviço</option>
                                             <option value="3">SELECT BR</option>
+                                            <option value="1">SH Hospitalar</option>
                                         </select>
                                     </div>
                                 </div>
