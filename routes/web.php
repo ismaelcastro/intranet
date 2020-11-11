@@ -26,4 +26,5 @@ Route::resource('f212', 'Rel\Financeiro\F212Controller');
 Route::resource('RelS016', 'Rel\Estoque\RelS016');
 Route::resource('RelF212', 'Rel\Financeiro\Financeiro212Controller');
 Route::resource('financeiro', 'FinanceiroController');
+Route::resource('propostas', 'PropostasController');
 
