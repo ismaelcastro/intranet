@@ -13,12 +13,13 @@ class Financeiro212Controller extends Controller
 {
     public function index(Request $request)
     {
+        
         $data_string = array(
             'cdFilial'=> $request->cdFilial,
             'dtInicio' => $request->dtInicio,
             'dtFim' => $request->dtFim,
         );
-        $client = new Client(['base_uri' => 'http://api.proel.local/api/', 'verify' => false]);
+        $client = new Client(['base_uri' => 'https://localhost:44353/api/', 'verify' => false]);
         $res = $client->request('post', 'Financeiro212',[
             'headers' => [
                 'Content-type' => 'application/json',
@@ -28,6 +29,7 @@ class Financeiro212Controller extends Controller
         ]);
 
         $data = json_decode( $res->getBody()->getContents() );
+
         return Datatables::of($data)
             ->editColumn('Cliente', function ($data){
                 return $data->cdCliente . " - " . $data->nmCliente;
