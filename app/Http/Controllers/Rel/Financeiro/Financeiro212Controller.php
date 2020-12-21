@@ -19,7 +19,7 @@ class Financeiro212Controller extends Controller
             'dtInicio' => $request->dtInicio,
             'dtFim' => $request->dtFim,
         );
-        $client = new Client(['base_uri' => 'http://api.proel.local/api/', 'verify' => false]);
+        $client = new Client(['base_uri' => 'https://localhost:44353/api/', 'verify' => false]);
         $res = $client->request('post', 'Financeiro212',[
             'headers' => [
                 'Content-type' => 'application/json',
@@ -60,6 +60,9 @@ class Financeiro212Controller extends Controller
             })
             ->editColumn('vlBrutoMov', function($data){
                 return "R$ " . number_format($data->vlBrutoMov, 2, ',', '.');
+            })
+            ->editColumn('vlBaseBruto', function($data){
+                return "R$ " . number_format($data->vlBaseBruto, 2, ',', '.');
             })
             ->editColumn('vlLiquidoMov', function($data){
                 return "R$ " . number_format($data->vlLiquidoMov, 2, ',', '.');
