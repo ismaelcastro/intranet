@@ -129,6 +129,11 @@ return [
             'url'         => 'financeiro',
             'icon'        => 'file-text-o',
         ],
+        [
+            'text'        => 'Contratos de Locação',
+            'url'         => 'contratos-locacao',
+            'icon'        => 'map-signs',
+        ],
         /*'Emitir Relatórios',
         [
             'text' => 'Financiro F212',

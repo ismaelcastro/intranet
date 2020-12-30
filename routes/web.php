@@ -27,4 +27,5 @@ Route::resource('RelS016', 'Rel\Estoque\RelS016');
 Route::resource('RelF212', 'Rel\Financeiro\Financeiro212Controller');
 Route::resource('financeiro', 'FinanceiroController');
 Route::resource('propostas', 'PropostasController');
+Route::resource('contratos-locacao', 'ContratosContoller');
 
