@@ -20,6 +20,6 @@ class Cliente extends Model
     public $timestamps = false;
 
     public function contratos(){
-        return $this->belongsTo(Contratos::class);
+        return $this->hasMany(Contratos::class);
     }
 }

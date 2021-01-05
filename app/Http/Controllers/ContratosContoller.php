@@ -55,9 +55,9 @@ class ContratosContoller extends Controller
         }
         $data = $form->getFieldValues();
         $data['dataEmissao'] = Carbon::createFromFormat('d/m/Y', $data['dataEmissao'])->format('Y-m-d');
-        $data['ativo'] = isset($data['ativo'])? iseet($data['ativo']) : 0;
-        dd($data);
-        //Contratos::create($data);
+        $data['ativo'] = $data['ativo'] == null? 0 : $data['ativo'];
+        
+        Contratos::create($data);
 
         
     }
