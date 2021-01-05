@@ -23,6 +23,22 @@
                         </button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table id="contratos" class="table table-bordered table-striped">
+                                <thead>
+                                    <th>Nº Contrato</th>
+                                    <th>Cliente</th>
+                                    <th>Descricao</th>
+                                    <th>Data Inicio</th>
+                                    <th>Data Fim</th>
+                                    <th>Ações</th>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -37,9 +53,10 @@
                   <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Novo Contrato</h4>
               </div>
+              <!-- formulario -->
+              {!! form_start($form) !!}
               <div class="modal-body">
-                <!-- formulario -->
-                {!! form_start($form) !!}
+                
                   <div class="row">
                       <div class="col-md-12">
                         {!! form_row($form->numeroContrato) !!}
@@ -74,22 +91,29 @@
                   </div>
                   <div class="row">
                       <div class="col-md-6">
-                          {!! form_row($form->cliente) !!}
+                          {!! form_row($form->id_cliente) !!}
                       </div>
                       <div class="col-md-6">
                           {!! form_row($form->gestor) !!}
                       </div>
                   </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                        {!! form_row($form->id_planoVenda) !!}
+                    </div>
+                    
+                    <div class="col-md-6">
+                        {!! form_row($form->valor) !!}
+                    </div>
+                  </div>
                 
-               
-                        
-                {!! form_end($form, $renderRest = false)!!}
-                <!-- fim form -->
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                {!! form_row($form->submit) !!}
               </div>
+              {!! form_end($form, $renderRest = false)!!}
+              <!-- fim form -->
             </div>
             <!-- /.modal-content -->
           </div>
@@ -107,20 +131,11 @@
 <link rel="stylesheet" href="{{ URL::asset('plugins/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('css/comercial/table.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
 <style type="text/css">
-    .collunm-list{
-        left: -150px !important;
-        max-height: 300px;
-        overflow-y: scroll;
-    }
-
-
-    .invalid-feedback{
-        display: none;
-        color: #dd4b39;
-    }
-    .MyColumn{
-        background: whitesmoke ;
+    .select2-container{
+	    display:block !important;
+	    width: 100% !important;
     }
 </style>
 @endpush
@@ -141,8 +156,35 @@
 <script src="{{ URL::asset('js/datepickReginalPTBR.js')}}"></script>
 <script src="{{ URL::asset('js/comercial/datepickrange.js')}}"></script>
 <script src="{{ URL::asset('js/comercial/validate.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script>
-            
+      $(function(){
+			$('.select2').select2();
+
+		});
+
+        $(function(){
+            table = $("#contratos").DataTable({
+                //dom: 'lBfrtip',
+                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "Todos"] ],
+                retrieve: true,
+                destroy: true,
+                processing:true,
+                serverSide:false,
+                ajax:{
+                    'url' : '{{"contratos-locacao/datatables"}}'
+                },
+                columns: [
+                    {data:'numeroContrato', name:'numeroContrato'},
+                    {data:'cliente', name:'cliente'},
+                    {data:'descricao', name:'descricao'},
+                    {data:'dataInicio', name:'dataInicio'},
+                    {data:'dataFinal', name:'datdataFinal'},
+                    {data:'action', name:'action'}
+                ],
+            });
+        })
+      
 </script>
 
 @include('sweetalert::alert')

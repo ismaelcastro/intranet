@@ -3,8 +3,12 @@
 namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
+use Illuminate\Support\Facades\DB;
+use App\Cliente;
+use App\PlanoVenda;
+use Carbon\Carbon;
 
-class ContatoForm extends Form
+class ContratoForm extends Form
 {
     public function buildForm()
     {
@@ -18,9 +22,11 @@ class ContatoForm extends Form
                 'rules' => 'required',
                 'attr' => ['rows' => '2']
             ])
-            ->add('dataEmissao', 'date', [
+            ->add('dataEmissao', 'text', [
                 'label' => 'Data Emissão',
-                'rules' => 'required'
+                'rules' => 'required',              
+                'value' => Carbon::toDay()->format('d/m/Y'),
+                
             ])
             ->add('dataInicio', 'date', [
                 'label' => 'Data Inicio',
@@ -46,17 +52,33 @@ class ContatoForm extends Form
             ->add('ativo', 'checkbox',[
                 'label' => 'Ativo'
             ])
-            ->add('cliente', 'select', [
+            ->add('id_cliente', 'select', [
                 'label' => 'Cliente',
                 'rules' => 'required',
+                'choices' => Cliente::select(DB::raw("CONCAT(id,' - ',CONCAT(CGC,' - ',razaosocial)) AS Cliente"), 'id')
+                    ->pluck('Cliente', 'id')->toArray(),
                 'attr' => [
                     'class' => 'form-control select2',
                 ],
 
             ])
-            ->add('prazoRec', 'text')
-            ->add('gestor', 'text')
-            ->add('Moeda', 'text')
-            ->add('Valor', 'text');
+            ->add('id_planoVenda', 'select', [
+                'label' => 'Prazo de Recebimento',
+                'choices' => PlanoVenda::pluck('nmPlano', 'id')->toArray(),
+                'attr' => [
+                    'class' => 'form-control select2'
+                ]
+            ])
+            ->add('gestor', 'text', [
+                'label' => 'Gestor do Contrato'
+            ])
+            //->add('moeda', 'text')
+            ->add('valor', 'text')
+            ->add('submit', 'submit', [
+                'label' => 'Salvar',
+                'attr' => ['class' => 'btn btn-primary']
+            ]);
+
+            
     }
 }

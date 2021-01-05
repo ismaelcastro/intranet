@@ -14,6 +14,7 @@
 Route::get('actionplans/datatables', 'actionPlansController@datatables');
 Route::get('actions/datatables/{id}', 'QualityactionController@datatables');
 Route::get('comercial/sugestaoCompra', 'ComercialController@sugestaoCompra');
+Route::get('contratos-locacao/datatables', 'ContratosContoller@datatables');
 
 
 Route::resource('/', 'DashboardController');
@@ -28,4 +29,5 @@ Route::resource('RelF212', 'Rel\Financeiro\Financeiro212Controller');
 Route::resource('financeiro', 'FinanceiroController');
 Route::resource('propostas', 'PropostasController');
 Route::resource('contratos-locacao', 'ContratosContoller');
+Route::resource('clientes', 'ClienteController');
 
