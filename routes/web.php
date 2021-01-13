@@ -30,4 +30,5 @@ Route::resource('financeiro', 'FinanceiroController');
 Route::resource('propostas', 'PropostasController');
 Route::resource('contratos-locacao', 'ContratosContoller');
 Route::resource('clientes', 'ClienteController');
+Route::resource('produtos', 'ProdutosController');
 

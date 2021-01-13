@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use App\Customers;
+use App\Produtos;
 
-class ClienteController extends Controller
+class ProdutosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,21 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        
+        $data_string = array(
+            'cdFilial'=> 0,
+            'cdLocal' => "8,16",
+            'estoquezero' => "N",
+        );
+        $client = new Client(['base_uri' => 'https://localhost:44353/api/', 'verify' => false]);
+        $res  = $client->request('post', 'listaInvetario',[
+            'headers' => [
+                'Content-type' => 'application/json',
+                'Accept' => 'application/json',
+            ],
+            'body' => json_encode($data_string)
+        ]);
+        $produtos = json_decode($res->getBody()->getContents());
+        return view('locacao.produtos', compact('produtos'));
     }
 
     /**
@@ -25,27 +39,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        $client = new Client();
-        $res = $client->request('GET', 'http://api.proel.local/api/clientes');
-        
-        $customers = json_decode($res->getBody()->getContents());
-        $customers_data = [];
-        foreach($customers as $c){
-           $data = [
-                'id' => $c->cdCliente,
-                'cgc' => $c->CGC,
-                'name' => $c->RazaoSocial,
-                'nickName' => $c->nmEntCli,
-                'phone' => $c->Fone1,
-                'mailSPED' => $c->emailSPED,
-                'typePerson' => $c->tpPessoa,
-                'typecustomer' => $c->tpEntCli
-           ];
-           array_push( $customers_data, $data);
-        }
-        foreach($customers_data as $c){
-            Customers::updateOrCreate($c);
-        }
+           
         
     }
 
@@ -57,7 +51,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**

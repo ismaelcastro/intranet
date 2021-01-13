@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlanoVendasTable extends Migration
+class CreateContractsTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePlanoVendasTable extends Migration
      */
     public function up()
     {
-        Schema::create('planovendas', function (Blueprint $table) {
+        Schema::create('contracts_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nmPlano');
+            $table->string('desc');
         });
     }
 
@@ -26,6 +26,6 @@ class CreatePlanoVendasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plano_vendas');
+        Schema::dropIfExists('contracts_types');
     }
 }

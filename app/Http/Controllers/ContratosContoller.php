@@ -7,7 +7,7 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\Datatables\Datatables;
 use App\Forms\ContratoForm;
-use App\Contratos;
+use App\Contracts;
 use Carbon\Carbon;
 
 class ContratosContoller extends Controller
@@ -54,10 +54,9 @@ class ContratosContoller extends Controller
 
         }
         $data = $form->getFieldValues();
-        $data['dataEmissao'] = Carbon::createFromFormat('d/m/Y', $data['dataEmissao'])->format('Y-m-d');
-        $data['ativo'] = $data['ativo'] == null? 0 : $data['ativo'];
-        
-        Contratos::create($data);
+        $data['dtemission'] = Carbon::createFromFormat('d/m/Y', $data['dtemission'])->format('Y-m-d');
+        $data['active'] = $data['active'] == null? 0 : $data['active'];
+        Contracts::create($data);
 
         
     }
@@ -107,22 +106,25 @@ class ContratosContoller extends Controller
         //
     }
     public function datatables(DataTables $DataTables){
-        $model = Contratos::with('Cliente');
+        $model = Contracts::with('Customer');
         return $DataTables->eloquent($model)
-        ->editColumn('dataInicio', function (Contratos $contrato){
-            return Carbon::parse($contrato->dataInicio)->format("d/m/Y");
+        ->editColumn('dtStart', function (Contracts $contrato){
+            return Carbon::parse($contrato->dtStart)->format("d/m/Y");
         })
-        ->editColumn('dataFinal', function(Contratos $contrato){
-            return Carbon::parse($contrato->dataFinal)->format("d/m/Y");
+        ->editColumn('dtEnd', function(Contracts $contrato){
+            return Carbon::parse($contrato->dtEnd)->format("d/m/Y");
         })
-        ->addColumn('cliente', function(Contratos $contrato){
-            return $contrato->cliente->razaosocial;
+        ->addColumn('customer', function(Contracts $contrato){
+            return $contrato->customer->name;
         })
-        ->addColumn('action', function(Contratos $contrato){
+        ->addColumn('action', function(Contracts $contrato){
             return "<a href='contratos-locacao/{$contrato->id}' 
             class='btn btn-primary'><i class='fa fa-fw fa-edit'></i>Editar</a>";
         })
-        ->rawColumns(['action'])
+        ->editColumn('status', function(Contracts $contrato){
+            return $contrato->ativo = 1 ?"<span class='label bg-green'>Ativo</span>" : "<span class='label bg-red'>Inativo</span>";
+        })
+        ->rawColumns(['action','status'])
         ->toJson();
     }
 }

@@ -33,6 +33,7 @@
                                     <th>Descricao</th>
                                     <th>Data Inicio</th>
                                     <th>Data Fim</th>
+                                    <th>Status</th>
                                     <th>Ações</th>
                                 </thead>
                             </table>
@@ -59,51 +60,52 @@
                 
                   <div class="row">
                       <div class="col-md-12">
-                        {!! form_row($form->numeroContrato) !!}
+                        {!! form_row($form->numberContract) !!}
                       </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                        {!! form_row($form->descricao) !!}
+                        {!! form_row($form->description) !!}
                     </div>
                   </div>
                   <div class="row">
                       <div class="col-md-3">
-                          {!! form_row($form->dataEmissao) !!}
+                          {!! form_row($form->dtemission) !!}
                       </div>
                       <div class="col-md-3">
-                          {!! form_row($form->dataInicio) !!}
+                          {!! form_row($form->dtStart) !!}
                       </div>
                       <div class="col-md-3">
-                          {!! form_row($form->dataFinal) !!}
+                          {!! form_row($form->dtEnd) !!}
                       </div>
                       <div class="col-md-3">
-                          {!! form_row($form->dataFaturamento) !!} 
+                          {!! form_row($form->dtbilling) !!} 
                       </div>
                   </div>
                   <div class="row">
                       <div class="col-md-6">
-                          {!! form_row($form->TipoContrato) !!}
+                          {!! form_row($form->id_type) !!}
                       </div>
                       <div class="col-md-6">
-                          {!! form_row($form->ativo) !!}
+                          {!! form_row($form->active) !!}
                       </div>
                   </div>
                   <div class="row">
                       <div class="col-md-6">
-                          {!! form_row($form->id_cliente) !!}
+                          {!! form_row($form->id_customers) !!}
                       </div>
                       <div class="col-md-6">
-                          {!! form_row($form->gestor) !!}
+                          {!! form_row($form->manager) !!}
                       </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                        {!! form_row($form->id_planoVenda) !!}
+                        {!! form_row($form->id_saleplans) !!}
                     </div>
                     
                     <div class="col-md-6">
-                        {!! form_row($form->valor) !!}
+                        {!! form_row($form->price) !!}
+                        {!! form_row($form->id_branch) !!}
                     </div>
                   </div>
                 
@@ -175,14 +177,19 @@
                     'url' : '{{"contratos-locacao/datatables"}}'
                 },
                 columns: [
-                    {data:'numeroContrato', name:'numeroContrato'},
-                    {data:'cliente', name:'cliente'},
-                    {data:'descricao', name:'descricao'},
-                    {data:'dataInicio', name:'dataInicio'},
-                    {data:'dataFinal', name:'datdataFinal'},
+                    {data:'numberContract', name:'numberContract'},
+                    {data:'customer', name:'customer'},
+                    {data:'description', name:'description'},
+                    {data:'dtStart', name:'dtStart'},
+                    {data:'dtEnd', name:'dtEnd'},
+                    {data:'status', name:'status'},
                     {data:'action', name:'action'}
                 ],
             });
+        })
+
+        $("#contratos").on("contextmenu", "tr", function(){
+            alert('context menu');
         })
       
 </script>
