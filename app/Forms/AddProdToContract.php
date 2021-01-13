@@ -30,6 +30,16 @@ class AddProdToContract extends Form
         ])
         ->add('id_contract', 'hidden',[
             'rules' => 'required'
+        ])
+        ->add('codp', 'hidden',[
+            'rules' => 'required'
+        ])
+        ->add('apelido', 'hidden', [
+            'rules' => 'required',
+        ])
+        ->add('nome', 'text', [
+            'label' => 'Nome do Produto',
+            'rules' => 'required'
         ]);
     }
 }
