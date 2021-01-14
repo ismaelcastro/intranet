@@ -3,14 +3,26 @@ $(function(){
 });
 
 $(function(){
-table = $('#produtos').DataTable();
+table = $('#produtos').DataTable({
+    "columns": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {"visible":false},
+    ]
+});
 
 table.column(5).data().unique().each(function(d, j){
-    $('#fvenda').append('<option value="'+d+'">'+d+'</option>');
+    $('#localEstoque').append('<option value="'+d+'">'+d+'</option>');
 })
 });
 
-$('#fvenda').on('change', function(){
+$('#localEstoque').on('change', function(){
 var val = $(this).val();
 if(val != -1){
     table.column(5)
@@ -23,7 +35,7 @@ $('.btn-info').on('click', function(e){
 column = $.map(table.row($(this).parent().parent()).data(), function(item){
    return item;
 });
-
+console.log(column);
 objColumn = {
     'codp' : column[0],
     'apelido': column[1],
@@ -31,9 +43,11 @@ objColumn = {
     'unidade': column[3],
     'tipoMercadoria': column[4],
     'localEstoque': column[5],
-    'ns': column[6]
+    'ns': column[6],
+    'fvenda':column[8]
 
 }
+
 
 modalFormItemToContract(objColumn);
 
@@ -41,5 +55,14 @@ modalFormItemToContract(objColumn);
 })
 
 function modalFormItemToContract(obj){
-$(".modal-title").html(obj.nome);
+    $(".modal-title").html(obj.nome);
+    $("#codp").val(obj.codp);
+    $("#apelido").val(obj.apelido);
+    $("#nome").val(obj.nome);
+    $("#dsUnidade").val(obj.unidade);
+    $("#dsLocal").val(obj.localEstoque);
+    $("#Tipo").val(obj.tipoMercadoria);
+    $("#numSerie").val(obj.ns);
+    $("#fvenda").val(obj.fvenda);
+
 }

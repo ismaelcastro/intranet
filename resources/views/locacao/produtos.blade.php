@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <select name="fvenda" id="fvenda" class="col-md-12">
+                            <select name="localEstoque" id="localEstoque" class="col-md-12">
                                 <option value="-1">-- Local de Estoque --</option>
                             </select>
                         </div>
@@ -34,6 +34,7 @@
                                     <th>Local de Estoque</th>
                                     <th>Nº Serie</th>
                                     <th>Ações</th>
+                                    <th>fvenda</th>
                                 </thead>
                                 <tbody>
                                     @foreach($produtos as $p)                      
@@ -54,6 +55,7 @@
                                                     ADD ao Contrato
                                                 </button>
                                         </td>
+                                        <td>{{$p->fVenda }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -76,12 +78,56 @@
                 <h4 class="modal-title"></h4>
               </div>
               <!-- formulario -->
+              {!! form_start($form) !!}
               <div class="modal-body">
-                
+                <div class="row">
+                    <div class="col-md-6">
+                        {!! form_row($form->id_branch) !!}
+                    </div>
+                    <div class="col-md-6">
+                        {!! form_row($form->id_contract) !!}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        {!! form_row($form->codp) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! form_row($form->apelido) !!}
+                        {!! form_row($form->nome) !!}
+                    </div>
+                    <div class="col-md-5">
+                        {!! form_row($form->numSerie) !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! form_row($form->qtd) !!}
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        {!! form_row($form->dsUnidade) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! form_row($form->dsLocal) !!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! form_row($form->Tipo) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! form_row($form->valor) !!}
+                        {!! form_row($form->fvenda) !!}
+                    </div>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                {!! form_row($form->submit) !!}  
               </div>
+              {!! form_end($form, $renderRest = false)!!}
               <!-- fim form -->
             </div>
             <!-- /.modal-content -->

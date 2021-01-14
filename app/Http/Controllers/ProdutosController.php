@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use App\Produtos;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Kris\LaravelFormBuilder\FormBuilderTrait;
+use App\Products;
+use App\Forms\AddProdToContract;
+use App\Services\CallistoAPIService;
 
 class ProdutosController extends Controller
 {
@@ -13,23 +17,27 @@ class ProdutosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(FormBuilder $formBuilder, CallistoAPIService $CallistoAPI)
     {
         $data_string = array(
             'cdFilial'=> 0,
             'cdLocal' => "8,16",
             'estoquezero' => "N",
         );
-        $client = new Client(['base_uri' => 'https://localhost:44353/api/', 'verify' => false]);
-        $res  = $client->request('post', 'listaInvetario',[
-            'headers' => [
-                'Content-type' => 'application/json',
-                'Accept' => 'application/json',
-            ],
-            'body' => json_encode($data_string)
+        $produtos = $CallistoAPI->getJson('listaInvetario', 'post', $data_string);
+
+        $form = $formBuilder->create(AddProdToContract::class, [
+            'method' => 'POST',
+            'url' => route('produtos.store')
         ]);
-        $produtos = json_decode($res->getBody()->getContents());
-        return view('locacao.produtos', compact('produtos'));
+        $form->modify('id_branch','select',[
+            'label' => 'Item propriedade de',
+        ]);
+        $form->modify('contract_id','select',[
+            'label' => 'Adicionar ao contrato'
+        ]);
+        
+        return view('locacao.produtos', compact('produtos','form'));
     }
 
     /**
@@ -49,9 +57,22 @@ class ProdutosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormBuilder $formBuilder, Request $request)
     {
-        //
+        $form  = $formBuilder->create(AddProdToContract::class);
+        if(!$form->isValid()){
+            return 
+            redirect()
+            ->back()
+            ->withErrrors($form->getErrors())
+            ->withInput();
+
+        };
+        
+        $data = $form->getFieldValues();
+        Products::create($data);
+
+        
     }
 
     /**
