@@ -8,6 +8,7 @@ use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\Datatables\Datatables;
 use App\Forms\ContratoForm;
 use App\Contracts;
+use App\Products;
 use Carbon\Carbon;
 
 class ContratosContoller extends Controller
@@ -69,7 +70,9 @@ class ContratosContoller extends Controller
      */
     public function show($id)
     {
-        //
+        $p = Products::where('id_contract', $id)->get();
+        dd($p);
+        
     }
 
     /**
