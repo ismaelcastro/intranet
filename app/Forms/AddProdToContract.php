@@ -6,6 +6,7 @@ use Kris\LaravelFormBuilder\Form;
 use Illuminate\Support\Facades\DB;
 use App\Contracts;
 use App\Branch;
+use App\Products;
 
 class AddProdToContract extends Form
 {
@@ -20,6 +21,14 @@ class AddProdToContract extends Form
             'attr' => [
                 'class' => 'form-control select2'
             ]
+        ])
+        ->add('id_product', 'select', [
+            'label' => 'Acessório de ',
+            'choices' => Products::select('nome', 'id')->where('tpobj', 'Equipamento')->pluck('nome', 'id')->toArray(),
+            'attr' => [
+                'class' => 'form-control select2'
+            ],
+            'empty_value' => '>> Selecine um item <<'
         ])
         ->add('id_branch', 'select', [
             'label' => 'Filial',
@@ -96,6 +105,11 @@ class AddProdToContract extends Form
                 'id' => 'fvenda',
                 'readonly' => true
             ]
+        ])
+        ->add('tpobj', 'select',[
+            'label' => 'Tipo de Objeto',
+            'rules' => 'required',
+            'choices' => ['Equipamento' => 'Equipamento', 'Acessório' => 'Acessório'],
         ])
         ->add('submit', 'submit', [
             'label' => 'Adicionar',

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'Proel Hospitalar',
 
     'title_prefix' => '',
 
@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Proel Hospitalar</b>',
 
     'logo_mini' => '<b>A</b>LT',
 
@@ -132,9 +132,23 @@ return [
         [
             'text'        => 'Contratos de Locação',
             'url'         => 'contratos-locacao',
-            'icon'        => 'map-signs',
+            'icon'        => 'files-o',
+            'submenu' => [
+                [
+                    'text' => 'Contratos',
+                    'url' => 'contratos-locacao',
+                    'icon' => 'map-signs'
+                ],
+                [
+                    'text' => 'Itens de Locação',
+                    'url' => 'produtos',
+                    'icon' => 'cubes',
+                ]
+            ]
+            
         ],
-        /*'Emitir Relatórios',
+        /*
+        'Emitir Relatórios',
         [
             'text' => 'Financiro F212',
             'icon' => 'file-text-o',

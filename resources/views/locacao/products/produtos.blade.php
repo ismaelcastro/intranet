@@ -21,6 +21,40 @@
                         </div>
                     </div>
                 </div>
+                @if(count($errors) > 0)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-error">
+							<p>Desculpe! Não foi possível vincular o item ao contrato.</p>
+							<ul>
+								@foreach( $errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+                    </div>
+                </div>                      
+
+                @endif
+                @if(Session()->has('success'))
+                <div class="row">
+                    <div class="col-md-12">
+                         <div class="alert alert-success">
+                            {{Session::get('success')}}
+                         </div>   
+                    </div>
+                </div>
+
+                @endif
+                @if(Session()->has('fall'))
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-error">
+                            {{Session::get('fall')}}
+                        </div>
+                    </div>
+                </div>
+                @endif
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -92,20 +126,20 @@
                     <div class="col-md-2">
                         {!! form_row($form->codp) !!}
                     </div>
+
                     <div class="col-md-3">
                         {!! form_row($form->apelido) !!}
                         {!! form_row($form->nome) !!}
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-2">
                         {!! form_row($form->numSerie) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! form_row($form->tpobj) !!}
                     </div>
                     <div class="col-md-2">
                         {!! form_row($form->qtd) !!}
                     </div>
-                </div>
-                <div class="row">
-                    
-                    
                 </div>
                 <div class="row">
                     <div class="col-md-2">
@@ -122,6 +156,12 @@
                         {!! form_row($form->fvenda) !!}
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {!! form_row($form->id_product) !!}
+                    </div>
+                </div>
+                
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>

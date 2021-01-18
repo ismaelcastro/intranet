@@ -28,7 +28,14 @@ class CreateProductsTable extends Migration
             $table->string('Tipo');
             $table->unsignedInteger('cdLote')->nullable();
             $table->string('numSerie')->nullable();
+            $table->enum('tpobj', ['Equipamento', 'Acessório']);
+
             $table->unsignedInteger('id_contract');
+            $table->foreign('id_contract')->references('id')->on('contracts');
+
+            $table->unsignedInteger('id_product')->nullable();
+            $table->foreign('id_product')->references('id')->on('products');
+            
 
             $table->unsignedInteger('id_branch');
             $table->foreign('id_branch')->references('id')->on('branches');

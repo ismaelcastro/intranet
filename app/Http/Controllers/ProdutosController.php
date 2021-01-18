@@ -37,7 +37,7 @@ class ProdutosController extends Controller
             'label' => 'Adicionar ao contrato'
         ]);
         
-        return view('locacao.produtos', compact('produtos','form'));
+        return view('locacao.products.produtos', compact('produtos','form'));
     }
 
     /**
@@ -70,7 +70,12 @@ class ProdutosController extends Controller
         };
         
         $data = $form->getFieldValues();
-        Products::create($data);
+        if(Products::create($data)){
+            $request->session()->flash('success', 'Item adicionado com sucesso !');
+        }else{
+            $request->session()->flash('fall', 'Ops ! Algo deu errado.');
+        };
+        return redirect()->back();
 
         
     }

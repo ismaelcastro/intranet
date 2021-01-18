@@ -25,7 +25,7 @@ class ContratosContoller extends Controller
             'url' => route('contratos-locacao.store')
         ]);
         
-        return view('locacao.index', compact('form'));
+        return view('locacao.contracts.index', compact('form'));
     }
 
     /**
@@ -57,7 +57,14 @@ class ContratosContoller extends Controller
         $data = $form->getFieldValues();
         $data['dtemission'] = Carbon::createFromFormat('d/m/Y', $data['dtemission'])->format('Y-m-d');
         $data['active'] = $data['active'] == null? 0 : $data['active'];
-        Contracts::create($data);
+        if(Contracts::create($data)){
+            $request->session()->flash('success', 'Contrato criado com sucesso !');
+            
+        }else{
+            $request->session()->flash('fall', 'Algo deu errado !');            
+        }
+        return redirect()->back();
+            
 
         
     }
@@ -70,9 +77,9 @@ class ContratosContoller extends Controller
      */
     public function show($id)
     {
-        $p = Products::where('id_contract', $id)->get();
-        dd($p);
-        
+        $produtos = Products::where('id_contract', $id)->get();
+
+        return view('locacao.contracts.show', compact('produtos'));        
     }
 
     /**
