@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\rel\Comercial;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Yajra\Datatables\Datatables;
 use GuzzleHttp\Client;
 use Illuminate\Cache\CacheManager;
+use App\Http\Controllers\Controller;
 
 
 class ComercialController extends Controller
@@ -25,7 +26,7 @@ class ComercialController extends Controller
      */
     public function index()
     {
-        return view('comercial.index');
+        return view('rel.comercial.index');
     }
 
     /**

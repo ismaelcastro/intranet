@@ -214,7 +214,7 @@
 					processing:true,
 					serverSide:false,
 					ajax:{
-						'url':'{{url('comercial/sugestaoCompra')}}',
+						'url':'{{url('relatorios/comercial/sugestaoCompra')}}',
 						'contentType': 'application/json',
 						'type': "get",
 						'data' :

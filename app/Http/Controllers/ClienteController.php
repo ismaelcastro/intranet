@@ -25,6 +25,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
+        
         $client = new Client();
         $res = $client->request('GET', 'http://api.proel.local/api/clientes');
         

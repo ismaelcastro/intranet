@@ -24,7 +24,7 @@ class ContratoForm extends Form
                 'attr' => ['rows' => '2']
             ])
             ->add('id_branch', 'hidden', [
-                'value' => 0,
+                'value' => 1,
                 'rules' => 'required'
             ])    
             ->add('dtemission', 'text', [

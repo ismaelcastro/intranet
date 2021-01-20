@@ -116,12 +116,12 @@ return [
         ],*/
         [
             'text'        => 'Comercial',
-            'url'         => 'comercial',
+            'url'         => 'relatorios/comercial',
             'icon'        => 'group',
         ],
         [
             'text'        => 'Estoque',
-            'url'         => 'estoque',
+            'url'         => 'relatorios/estoque',
             'icon'        => 'shopping-cart',
         ],
         [

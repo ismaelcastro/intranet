@@ -13,7 +13,7 @@ class FinanceiroController extends Controller
      */
     public function index()
     {
-        return view('financeiro.index');
+        return view('rel.financeiro.index');
     }
 
     /**

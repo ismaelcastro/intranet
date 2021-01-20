@@ -20,11 +20,12 @@ class AddProdToContract extends Form
             ->pluck('Contract', 'id')->toArray(),
             'attr' => [
                 'class' => 'form-control select2'
-            ]
+            ],
+            'empty_value' => '>> Selecine um item <<'
         ])
         ->add('id_product', 'select', [
             'label' => 'Acessório de ',
-            'choices' => Products::select('nome', 'id')->where('tpobj', 'Equipamento')->pluck('nome', 'id')->toArray(),
+            'choices' => Products::select(DB::raw("CONCAT(nome, ' - ', numSerie) AS nome"), 'id')->where('tpobj','=' ,'Equipamento')->pluck('nome', 'id')->toArray(),
             'attr' => [
                 'class' => 'form-control select2'
             ],

@@ -128,8 +128,27 @@ class ContratosContoller extends Controller
             return $contrato->customer->name;
         })
         ->addColumn('action', function(Contracts $contrato){
-            return "<a href='contratos-locacao/{$contrato->id}' 
-            class='btn btn-primary'><i class='fa fa-fw fa-edit'></i>Editar</a>";
+            return "
+            <div class='row'>
+                <div class='col-md-4 col-sm-4'>
+                    <a 
+                    href='contratos-locacao/{$contrato->id}' 
+                    class='btn btn-sm btn-primary'>
+                        <i class='fa fa-fw fa-cubes'></i>
+                        Objetos Cobertos
+                    </a>
+                </div>
+            </div>
+            <div class='row mt-2'>
+                <div class='col-md-4 col-sm-4'>
+                    <a 
+                    href='contratos-locacao/{$contrato->id}/edit'
+                    class ='btn btn-sm btn-success'>
+                        <i class='fa fa-fw fa-edit'></i>
+                        Editar
+                    </a>
+                </div>
+            </div>";
         })
         ->editColumn('status', function(Contracts $contrato){
             return $contrato->ativo = 1 ?"<span class='label bg-green'>Ativo</span>" : "<span class='label bg-red'>Inativo</span>";

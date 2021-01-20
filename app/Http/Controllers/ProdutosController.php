@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use GuzzleHttp\Client;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Products;
 use App\Forms\AddProdToContract;
 use App\Services\CallistoAPIService;
+use Exception;
 
 class ProdutosController extends Controller
 {
@@ -70,11 +72,21 @@ class ProdutosController extends Controller
         };
         
         $data = $form->getFieldValues();
-        if(Products::create($data)){
-            $request->session()->flash('success', 'Item adicionado com sucesso !');
-        }else{
-            $request->session()->flash('fall', 'Ops ! Algo deu errado.');
-        };
+        try{
+            if(Products::create($data)){
+                $request->session()->flash('success', 'Item adicionado com sucesso !');
+            }else{
+                $request->session()->flash('fall', 'Ops ! Algo deu errado.');
+            };
+
+        }catch(QueryException $ex){
+            $request
+            ->session()
+            ->flash('fall', 
+            'Ops ! O N° Serie que você está tentando inserir já está 
+            vinculado a um contrato.');
+        }
+        
         return redirect()->back();
 
         

@@ -27,7 +27,7 @@ class CreateProductsTable extends Migration
             $table->string('dsLocal');
             $table->string('Tipo');
             $table->unsignedInteger('cdLote')->nullable();
-            $table->string('numSerie')->nullable();
+            $table->string('numSerie')->unique()->nullable();
             $table->enum('tpobj', ['Equipamento', 'Acessório']);
 
             $table->unsignedInteger('id_contract');

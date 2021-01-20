@@ -208,7 +208,7 @@
                 processing:true,
                 serverSide:false,
                 ajax:{
-                    'url':'{{"RelF212"}}',
+                    'url':'{{"relatorios/RelF212"}}',
                     'contentType': 'application/json',
                     'type': "get",
                     'data':{
