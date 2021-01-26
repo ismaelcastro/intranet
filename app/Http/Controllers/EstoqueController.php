@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Products;
+use App\Contracts;
+use App\Saleplans;
 
 class EstoqueController extends Controller
 {
@@ -14,8 +16,8 @@ class EstoqueController extends Controller
      */
     public function index()
     {
-        $produtosEst = Products::all();
-        dd($produtosEst);
+        $produtosEst = Products::with('contracts')->get();
+        return view('locacao.estoque.index', compact('produtosEst'));
     }
 
     /**

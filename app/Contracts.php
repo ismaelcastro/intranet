@@ -28,6 +28,9 @@ class Contracts extends Model
     }
 
     public function salesplan(){
-        return $this->belongsTo(Saleplans::class);
+        return $this->belongsTo(Saleplans::class, 'id_saleplans');
+    }
+    public function products(){
+        return $this->hasMany(Products::class, 'id_contract');
     }
 }

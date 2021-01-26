@@ -35,7 +35,6 @@ $('.btn-info').on('click', function(e){
 column = $.map(table.row($(this).parent().parent()).data(), function(item){
    return item;
 });
-console.log(column);
 objColumn = {
     'codp' : column[0],
     'apelido': column[1],

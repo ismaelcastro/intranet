@@ -9,7 +9,11 @@
         <div class="box box-solid">
             <div class="box-header">
                 <i class="fa fa-th"></i>
-                <h3 class="box-title">Objetos Cobertos</h3>
+                <h3 class="box-title">
+                    Objetos Cobertos - 
+                    {{$contracts->numberContract}} - 
+                    {{$contracts->description}}
+                </h3>
             </div>
             <div class="box-body">
                 <div class="table-responsive">
@@ -22,7 +26,7 @@
                             <th>Nº Serie</th>
                         </thead>
                         <tbody>
-                            @foreach($produtos as $p)
+                            @foreach($products as $p)
                             <tr>
                                 <td>{{$p->codp}}</td>
                                 <td>{{$p->apelido}}</td>
@@ -82,6 +86,7 @@
 
         $(function(){
             table = $("#objetoscobertos").DataTable();
+        )};
 
       
 </script>

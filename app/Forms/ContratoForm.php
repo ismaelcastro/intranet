@@ -78,7 +78,9 @@ class ContratoForm extends Form
                 'label' => 'Gestor do Contrato'
             ])
             //->add('moeda', 'text')
-            ->add('price', 'text')
+            ->add('price', 'text',[
+                'label' => 'Valor do Contrato'
+            ])
             ->add('submit', 'submit', [
                 'label' => 'Salvar',
                 'attr' => ['class' => 'btn btn-primary']

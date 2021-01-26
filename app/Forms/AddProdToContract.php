@@ -15,7 +15,6 @@ class AddProdToContract extends Form
         $this
         ->add('id_contract', 'select', [
             'label' => 'Contrato',
-            'rules' => 'required',
             'choices' => Contracts::select(DB::raw("CONCAT(numberContract,' - ', description) AS Contract"), 'id')
             ->pluck('Contract', 'id')->toArray(),
             'attr' => [
@@ -81,9 +80,10 @@ class AddProdToContract extends Form
             'rules' => 'required',
             'value' => 1
         ])
-        ->add('valor', 'text', [
+        ->add('valor', 'number', [
             'label' => 'Valor do Item',
-            'rules' => 'required|integer',
+            'rules' => 'required|numeric',
+            
         ])
         ->add('dsLocal', 'text',[
             'label' => 'Local de Estoque',
@@ -111,6 +111,7 @@ class AddProdToContract extends Form
             'label' => 'Tipo de Objeto',
             'rules' => 'required',
             'choices' => ['Equipamento' => 'Equipamento', 'Acessório' => 'Acessório'],
+            'empty_value' => '>> Selecine Tipo de Objeto <<'
         ])
         ->add('submit', 'submit', [
             'label' => 'Adicionar',

@@ -120,7 +120,7 @@ return [
             'icon'        => 'group',
         ],
         [
-            'text'        => 'Estoque',
+            'text'        => 'Suprimentos',
             'url'         => 'relatorios/estoque',
             'icon'        => 'shopping-cart',
         ],
@@ -143,6 +143,11 @@ return [
                     'text' => 'Itens de Locação',
                     'url' => 'produtos',
                     'icon' => 'cubes',
+                ],
+                [
+                    'text' => 'Patrimônio',
+                    'url' => 'estoque',
+                    'icon' =>'bank',
                 ]
             ]
             

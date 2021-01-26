@@ -23,4 +23,8 @@ class Products extends Model
         'id_branch'
     ];
     public $timestamps = false;
+
+    public function contracts(){
+        return $this->belongsTo(Contracts::class, 'id_contract');
+    }
 }

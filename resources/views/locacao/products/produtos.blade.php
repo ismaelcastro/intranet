@@ -83,11 +83,13 @@
                                         <td>
                                             <button 
                                                 type="button" 
-                                                class="btn btn-info" 
+                                                class="btn btn-sm btn-info" 
                                                 data-toggle="modal" 
                                                 data-target="#modal-contrato">
-                                                    ADD ao Contrato
-                                                </button>
+                                                    <i class="fa fa-cloud-download"></i>
+                                                    Importar
+                                            </button>
+                                            
                                         </td>
                                         <td>{{$p->fVenda }}</td>
                                     </tr>

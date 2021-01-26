@@ -9,6 +9,8 @@ use Yajra\Datatables\Datatables;
 use App\Forms\ContratoForm;
 use App\Contracts;
 use App\Products;
+use App\contractsType;
+use App\Branch;
 use Carbon\Carbon;
 
 class ContratosContoller extends Controller
@@ -77,9 +79,9 @@ class ContratosContoller extends Controller
      */
     public function show($id)
     {
-        $produtos = Products::where('id_contract', $id)->get();
-
-        return view('locacao.contracts.show', compact('produtos'));        
+        $contracts = Contracts::find($id);
+        $products = $contracts->products;
+        return view('locacao.contracts.show', compact('contracts','products'));        
     }
 
     /**
@@ -88,9 +90,60 @@ class ContratosContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(FormBuilder $formBuilder, $id)
     {
-        //
+        $contract = Contracts::find($id);
+        $form = $formBuilder->create(ContratoForm::class, [
+            'method' => 'PUT',
+            'url' => route('contratos-locacao.update', $id),
+        ]);
+        $form->modify('numberContract', 'text', [
+            'value' => $contract->numberContract,
+        ]);
+        $form->modify('description', 'textarea', [
+            'value' => $contract->description,
+        ]);
+        $form->modify('dtemission', 'date',[
+            'value' => $contract->dtemission,
+        ]);
+        $form->modify('dtStart', 'date', [
+            'value' => $contract->dtStart,
+        ]);
+        $form->modify('dtEnd', 'date', [
+            'value' => $contract->dtEnd,
+        ]);
+        $form->modify('dtbilling', 'date', [
+            'value' => $contract->dtbilling,
+        ]);
+        $form->modify('id_type', 'select', [
+            
+            'selected' => $contract->id_type,
+        ]);
+        $form->modify('active', 'checkbox', [
+            'value' => $contract->active,
+            'checked' => $contract->active
+        ]);
+        $form->modify('id_customers', 'select',[
+            'selected' => $contract->id_customers,
+        ]);
+        $form->modify('manager', 'text', [
+            'value' => $contract->manager
+        ]);
+        $form->modify('id_branch', 'select', [
+            'choices' => Branch::pluck('name', 'id')->toArray(),
+            'selected' => $contract->id_branch,
+            'label' => 'Filial Responsável'
+        ]);
+        $form->modify('id_saleplans', 'select', [
+            'selected' => $contract->id_saleplans,
+        ]);
+        $form->modify('price', 'text', [
+            'value' => $contract->price
+        ]);
+        $form->modify('submit', 'submit', [
+            'label' => 'Atualizar'
+        ]);
+        return view('locacao.contracts.edit', compact('form'));
     }
 
     /**

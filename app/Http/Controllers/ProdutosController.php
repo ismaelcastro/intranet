@@ -66,7 +66,7 @@ class ProdutosController extends Controller
             return 
             redirect()
             ->back()
-            ->withErrrors($form->getErrors())
+            ->withErrors($form->getErrors())
             ->withInput();
 
         };
@@ -84,7 +84,7 @@ class ProdutosController extends Controller
             ->session()
             ->flash('fall', 
             'Ops ! O N° Serie que você está tentando inserir já está 
-            vinculado a um contrato.');
+            vinculado a um contrato ou já existem em patrimônio.');
         }
         
         return redirect()->back();

@@ -9,63 +9,73 @@
         <div class="box box-solid">
             <div class="box-header">
                 <i class="fa fa-th"></i>
-                <h3 class="box-title">Objetos Cobertos</h3>
+                <h3 class="box-title">Contratos</h3>
             </div>
             <div class="box-body">
-                <div class="table-responsive">
-                    <table id="objetoscobertos" class="table table-bordered table-striped">
-                        <thead>
-                            <th>id</th>
-                            <th>Cod.</th>
-                            <th>Cod. Alternativo</th>
-                            <th>Descrição</th>
-                            <th>Quantidade</th>
-                            <th>Nº Serie</th>
-                            <th>R$ Valor</th>
-                            <th>Contrato</th>
-                        </thead>
-                        <tbody>
-                            @foreach($produtosEst as $p)
-                            <tr class="context-menu-one">
-                                <td>{{$p->id}}</td>
-                                <td>{{$p->codp}}</td>
-                                <td>{{$p->apelido}}</td>
-                                <td>{{$p->nome}}</td>
-                                <td>{{$p->qtd}}</td>
-                                <td>{{$p->numSerie}}</td>
-                                <td>{{number_format($p->valor, 2)}}</td>
-                                <td>
-                                    @if(isset($p->contracts->numberContract))
-                                        {{$p->contracts->numberContract}}
-                                    @endif
-                                   
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                {!! form_start($form) !!}
+                <div class="row">                    
+                    <div class="col-md-2">
+                        {!! form_row($form->numberContract) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! form_row($form->id_branch) !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! form_row($form->id_saleplans) !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! form_row($form->price) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! form_row($form->manager)!!}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {!! form_row($form->description) !!}
+                    </div>
+                </div>
+                <div class="row">                
+                    <div class="col-md-3">
+                        {!! form_row($form->dtemission) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! form_row($form->dtStart) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! form_row($form->dtEnd) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! form_row($form->dtbilling) !!}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        {!! form_row($form->id_type) !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! form_row($form->active) !!}
+                    </div>
+                    <div class="col-md-7">
+                        {!! form_row($form->id_customers) !!}
+                    </div>
+                </div>
+                             
+                <div class="row">
+                    <div class="col-md-12">
+                        {!! form_row($form->submit) !!}
+                    </div>
+                </div>  
+                {!! form_end($form, $renderRest = false)!!}
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- modal -->
 
-<div class="modal fade" id="modal-condenar">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"></h4>
-              </div>
-              teste
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-    <!-- end modal -->
+
+    
+</div>
+
 @stop
 @push('css')
 
@@ -76,7 +86,6 @@
 <link rel="stylesheet" href="{{ URL::asset('plugins/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('css/comercial/table.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
 <style type="text/css">
     .select2-container{
 	    display:block !important;
@@ -102,16 +111,7 @@
 <script src="{{ URL::asset('js/comercial/datepickrange.js')}}"></script>
 <script src="{{ URL::asset('js/comercial/validate.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
-<script src="{{ URL::asset('js/contextMenu/contextMenu.js')}}"></script>
-<script>
-      $(function(){
-			$('.select2').select2();
 
-		});
-      
-</script>
 
 @include('sweetalert::alert')
 @endpush

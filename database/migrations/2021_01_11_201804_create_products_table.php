@@ -30,7 +30,7 @@ class CreateProductsTable extends Migration
             $table->string('numSerie')->unique()->nullable();
             $table->enum('tpobj', ['Equipamento', 'Acessório']);
 
-            $table->unsignedInteger('id_contract');
+            $table->unsignedInteger('id_contract')->nullable();
             $table->foreign('id_contract')->references('id')->on('contracts');
 
             $table->unsignedInteger('id_product')->nullable();

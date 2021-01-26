@@ -34,3 +34,4 @@ Route::resource('propostas', 'PropostasController');
 Route::resource('contratos-locacao', 'ContratosContoller');
 Route::resource('clientes', 'ClienteController');
 Route::resource('produtos', 'ProdutosController');
+Route::resource('estoque', 'EstoqueController');
