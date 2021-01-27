@@ -59,7 +59,7 @@
                   <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title"></h4>
               </div>
-              teste
+              
             </div>
             <!-- /.modal-content -->
           </div>
