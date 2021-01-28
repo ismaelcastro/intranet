@@ -40,6 +40,7 @@ class SummaryObjController extends Controller
     public function store( FormBuilder $formBuilder, Request $request)
     {
         $form = $formBuilder->create(SummaryObjForm::class);
+
         if(!$form->isValid()){
             return redirect()
                     ->back()
@@ -48,14 +49,16 @@ class SummaryObjController extends Controller
         }
 
         $data = $form->getFieldValues();
+
         DB::beginTransaction();
         $createSummary = SummaryObj::create($data);
         $product = Products::find($data['product_id']);
-        $product->status = 0;
-        if(!$createSummary || $product->save()){
-            DB::rollbackTransaction();
+        $product->active = 0;
+        $product->id_contract = NULL;
+        if(!$createSummary || !$product->save()){
+            DB::rollBack();
         }else{
-            DB::commitTransaction();
+            DB::commit();
         }
     }
 

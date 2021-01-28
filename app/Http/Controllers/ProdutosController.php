@@ -38,7 +38,7 @@ class ProdutosController extends Controller
         $form->modify('contract_id','select',[
             'label' => 'Adicionar ao contrato'
         ]);
-        
+
         return view('locacao.products.produtos', compact('produtos','form'));
     }
 
@@ -49,8 +49,8 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-           
-        
+
+
     }
 
     /**
@@ -63,14 +63,14 @@ class ProdutosController extends Controller
     {
         $form  = $formBuilder->create(AddProdToContract::class);
         if(!$form->isValid()){
-            return 
+            return
             redirect()
             ->back()
             ->withErrors($form->getErrors())
             ->withInput();
 
         };
-        
+
         $data = $form->getFieldValues();
         try{
             if(Products::create($data)){
@@ -82,14 +82,14 @@ class ProdutosController extends Controller
         }catch(QueryException $ex){
             $request
             ->session()
-            ->flash('fall', 
-            'Ops ! O N° Serie que você está tentando inserir já está 
+            ->flash('fall',
+            'Ops ! O N° Serie que você está tentando inserir já está
             vinculado a um contrato ou já existem em patrimônio.');
         }
-        
+
         return redirect()->back();
 
-        
+
     }
 
     /**
@@ -100,7 +100,8 @@ class ProdutosController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Products::findOrFail($id);
+        return view('locacao.products.show', compact('product'));
     }
 
     /**
@@ -109,9 +110,51 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( FormBuilder $formBuilder ,$id)
     {
-        //
+        $product = Products::findOrFail($id);
+        $form = $formBuilder->create(AddProdToContract::class, [
+            'method' => 'POST',
+            'url' => route('produtos.update', $id),
+        ]);
+        $form->modify('id_branch','select',[
+            'selected' => $product->id_branch,
+        ]);
+        $form->modify('codp', 'text', [
+            'value' => $product->codp,
+        ]);
+        $form->modify('apelido', 'text', [
+            'value' => $product->apelido,
+        ]);
+        $form->modify('nome', 'text', [
+            'value' => $product->nome,
+        ]);
+        $form->modify('dsUnidade', 'text', [
+            'value' => $product->dsUnidade
+        ]);
+        $form->modify('valor', 'number', [
+            'value' => $product->valor
+        ]);
+        $form->modify('dsLocal', 'text',[
+            'value' => $product->dsLocal,
+        ]);
+        $form->modify('Tipo', 'text', [
+            'value' => $product->Tipo,
+        ]);
+        $form->modify('id_contract', 'select', [
+            'selected' => $product->id_contract,
+        ]);
+        $form->modify('numSerie', 'text', [
+            'value' => $product->numSerie,
+            'attr' => [
+                'readonly' => true
+            ]
+        ]);
+        $form->modify('submit', 'submit',[
+            'label' => 'Atualizar'
+        ]);
+
+        return view('locacao.products.edit', compact('form'));
     }
 
     /**

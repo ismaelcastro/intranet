@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Products;
 use App\Contracts;
+use App\Forms\AddProdToContract;
+use App\Forms\SummaryObjForm;
 use App\Saleplans;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class EstoqueController extends Controller
 {
@@ -14,10 +17,15 @@ class EstoqueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(FormBuilder $formBuilder)
     {
+        $formSummaryObj = $formBuilder->create(SummaryObjForm::class, [
+            'method' => 'POST',
+            'url' => route('summaryobj.store'),
+        ]);
+
         $produtosEst = Products::with('contracts')->get();
-        return view('locacao.estoque.index', compact('produtosEst'));
+        return view('locacao.estoque.index', compact('produtosEst', 'formSummaryObj'));
     }
 
     /**

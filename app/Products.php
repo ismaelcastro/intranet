@@ -20,11 +20,16 @@ class Products extends Model
         'cdLote',
         'numSerie',
         'id_contract',
-        'id_branch'
+        'id_branch',
+        'id_product',
+        'tpobj'
     ];
     public $timestamps = false;
 
     public function contracts(){
         return $this->belongsTo(Contracts::class, 'id_contract');
+    }
+    public function objLinked(){
+        return $this->hasMany(Products::class, 'id_product');
     }
 }

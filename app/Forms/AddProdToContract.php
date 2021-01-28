@@ -24,7 +24,10 @@ class AddProdToContract extends Form
         ])
         ->add('id_product', 'select', [
             'label' => 'Acessório de ',
-            'choices' => Products::select(DB::raw("CONCAT(nome, ' - ', numSerie) AS nome"), 'id')->where('tpobj','=' ,'Equipamento')->pluck('nome', 'id')->toArray(),
+            'choices' => Products::select(DB::raw("CONCAT(nome, ' - ', numSerie) AS nome"), 'id')
+                                        ->where('tpobj','=' ,'Equipamento')
+                                        ->pluck('nome', 'id')
+                                        ->toArray(),
             'attr' => [
                 'class' => 'form-control select2'
             ],
@@ -40,11 +43,11 @@ class AddProdToContract extends Form
         ])
         ->add('qtSaldo', 'number',[
             'label' => 'Quantidade',
-            
+
         ])
         ->add('numSerie', 'text',[
             'label' => 'Nº Serie',
-            'rules' => 'required',
+            'rules' => 'required|min:4',
         ])
         ->add('codp', 'text',[
             'rules' => 'required',
@@ -83,7 +86,7 @@ class AddProdToContract extends Form
         ->add('valor', 'number', [
             'label' => 'Valor do Item',
             'rules' => 'required|numeric',
-            
+
         ])
         ->add('dsLocal', 'text',[
             'label' => 'Local de Estoque',
@@ -110,7 +113,7 @@ class AddProdToContract extends Form
         ->add('tpobj', 'select',[
             'label' => 'Tipo de Objeto',
             'rules' => 'required',
-            'choices' => ['Equipamento' => 'Equipamento', 'Acessório' => 'Acessório'],
+            'choices' => ['Equipamento' => 'Equipamento', 'Acessorio' => 'Acessorio'],
             'empty_value' => '>> Selecine Tipo de Objeto <<'
         ])
         ->add('submit', 'submit', [

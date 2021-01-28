@@ -4,12 +4,13 @@
 <h1>Contratos de Locação</h1>
 @stop
 @section('content')
+
 <div class="row">
     <div class="col-md-12">
         <div class="box box-solid">
             <div class="box-header">
                 <i class="fa fa-th"></i>
-                <h3 class="box-title">Objetos Cobertos</h3>
+                <h3 class="box-title">Objetos Cobertos </h3>
             </div>
             <div class="box-body">
                 <div class="table-responsive">
@@ -23,6 +24,7 @@
                             <th>Nº Serie</th>
                             <th>R$ Valor</th>
                             <th>Contrato</th>
+                            <th>Status</th>
                         </thead>
                         <tbody>
                             @foreach($produtosEst as $p)
@@ -38,7 +40,12 @@
                                     @if(isset($p->contracts->numberContract))
                                         {{$p->contracts->numberContract}}
                                     @endif
-                                   
+
+                                </td>
+                                <td>
+                                    <span class="label {{$p->active ? 'bg-green': 'bg-red'}}">
+                                        {{$p->active ? 'Operacional' : 'Condenado'}}
+                                    </span>
                                 </td>
                             </tr>
                             @endforeach
@@ -50,23 +57,45 @@
     </div>
 </div>
 <!-- modal -->
-
 <div class="modal fade" id="modal-condenar">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
+                    <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title"></h4>
-              </div>
-              
             </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
+            <!-- formulario -->
+            {!! form_start($formSummaryObj) !!}
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        {!! form_row($formSummaryObj->product_id) !!}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {!! form_row($formSummaryObj->description) !!}
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                {!! form_row($formSummaryObj->submit) !!}
+              </div>
+            {!! form_end($formSummaryObj, $renderRest = false)!!}
+
         </div>
+    <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
     <!-- end modal -->
+
 @stop
+
+
 @push('css')
 
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
@@ -110,7 +139,7 @@
 			$('.select2').select2();
 
 		});
-      
+
 </script>
 
 @include('sweetalert::alert')

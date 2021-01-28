@@ -13,6 +13,8 @@ $(function(){
             }else if(key === 'condenar'){
                 modalFormItemToContract(objColumn);
                 $('#modal-condenar').modal('show');
+            }else{
+                window.location.href = 'produtos/'+objColumn.id+'/show'
             }
 
 
@@ -22,7 +24,10 @@ $(function(){
             "condenar": {
                 name:'Condenar',
                 icon:'fa-minus-circle', },
-            "addContract" : {name: 'ADD ao Contrato', icon:'fa-plus-square'}
+            "vinculados" : {
+                name:'Objetos Vinculados',
+                icon:'fa-link'
+            }
 
         }
     });
@@ -49,6 +54,7 @@ $(function(){
 
     function modalFormItemToContract(obj){
         $(".modal-title").html(obj.nome +' Nº Serie: '+ obj.ns);
+        $("[name='product_id']").val(obj.id);
 
 
     }
