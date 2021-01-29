@@ -1,20 +1,21 @@
-$(function(){
-    $(function(){
-        table = $("#objetoscobertos").DataTable();
-    });
+$(document).ready(function(){
+
+    table = $("#objetoscobertos").DataTable();
+
 
     $.contextMenu({
         selector:'.context-menu-one',
         callback: function(key, options){
             objColumn = seriealize($(this));
+            baseURL = window.location.origin+'/intranet/public/';
 
             if(key === 'edit'){
-                window.location.href = 'produtos/'+objColumn.id+'/edit';
+                window.location.href = baseURL+'produtos/'+objColumn.id+'/edit';
             }else if(key === 'condenar'){
                 modalFormItemToContract(objColumn);
                 $('#modal-condenar').modal('show');
             }else{
-                window.location.href = 'produtos/'+objColumn.id+'/show'
+                window.location.href = baseURL+'produtos/'+objColumn.id
             }
 
 
@@ -25,8 +26,8 @@ $(function(){
                 name:'Condenar',
                 icon:'fa-minus-circle', },
             "vinculados" : {
-                name:'Objetos Vinculados',
-                icon:'fa-link'
+                name:'Detalhes',
+                icon:'fa-eye'
             }
 
         }
@@ -42,9 +43,8 @@ $(function(){
             'apelido': column[2],
             'nome' : column[3],
             'qtd': column[4],
-            'ns': column[5],
-            'valor': column[6],
-            'contrato': column[7],
+            'ns': column[5]
+
 
 
         };

@@ -135,10 +135,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script src="{{ URL::asset('js/contextMenu/contextMenu.js')}}"></script>
 <script>
-      $(function(){
+
 			$('.select2').select2();
 
-		});
+
 
 </script>
 

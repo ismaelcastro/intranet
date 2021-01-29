@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Posição de Estoque - RelS016')
 @section('content_header')
-<h1>Detalhes do Item</h1>
+<h1>Detalhes do Item <small><b>{{$product->nome}} - {{$product->numSerie}}</b></small></h1>
 @stop
 @section('content')
 <div class="row">

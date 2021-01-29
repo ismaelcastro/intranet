@@ -10,7 +10,9 @@ use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Products;
 use App\Forms\AddProdToContract;
 use App\Services\CallistoAPIService;
+use App\Services\ProductsService;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ProdutosController extends Controller
 {
@@ -59,7 +61,7 @@ class ProdutosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FormBuilder $formBuilder, Request $request)
+    public function store(FormBuilder $formBuilder, Request $request, ProductsService $productsService)
     {
         $form  = $formBuilder->create(AddProdToContract::class);
         if(!$form->isValid()){
@@ -72,14 +74,18 @@ class ProdutosController extends Controller
         };
 
         $data = $form->getFieldValues();
+
+        DB::beginTransaction();
         try{
-            if(Products::create($data)){
+            if($p = Products::create($data)){
+                $productsService->createLocMov($p->id, $data['id_contract']);
                 $request->session()->flash('success', 'Item adicionado com sucesso !');
             }else{
                 $request->session()->flash('fall', 'Ops ! Algo deu errado.');
             };
-
+            DB::commit();
         }catch(QueryException $ex){
+            DB::rollBack();
             $request
             ->session()
             ->flash('fall',
@@ -143,6 +149,7 @@ class ProdutosController extends Controller
         ]);
         $form->modify('id_contract', 'select', [
             'selected' => $product->id_contract,
+            'empty_value' => false,
         ]);
         $form->modify('numSerie', 'text', [
             'value' => $product->numSerie,
