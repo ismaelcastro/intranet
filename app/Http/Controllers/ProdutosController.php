@@ -115,7 +115,7 @@ class ProdutosController extends Controller
     {
         $product = Products::with('movs')->findOrFail($id);
 
-        return view('locacao.products.show', compact('product', 'form'));
+        return view('locacao.products.show', compact('product'));
     }
 
     /**
