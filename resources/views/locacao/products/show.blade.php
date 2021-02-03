@@ -29,7 +29,26 @@
                 <h3 class="box-title">Resumo</h3>
             </div>
             <div class="box-body">
+                <ul class="nav nav-stacked">
+                    @forelse ($product->movs as $item)
+                    <li>
+                        <a href="#">
+                                <b>Data:</b>
+                                {{\Carbon\Carbon::parse($item->created_at)->format('d/m/Y')}}
 
+                                <b>{{$item->tp === 'R'? 'Retorno do Contrato: ': 'Para: '}}</b>
+                                {{$item->contract->numberContract}}
+
+                            <span class="pull-right badge {{$item->tp === 'S' ? 'bg-yellow': 'bg-green'}}">
+                                {{$item->tp}}
+                            </span>
+                        </a>
+                    </li>
+                    @empty
+                    <p>No Result</p>
+                    @endforelse
+
+                </ul>
             </div>
         </div>
     </div>

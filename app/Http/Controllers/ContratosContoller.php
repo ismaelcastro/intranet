@@ -11,7 +11,9 @@ use App\Contracts;
 use App\Products;
 use App\contractsType;
 use App\Branch;
+use App\Forms\UpdateObjContract;
 use Carbon\Carbon;
+
 
 class ContratosContoller extends Controller
 {
@@ -26,7 +28,7 @@ class ContratosContoller extends Controller
             'method' => 'POST',
             'url' => route('contratos-locacao.store')
         ]);
-        
+
         return view('locacao.contracts.index', compact('form'));
     }
 
@@ -61,14 +63,14 @@ class ContratosContoller extends Controller
         $data['active'] = $data['active'] == null? 0 : $data['active'];
         if(Contracts::create($data)){
             $request->session()->flash('success', 'Contrato criado com sucesso !');
-            
+
         }else{
-            $request->session()->flash('fall', 'Algo deu errado !');            
+            $request->session()->flash('fall', 'Algo deu errado !');
         }
         return redirect()->back();
-            
 
-        
+
+
     }
 
     /**
@@ -77,11 +79,15 @@ class ContratosContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, FormBuilder $formBuilder)
     {
         $contracts = Contracts::find($id);
         $products = $contracts->products;
-        return view('locacao.contracts.show', compact('contracts','products'));        
+        $form = $formBuilder->create(UpdateObjContract::class,[
+            'method' => 'PUT',
+            'url' => route('produtos.update', $id)
+        ]);
+        return view('locacao.contracts.show', compact('contracts','products', 'form'));
     }
 
     /**
@@ -116,7 +122,7 @@ class ContratosContoller extends Controller
             'value' => $contract->dtbilling,
         ]);
         $form->modify('id_type', 'select', [
-            
+
             'selected' => $contract->id_type,
         ]);
         $form->modify('active', 'checkbox', [
@@ -184,8 +190,8 @@ class ContratosContoller extends Controller
             return "
             <div class='row'>
                 <div class='col-md-4 col-sm-4'>
-                    <a 
-                    href='contratos-locacao/{$contrato->id}' 
+                    <a
+                    href='contratos-locacao/{$contrato->id}'
                     class='btn btn-sm btn-primary'>
                         <i class='fa fa-fw fa-cubes'></i>
                         Objetos Cobertos
@@ -194,7 +200,7 @@ class ContratosContoller extends Controller
             </div>
             <div class='row mt-2'>
                 <div class='col-md-4 col-sm-4'>
-                    <a 
+                    <a
                     href='contratos-locacao/{$contrato->id}/edit'
                     class ='btn btn-sm btn-success'>
                         <i class='fa fa-fw fa-edit'></i>

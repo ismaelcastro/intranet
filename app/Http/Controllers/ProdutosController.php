@@ -9,8 +9,11 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Products;
 use App\Forms\AddProdToContract;
+use App\Forms\UpdateObjContract;
+use App\LocMov;
 use App\Services\CallistoAPIService;
 use App\Services\ProductsService;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -78,7 +81,11 @@ class ProdutosController extends Controller
         DB::beginTransaction();
         try{
             if($p = Products::create($data)){
-                $productsService->createLocMov($p->id, $data['id_contract']);
+                $productsService->createLocMovInput($p->id, $data['id_contract']);
+                if(isset($data['id_contract']) && !empty($data['id_contract'])){
+                    $productsService->createLocMovOut($p->id, $data['id_contract']);
+                }
+
                 $request->session()->flash('success', 'Item adicionado com sucesso !');
             }else{
                 $request->session()->flash('fall', 'Ops ! Algo deu errado.');
@@ -106,8 +113,9 @@ class ProdutosController extends Controller
      */
     public function show($id)
     {
-        $product = Products::findOrFail($id);
-        return view('locacao.products.show', compact('product'));
+        $product = Products::with('movs')->findOrFail($id);
+
+        return view('locacao.products.show', compact('product', 'form'));
     }
 
     /**
@@ -120,7 +128,7 @@ class ProdutosController extends Controller
     {
         $product = Products::findOrFail($id);
         $form = $formBuilder->create(AddProdToContract::class, [
-            'method' => 'POST',
+            'method' => 'PUT',
             'url' => route('produtos.update', $id),
         ]);
         $form->modify('id_branch','select',[
@@ -171,9 +179,24 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FormBuilder $formBuilder, Request $request, ProductsService $productsService, $id)
     {
-        //
+        $product = Products::findOrFail($id);
+        $form  = $formBuilder->create(AddProdToContract::class);
+        if(!$form->isValid()){
+            return
+            redirect()
+            ->back()
+            ->withErrors($form->getErrors())
+            ->withInput();
+
+        };
+        $data = $form->getFieldValues();
+        $product->update($data);
+
+        return redirect()->back();
+
+
     }
 
     /**

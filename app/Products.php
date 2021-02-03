@@ -32,4 +32,7 @@ class Products extends Model
     public function objLinked(){
         return $this->hasMany(Products::class, 'id_product');
     }
+    public function movs(){
+        return $this->hasMany(LocMov::class, 'product_id');
+    }
 }

@@ -16,6 +16,13 @@
                 </h3>
             </div>
             <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-contrato">
+                            Incluir Objeto
+                        </button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table id="objetoscobertos" class="table table-bordered table-striped">
                         <thead>
@@ -28,6 +35,7 @@
                             <th>R$ Valor</th>
                             <th>Contrato</th>
                             <th>Status</th>
+                            <th>Ações</th>
                         </thead>
                         <tbody>
                             @foreach($products as $p)
@@ -46,9 +54,20 @@
 
                                 </td>
                                 <td>
-                                    <span class="label {{$p->active ? 'bg-green': 'bg-red'}}">
+                                    <span class="badge {{$p->active ? 'bg-green': 'bg-red'}}">
                                         {{$p->active ? 'Operacional' : 'Condenado'}}
                                     </span>
+                                </td>
+                                <td>
+                                    <form method="POST" action="/intranet/public/remove-from-contract/product">
+                                        @csrf
+                                        <button
+                                            name="product_id"
+                                            value="{{$p->id}}"
+                                            class="btn btn-sm btn-danger">
+                                                Remover
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -58,6 +77,39 @@
             </div>
         </div>
     </div>
+    <!-- modal -->
+    <div class="modal fade" id="modal-contrato">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Novo Contrato</h4>
+            </div>
+            <!-- formulario -->
+            {!! form_start($form) !!}
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                      {!! form_row($form->id_product) !!}
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+              {!! form_row($form->submit) !!}
+            </div>
+            {!! form_end($form, $renderRest = false)!!}
+            <!-- fim form -->
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+  <!-- end modal -->
 </div>
 
 @stop
@@ -101,8 +153,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script src="{{ URL::asset('js/contextMenu/contextMenu.js')}}"></script>
 <script>
+$(document).ready(function(){
+    $('.select2').select2();
+})
 
-	$('.select2').select2();
 
 
 

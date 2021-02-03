@@ -43,7 +43,7 @@
 
                                 </td>
                                 <td>
-                                    <span class="label {{$p->active ? 'bg-green': 'bg-red'}}">
+                                    <span class="badge {{$p->active ? 'bg-green': 'bg-red'}}">
                                         {{$p->active ? 'Operacional' : 'Condenado'}}
                                     </span>
                                 </td>
