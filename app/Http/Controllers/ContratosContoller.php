@@ -11,6 +11,7 @@ use App\Contracts;
 use App\Products;
 use App\contractsType;
 use App\Branch;
+use App\Forms\SummaryObjForm;
 use App\Forms\UpdateObjContract;
 use Carbon\Carbon;
 
@@ -84,10 +85,18 @@ class ContratosContoller extends Controller
         $contracts = Contracts::find($id);
         $products = $contracts->products;
         $form = $formBuilder->create(UpdateObjContract::class,[
-            'method' => 'PUT',
-            'url' => route('produtos.update', $id)
+            'method' => 'post',
+            'url' => 'add-to-contract/product'
         ]);
-        return view('locacao.contracts.show', compact('contracts','products', 'form'));
+        $form->modify('id_contract', 'hidden',[
+            'value' => $id,
+        ]);
+
+        $formSummaryObj = $formBuilder->create(SummaryObjForm::class, [
+            'method' => 'POST',
+            'url' => route('summaryobj.store'),
+        ]);
+        return view('locacao.contracts.show', compact('contracts','products', 'form', 'formSummaryObj'));
     }
 
     /**
@@ -159,9 +168,28 @@ class ContratosContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, FormBuilder $formBuilder )
     {
-        //
+        $c = Contracts::findOrFail($id);
+        $form = $formBuilder->create(ContratoForm::class);
+        if(!$form->isValid()){
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
+        }
+        $data = $form->getFieldValues();
+        if(!isset($data['active'] ) && empty($data['active'])){
+            $data['active'] = 0;
+        }
+        $c->update($data);
+        if($c->save()){
+            $request->session()->flash('success', 'Dados atualizados com sucesso !');
+        }else{
+            $request->session()->flash('fall', 'Desculpe. Algo deu errado !');
+        }
+        return redirect()->back();
+
     }
 
     /**

@@ -11,6 +11,20 @@
                 <i class="fa fa-th"></i>
                 <h3 class="box-title">Editar Produto</h3>
             </div>
+            @if(count($errors) > 0)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-error">
+							<p>Desculpe! Não foi possível vincular o item ao contrato.</p>
+							<ul>
+								@foreach( $errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+                    </div>
+                </div>
+                @endif
             {!! form_start($form)!!}
             <div class="box-body">
                 <div class="row">
@@ -31,11 +45,14 @@
                     <div class="col-md-3">
                         {!! form_row($form->dsUnidade) !!}
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         {!! form_row($form->valor)!!}
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         {!! form_row($form->Tipo) !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! form_row($form->tpobj) !!}
                     </div>
                 </div>
                 <div class="row">
@@ -53,7 +70,9 @@
                     </div>
                 </div>
             </div>
-
+            {!! form_row($form->qtd) !!}
+            {!! form_row($form->dsLocal)!!}
+            {!! form_row($form->fvenda)!!}
             {!! form_end($form, $renderRest = false) !!}
         </div>
     </div>

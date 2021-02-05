@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Forms\SummaryObjForm;
 use App\Products;
+use App\Services\ProductsService;
 use App\SummaryObj;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -37,7 +38,7 @@ class SummaryObjController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( FormBuilder $formBuilder, Request $request)
+    public function store( FormBuilder $formBuilder, Request $request, ProductsService $productsService)
     {
         $form = $formBuilder->create(SummaryObjForm::class);
 
@@ -54,6 +55,7 @@ class SummaryObjController extends Controller
         $createSummary = SummaryObj::create($data);
         $product = Products::find($data['product_id']);
         $product->active = 0;
+        $productsService->createLocMovOut($product->id, $product->id_contract, 'Patrimônio', 'Condenados');
         $product->id_contract = NULL;
         if(!$createSummary || !$product->save()){
             DB::rollBack();

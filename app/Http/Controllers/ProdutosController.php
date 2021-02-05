@@ -81,9 +81,9 @@ class ProdutosController extends Controller
         DB::beginTransaction();
         try{
             if($p = Products::create($data)){
-                $productsService->createLocMovInput($p->id, $data['id_contract']);
+                $productsService->createLocMovInput($p->id, $data['id_contract'],'-', 'Patrimônio');
                 if(isset($data['id_contract']) && !empty($data['id_contract'])){
-                    $productsService->createLocMovOut($p->id, $data['id_contract']);
+                    $productsService->createLocMovOut($p->id, $data['id_contract'], 'Patrimônio', 'Cliente');
                 }
 
                 $request->session()->flash('success', 'Item adicionado com sucesso !');
@@ -165,6 +165,19 @@ class ProdutosController extends Controller
                 'readonly' => true
             ]
         ]);
+        $form->modify('qtd', 'hidden', [
+            'value' => $product->qtd,
+        ]);
+        $form->modify('dsLocal', 'hidden',[
+
+            'value' => $product->dsLocal,
+        ]);
+        $form->modify('fvenda', 'hidden', [
+            'value' => $product->fvenda,
+        ]);
+        $form->modify('tpobj', 'select', [
+            'selected' => $product->tpobj,
+        ]);
         $form->modify('submit', 'submit',[
             'label' => 'Atualizar'
         ]);
@@ -193,6 +206,7 @@ class ProdutosController extends Controller
         };
         $data = $form->getFieldValues();
         $product->update($data);
+        $product->save();
 
         return redirect()->back();
 

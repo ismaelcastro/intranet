@@ -93,6 +93,7 @@
                 <div class="row">
                     <div class="col-md-12">
                       {!! form_row($form->id_product) !!}
+                      {!! form_row($form->id_contract) !!}
                     </div>
                 </div>
 
@@ -110,6 +111,74 @@
         <!-- /.modal-dialog -->
       </div>
   <!-- end modal -->
+
+  <!-- modal -->
+  <div class="modal fade" id="modal-linked-obj">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Novo Contrato</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+
+        </div>
+        <!-- fim form -->
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+<!-- end modal -->
+
+<!-- modal -->
+<div class="modal fade" id="modal-condenar">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <!-- formulario -->
+            {!! form_start($formSummaryObj) !!}
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        {!! form_row($formSummaryObj->product_id) !!}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {!! form_row($formSummaryObj->description) !!}
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                {!! form_row($formSummaryObj->submit) !!}
+              </div>
+            {!! form_end($formSummaryObj, $renderRest = false)!!}
+
+        </div>
+    <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+    <!-- end modal -->
 </div>
 
 @stop

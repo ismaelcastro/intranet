@@ -19,6 +19,8 @@ class CreateLocMovsTable extends Migration
             $table->increments('id');
             $table->date('created_at')->default(DB::raw('NOW()'));
             $table->enum('tp', ['E', 'S', 'R']);
+            $table->string('origem');
+            $table->string('destino');
 
             $table->unsignedInteger('contract_id')->nullable();
             $table->foreign('contract_id')->references('id')->on('contracts');

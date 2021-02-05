@@ -12,8 +12,27 @@
                 <h3 class="box-title">Contratos</h3>
             </div>
             <div class="box-body">
+                @if(Session()->has('success'))
+                <div class="row">
+                    <div class="col-md-12">
+                         <div class="alert alert-success">
+                            {{Session::get('success')}}
+                         </div>
+                    </div>
+                </div>
+
+                @endif
+                @if(Session()->has('fall'))
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-error">
+                            {{Session::get('fall')}}
+                        </div>
+                    </div>
+                </div>
+                @endif
                 {!! form_start($form) !!}
-                <div class="row">                    
+                <div class="row">
                     <div class="col-md-2">
                         {!! form_row($form->numberContract) !!}
                     </div>
@@ -35,7 +54,7 @@
                         {!! form_row($form->description) !!}
                     </div>
                 </div>
-                <div class="row">                
+                <div class="row">
                     <div class="col-md-3">
                         {!! form_row($form->dtemission) !!}
                     </div>
@@ -60,12 +79,12 @@
                         {!! form_row($form->id_customers) !!}
                     </div>
                 </div>
-                             
+
                 <div class="row">
                     <div class="col-md-12">
                         {!! form_row($form->submit) !!}
                     </div>
-                </div>  
+                </div>
                 {!! form_end($form, $renderRest = false)!!}
                 </div>
             </div>
@@ -73,7 +92,7 @@
     </div>
 
 
-    
+
 </div>
 
 @stop

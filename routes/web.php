@@ -17,7 +17,8 @@ Route::get('actionplans/datatables', 'actionPlansController@datatables');
 Route::get('actions/datatables/{id}', 'QualityactionController@datatables');
 
 Route::get('contratos-locacao/datatables', 'ContratosContoller@datatables');
-Route::post('remove-from-contract/product', ProductContractController::class);
+Route::post('remove-from-contract/product', 'ProductContractController@removeProdOfContract');
+Route::post('add-to-contract/product', 'ProductContractController@addProdToContract');
 
 Route::prefix('relatorios')->group(function(){
     Route::get('comercial/sugestaoCompra', 'Rel\Comercial\ComercialController@sugestaoCompra');

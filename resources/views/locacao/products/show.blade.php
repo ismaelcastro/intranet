@@ -29,26 +29,35 @@
                 <h3 class="box-title">Resumo</h3>
             </div>
             <div class="box-body">
-                <ul class="nav nav-stacked">
-                    @forelse ($product->movs as $item)
-                    <li>
-                        <a href="#">
-                                <b>Data:</b>
-                                {{\Carbon\Carbon::parse($item->created_at)->format('d/m/Y')}}
 
-                                <b>{{$item->tp === 'R'? 'Retorno do Contrato: ': 'Para: '}}</b>
-                                {{$item->contract->numberContract}}
-
-                            <span class="pull-right badge {{$item->tp === 'S' ? 'bg-yellow': 'bg-green'}}">
-                                {{$item->tp}}
-                            </span>
-                        </a>
-                    </li>
-                    @empty
-                    <p>No Result</p>
-                    @endforelse
-
-                </ul>
+                <div class="table-responsive">
+                    <table id="movimentações" class="table table-bordered table-striped">
+                        <thead>
+                            <th>Data</th>
+                            <th>Movimentação</th>
+                            <th>Origem</th>
+                            <th>Destino</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($product->movs as $item)
+                            <tr>
+                                <td>{{\Carbon\Carbon::parse($item->created_at)->format('d/m/Y')}}</td>
+                                <td>
+                                    <span class="pull-right badge {{$item->tp === 'S' ? 'bg-yellow': 'bg-green'}}">
+                                        {{$item->tp}}
+                                    </span>
+                                </td>
+                                <td>
+                                    {{$item->origem}}
+                                </td>
+                                <td>
+                                    {{$item->destino}}
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

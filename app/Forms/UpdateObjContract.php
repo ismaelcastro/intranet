@@ -19,11 +19,15 @@ class UpdateObjContract extends Form
                 ],
                 'choices' => Products::select(DB::raw("CONCAT(numSerie, ' - ', nome) AS nome"), 'id')
                     ->where('id_contract','=' , NULL)
+                    ->where('active', '=', 1)
                     ->pluck('nome', 'id')->toArray(),
                 'empty_value' => '>> Tipo de Produto <<'
             ])
             ->add('id_contract', 'hidden', [
-                'rules' => 'required'
+                'rules' => 'required',
+                'attr' => [
+                    'readonly' => true
+                ]
             ])
             ->add('submit','submit', [
                 'attr' => [
