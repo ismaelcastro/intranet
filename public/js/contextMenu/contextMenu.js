@@ -25,7 +25,7 @@ $(document).ready(function(){
             "condenar": {
                 name:'Condenar',
                 icon:'fa-minus-circle', },
-            "vinculados" : {
+            "detalhar" : {
                 name:'Detalhes',
                 icon:'fa-eye'
             }

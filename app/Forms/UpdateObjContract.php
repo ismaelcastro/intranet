@@ -21,7 +21,7 @@ class UpdateObjContract extends Form
                     ->where('id_contract','=' , NULL)
                     ->where('active', '=', 1)
                     ->pluck('nome', 'id')->toArray(),
-                'empty_value' => '>> Tipo de Produto <<'
+                'empty_value' => '>> Selecione um item <<'
             ])
             ->add('id_contract', 'hidden', [
                 'rules' => 'required',

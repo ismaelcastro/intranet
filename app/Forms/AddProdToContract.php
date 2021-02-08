@@ -20,7 +20,7 @@ class AddProdToContract extends Form
             'attr' => [
                 'class' => 'form-control select2'
             ],
-            'empty_value' => '>> Selecine um item <<'
+            'empty_value' => '>> Selecine um Contrato <<'
         ])
         ->add('id_product', 'select', [
             'label' => 'Acessório de ',
@@ -31,7 +31,7 @@ class AddProdToContract extends Form
             'attr' => [
                 'class' => 'form-control select2'
             ],
-            'empty_value' => '>> Selecine um item <<'
+            'empty_value' => '>> Selecine <<'
         ])
         ->add('id_branch', 'select', [
             'label' => 'Filial',

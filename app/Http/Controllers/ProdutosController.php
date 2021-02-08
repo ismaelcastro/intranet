@@ -206,7 +206,11 @@ class ProdutosController extends Controller
         };
         $data = $form->getFieldValues();
         $product->update($data);
-        $product->save();
+        if($product->save()){
+            $request->session()->flash('success', 'Dados Atualizados com sucesso !');
+        }else{
+            $request->session()->flash('fall', 'Ops ! Algo deu errado.');
+        };
 
         return redirect()->back();
 

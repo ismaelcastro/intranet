@@ -68,6 +68,10 @@
                                                 Remover
                                         </button>
                                     </form>
+                                    <a href="{{ route('acessorios.show', $p->id)}}"
+                                        class="btn btn-sm btn-primary">
+                                        Objeto Vinculados
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach
@@ -84,7 +88,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Novo Contrato</h4>
+              <h4 class="modal-title">Adicionar ao Contrato</h4>
             </div>
             <!-- formulario -->
             {!! form_start($form) !!}
@@ -112,36 +116,7 @@
       </div>
   <!-- end modal -->
 
-  <!-- modal -->
-  <div class="modal fade" id="modal-linked-obj">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Novo Contrato</h4>
-        </div>
-        <div class="modal-body">
 
-            <div class="row">
-                <div class="col-md-12">
-
-                </div>
-            </div>
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-
-        </div>
-        <!-- fim form -->
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-<!-- end modal -->
 
 <!-- modal -->
 <div class="modal fade" id="modal-condenar">

@@ -24,7 +24,27 @@
 						</div>
                     </div>
                 </div>
-                @endif
+            @endif
+
+            @if(Session()->has('success'))
+            <div class="row">
+                <div class="col-md-12">
+                     <div class="alert alert-success">
+                        {{Session::get('success')}}
+                     </div>
+                </div>
+            </div>
+
+            @endif
+            @if(Session()->has('fall'))
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-error">
+                        {{Session::get('fall')}}
+                    </div>
+                </div>
+            </div>
+            @endif
             {!! form_start($form)!!}
             <div class="box-body">
                 <div class="row">

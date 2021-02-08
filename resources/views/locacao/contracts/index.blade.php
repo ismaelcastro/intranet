@@ -14,10 +14,10 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <button 
-                            type="button" 
-                            class="btn btn-info" 
-                            data-toggle="modal" 
+                        <button
+                            type="button"
+                            class="btn btn-info"
+                            data-toggle="modal"
                             data-target="#modal-contrato">
                                 Novo Contrato
                         </button>
@@ -57,7 +57,7 @@
               <!-- formulario -->
               {!! form_start($form) !!}
               <div class="modal-body">
-                
+
                   <div class="row">
                       <div class="col-md-12">
                         {!! form_row($form->numberContract) !!}
@@ -79,7 +79,7 @@
                           {!! form_row($form->dtEnd) !!}
                       </div>
                       <div class="col-md-3">
-                          {!! form_row($form->dtbilling) !!} 
+                          {!! form_row($form->dtbilling) !!}
                       </div>
                   </div>
                   <div class="row">
@@ -102,13 +102,13 @@
                     <div class="col-md-6">
                         {!! form_row($form->id_saleplans) !!}
                     </div>
-                    
+
                     <div class="col-md-6">
                         {!! form_row($form->price) !!}
                         {!! form_row($form->id_branch) !!}
                     </div>
                   </div>
-                
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
@@ -188,10 +188,6 @@
             });
         })
 
-        $("#contratos").on("contextmenu", "tr", function(){
-            alert('context menu');
-        })
-      
 </script>
 
 @include('sweetalert::alert')

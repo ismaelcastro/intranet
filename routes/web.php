@@ -40,3 +40,4 @@ Route::resource('clientes', 'ClienteController');
 Route::resource('produtos', 'ProdutosController');
 Route::resource('estoque', 'EstoqueController');
 Route::resource('summaryobj', 'SummaryObjController');
+Route::resource('acessorios', 'AcessoriesController');

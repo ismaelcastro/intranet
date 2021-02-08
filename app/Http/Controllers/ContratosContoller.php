@@ -11,6 +11,7 @@ use App\Contracts;
 use App\Products;
 use App\contractsType;
 use App\Branch;
+use App\Forms\ObjLinkedForm;
 use App\Forms\SummaryObjForm;
 use App\Forms\UpdateObjContract;
 use Carbon\Carbon;
@@ -96,6 +97,7 @@ class ContratosContoller extends Controller
             'method' => 'POST',
             'url' => route('summaryobj.store'),
         ]);
+
         return view('locacao.contracts.show', compact('contracts','products', 'form', 'formSummaryObj'));
     }
 
