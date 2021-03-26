@@ -17,7 +17,7 @@ class CreateLocMovsTable extends Migration
     {
         Schema::create('loc_movs', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('created_at')->default(DB::raw('NOW()'));
+            $table->date('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->enum('tp', ['E', 'S', 'R']);
             $table->string('origem');
             $table->string('destino');
