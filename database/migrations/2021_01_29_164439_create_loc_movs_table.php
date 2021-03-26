@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CreateLocMovsTable extends Migration
 {
@@ -17,7 +18,7 @@ class CreateLocMovsTable extends Migration
     {
         Schema::create('loc_movs', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('created_at')->default(Carbon::now());
             $table->enum('tp', ['E', 'S', 'R']);
             $table->string('origem');
             $table->string('destino');
