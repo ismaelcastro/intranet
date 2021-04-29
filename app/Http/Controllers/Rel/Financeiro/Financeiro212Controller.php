@@ -13,7 +13,7 @@ class Financeiro212Controller extends Controller
 {
     public function index(Request $request)
     {
-        
+
         $data_string = array(
             'cdFilial'=> $request->cdFilial,
             'dtInicio' => $request->dtInicio,
@@ -68,7 +68,7 @@ class Financeiro212Controller extends Controller
                 return "R$ " . number_format($data->vlLiquidoMov, 2, ',', '.');
             })
             ->editColumn('vlFinanceiroMov', function($data){
-                return "R$ " . number_format($data->vlFinanceiroMov, 2, ',', '.'); 
+                return "R$ " . number_format($data->vlFinanceiroMov, 2, ',', '.');
             })
             ->editColumn('vlCOFINS', function($data){
                 return "R$ " . number_format($data->vlCOFINS, 2, ',', '.');
@@ -92,7 +92,7 @@ class Financeiro212Controller extends Controller
                 return "R$ " . number_format($data->vlImpostos, 2, ',', '.');
             })
             ->editColumn('vlCSLL', function($data){
-                return "R$ " . number_format($data->vlCSLL, 2, ',', '.'); 
+                return "R$ " . number_format($data->vlCSLL, 2, ',', '.');
             })
             ->toJson();
     }
