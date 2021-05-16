@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 class CallistoAPIService{
     public function getJson(string $endPoint, string $method, array $dataString){
         
-        $client = new Client(['base_uri' => 'https://localhost:44353/api/', 'verify' => false]);
+        $client = new Client(['base_uri' => 'http://api.proel.local/api/', 'verify' => false]);
         
         $res  = $client->request($method, $endPoint,[
             'headers' => [
