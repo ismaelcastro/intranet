@@ -223,24 +223,24 @@
                 columns: [
                     {data:'cdRec', name:'cdRec', visible:false},
                     {data:'cdRepres', name:'cdRepres', visible: false},
-                    {data:'nrDoc', name:'nrDoc'},
+                    {data:'NrDoc', name:'NrDoc'},
                     {data:'dtVencto', name:'dtVencto', "type":'date-eu'},
                     {data:'dtLancto', name:'dtLancto', "type":'date-eu', visible: false},
                     {data:'dtEmissao', name:'dtEmissao', "type":'date-eu'},
                     {data:'dtPag', name:'dtPag'},
                     {data:'dtBaixa', name:'dtBaixa'},
-                    {data:'vlBruto', name:'vlBruto'},
+                    {data:'VlBruto', name:'VlBruto'},
                     {data:'vlBaseBruto', name:'vlBaseBruto'},
                     {data:'FormaRec', name:'FormaRec'},
                     {data:'Juros', name:'Juros', visible: false},
                     {data:'Multa', name:'Multa', visible: false},
-                    {data:'vlDesc', name:'vlDesc', visible: false},
-                    {data:'vlPago', name:'vlPago', visible: false},
+                    {data:'VlDesc', name:'VlDesc', visible: false},
+                    {data:'VlPago', name:'VlPago', visible: false},
                     {data:'Cliente', name:'Cliente'},
-                    {data:'nf', name:'nf'},
+                    {data:'NF', name:'NF'},
                     {data:'dsCedente', name:'dsCedente', visible: false},
                     {data:'dsOp', name:'dsOp', visible: false},
-                    {data:'tpDoc', name:'tpDoc'},
+                    {data:'TpDoc', name:'TpDoc'},
                     {data:'stEstado', name:'stEstado', visible: false},
                     {data:'vlImpostos', name:'vlImpostos'},
                     {data:'vlIRRF', name:'vlIRRF'},
@@ -257,7 +257,7 @@
                     {data:'vlPISRetidoMov', name:'vlPISRetidoMov', visible: false},
                     {data:'vlICMSRetidoMov', name:'vlICMSRetidoMov', visible: false},
                     {data:'vlISSRetidoMov', name:'vlISSRetidoMov'},
-                    {data:'vlBrutoMov', name:'vlBrutoMov'},
+                    {data:'vlBrutoDF', name:'vlBrutoDF'},
                     {data:'vlDescontoMov', name:'vlDescontoMov', visible: false},
                     {data:'vlLiquidoMov', name:'vlLiquidoMov',visible: false},
                     {data:'vlFinanceiroMov', name:'vlFinanceiroMov', visible:false}
@@ -268,16 +268,16 @@
                     {
                         extend:'excelHtml5',
                         title: 'Recebimentos - F212',
-                        messageTop: 'Filial:' + nomeFilial + 
-                                ' \n Data Inicial: '+ dtinicial.format("DD/MM/YYYY") + 
+                        messageTop: 'Filial:' + nomeFilial +
+                                ' \n Data Inicial: '+ dtinicial.format("DD/MM/YYYY") +
                                 '\n Data Final: ' +  dtFim.format("DD/MM/YYYY"),
                     },
 
                     'csvHtml5',
                     {
                         extend: 'pdfHtml5',
-                        messageTop: 'Filial:' + nomeFilial + 
-                                ' \n Data Inicial: '+ dtinicial.format("DD/MM/YYYY") + 
+                        messageTop: 'Filial:' + nomeFilial +
+                                ' \n Data Inicial: '+ dtinicial.format("DD/MM/YYYY") +
                                 '\n Data Final ' +  dtFim.format("DD/MM/YYYY"),
                         title: 'Recebimentos - F212',
                         orientation: 'landscape',
@@ -286,7 +286,7 @@
                 ]
 
             });
-            
+
             columnListVisible();
         });
 
@@ -300,6 +300,6 @@
         })
 
     </script>
-    
+
     @include('sweetalert::alert')
 @endpush
