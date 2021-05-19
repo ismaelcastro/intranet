@@ -20,7 +20,7 @@ class Financeiro212Controller extends Controller
             'dtFim' => $request->dtFim,
             'fOrigemTitulo' => 0,
         );
-        $client = new Client(['base_uri' => 'https://localhost:44353/api/', 'verify' => false]);
+        $client = new Client(['base_uri' => 'http://api.proel.local/api/', 'verify' => false]);
         $res = $client->request('post', 'RecebimentosEfetuados',[
             'headers' => [
                 'Content-type' => 'application/json',
