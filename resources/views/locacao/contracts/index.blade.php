@@ -59,8 +59,11 @@
               <div class="modal-body">
 
                   <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         {!! form_row($form->numberContract) !!}
+                      </div>
+                      <div class="col-md-6">
+                        {!! form_row($form->id_branch) !!}
                       </div>
                   </div>
                   <div class="row">
@@ -68,6 +71,7 @@
                         {!! form_row($form->description) !!}
                     </div>
                   </div>
+
                   <div class="row">
                       <div class="col-md-3">
                           {!! form_row($form->dtemission) !!}
@@ -105,7 +109,7 @@
 
                     <div class="col-md-6">
                         {!! form_row($form->price) !!}
-                        {!! form_row($form->id_branch) !!}
+
                     </div>
                   </div>
 

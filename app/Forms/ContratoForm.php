@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Customers;
 use App\Saleplans;
 use App\contractsType;
+use App\Branch;
 use Carbon\Carbon;
 
 class ContratoForm extends Form
@@ -23,15 +24,20 @@ class ContratoForm extends Form
                 'rules' => 'required',
                 'attr' => ['rows' => '2']
             ])
-            ->add('id_branch', 'hidden', [
-                'value' => 1,
-                'rules' => 'required'
-            ])    
+            ->add('id_branch', 'select', [
+                'label' => 'Filial',
+                'rules' => 'required',
+                'choices' => Branch::pluck('name','id')->toArray(),
+                'attr' => [
+                    'class' => 'form-control select2',
+                ],
+                'empty_value' => '>> Selecione uma Filial <<'
+            ])
             ->add('dtemission', 'text', [
                 'label' => 'Data Emissão',
-                'rules' => 'required',              
+                'rules' => 'required',
                 'value' => Carbon::toDay()->format('d/m/Y'),
-                
+
             ])
             ->add('dtStart', 'date', [
                 'label' => 'Data Inicio',
@@ -86,6 +92,6 @@ class ContratoForm extends Form
                 'attr' => ['class' => 'btn btn-primary']
             ]);
 
-            
+
     }
 }
