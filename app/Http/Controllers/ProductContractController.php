@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Products;
 use App\Services\ProductsService;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Illuminate\Support\Facades\DB;
 
 class ProductContractController extends Controller
 {
@@ -20,11 +21,16 @@ class ProductContractController extends Controller
     {
 
         $p = Products::findOrFail($request->product_id);
+        DB::beginTransaction();
         $productsService->createLocMovReturn($p->id, $p->id_contract);
+        $p->objLinked->each(function(Products $produto){
+            $produto->id_product = NULL;
+            $produto->save();
+        });
         $p->id_contract  = NULL;
         $p->id_product = NULL;
-
         $p->save();
+        DB::commit();
         return redirect()->back();
 
     }

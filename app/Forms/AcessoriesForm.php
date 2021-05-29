@@ -21,7 +21,7 @@ class AcessoriesForm extends Form
             ->add('id_acessorio', 'select',[
                 'label' => 'Acessórios Disponíveis',
                 'choices' => Products::select(DB::raw("CONCAT(numSerie, ' - ', nome) AS nome"), 'id')
-                ->where('id_contract','=' , NULL)
+                ->whereNull('id_product')
                 ->where('active', '=', 1)
                 ->where('tpobj', '=', 'Acessorio' )
                 ->pluck('nome', 'id')->toArray(),

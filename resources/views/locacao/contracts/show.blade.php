@@ -57,6 +57,12 @@
                                     <span class="badge {{$p->active ? 'bg-green': 'bg-red'}}">
                                         {{$p->active ? 'Operacional' : 'Condenado'}}
                                     </span>
+
+                                    @if(!isset($p->id_product) && $p->tpobj === 'Acessorio')
+                                        <span class="badge bg-red">
+                                            Não Vinculado
+                                        </span>
+                                    @endif
                                 </td>
                                 <td>
                                     <form method="POST" action="/intranet/public/remove-from-contract/product">
