@@ -80,7 +80,7 @@
 
                                         </ul>
                                     </div>
-                                    <form method="POST" action="/intranet/public/remove-from-contract/product">
+                                    <form method="POST" action="/remove-from-contract/product">
                                         @csrf
                                         <button
                                             name="product_id"
