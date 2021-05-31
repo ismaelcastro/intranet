@@ -25,6 +25,7 @@
                             <th>R$ Valor</th>
                             <th>Contrato</th>
                             <th>Status</th>
+                            <th style="width: 200px">Ações</th>
                         </thead>
                         <tbody>
                             @foreach($produtosEst as $p)
@@ -47,6 +48,22 @@
                                         {{$p->active ? 'Operacional' : 'Condenado'}}
                                     </span>
                                 </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-info">Opções</button>
+                                        <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="{{route('produtos.edit', $p->id)}}">Editar</a></li>
+                                            <li><a href="{{route('produtos.show', $p->id)}}">Detalhes</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#" data-toggle="modal" data-target="#modal-condenar">Condenar</a></li>
+
+                                        </ul>
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -63,7 +80,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"></h4>
+                <h4 class="modal-title">Condenar Objeto</h4>
             </div>
             <!-- formulario -->
             {!! form_start($formSummaryObj) !!}
@@ -131,9 +148,7 @@
 <script src="{{ URL::asset('js/comercial/datepickrange.js')}}"></script>
 <script src="{{ URL::asset('js/comercial/validate.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
-<script src="{{ URL::asset('js/contextMenu/contextMenu.js')}}"></script>
+
 <script>
 
 			$('.select2').select2();
