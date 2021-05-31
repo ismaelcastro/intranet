@@ -7,15 +7,15 @@ $(document).ready(function(){
         selector:'.context-menu-one',
         callback: function(key, options){
             objColumn = seriealize($(this));
-            baseURL = window.location.origin+'/intranet/public/';
+            //baseURL = window.location.origin+'/intranet/public/';
 
             if(key === 'edit'){
-                window.location.href = baseURL+'produtos/'+objColumn.id+'/edit';
+                window.location.href = /*baseURL+*/'produtos/'+objColumn.id+'/edit';
             }else if(key === 'condenar'){
                 modalFormItemToContract(objColumn);
                 $('#modal-condenar').modal('show');
             }else{
-                window.location.href = baseURL+'produtos/'+objColumn.id
+                window.location.href = /*baseURL+*/'produtos/'+objColumn.id
             }
 
 
