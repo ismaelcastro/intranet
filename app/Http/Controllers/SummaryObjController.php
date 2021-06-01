@@ -62,6 +62,7 @@ class SummaryObjController extends Controller
         }else{
             DB::commit();
         }
+        return redirect()->back();
     }
 
     /**
