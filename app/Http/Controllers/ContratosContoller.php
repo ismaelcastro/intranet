@@ -244,7 +244,7 @@ class ContratosContoller extends Controller
             </div>";
         })
         ->editColumn('status', function(Contracts $contrato){
-            return $contrato->ativo ?"<span class='label bg-green'>Ativo</span>" : "<span class='label bg-red'>Inativo</span>";
+            return $contrato->active === 1 ?"<span class='label bg-green'>Ativo</span>" : "<span class='label bg-red'>Inativo</span>";
         })
         ->rawColumns(['action','status'])
         ->toJson();
