@@ -11,11 +11,57 @@
                 <i class="fa fa-th"></i>
                 <h3 class="box-title">
                     Objetos Cobertos -
-                    {{$contracts->numberContract}} -
-                    {{$contracts->description}}
+                    {{$contracts->numberContract}}
                 </h3>
             </div>
             <div class="box-body">
+                <div class="row">
+                    <div class="col-md-2 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header">N° Contrato</h5>
+                            <span class="description-text">
+                                {{$contracts->numberContract}}
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-2 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header">Cliente</h5>
+                            <span class="description-text">
+                                {{$contracts->customer->name}}
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header">Descrição</h5>
+                            <span class="description-text">
+                                {{$contracts->description}}
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-2 border-right">
+
+                        <div class="description-block">
+                            <h5 class="description-header">Data de Inicio</h5>
+                            <span class="description-text">
+                                {{\Carbon\Carbon::parse($contracts->dtStart)->format("d/m/Y")}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 border-right">
+
+                        <div class="description-block">
+                            <h5 class="description-header">Data de Fim</h5>
+                            <span class="description-text">
+                                {{\Carbon\Carbon::parse($contracts->dtEnd)->format("d/m/Y")}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <button class="btn btn-primary" data-toggle="modal" data-target="#modal-contrato">
