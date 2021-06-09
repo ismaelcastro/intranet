@@ -181,9 +181,13 @@ class ContratosContoller extends Controller
                 ->withInput();
         }
         $data = $form->getFieldValues();
+
         if(!isset($data['active'] ) && empty($data['active'])){
             $data['active'] = 0;
+        }else{
+            $data['active'] = 1;
         }
+
         $c->update($data);
         if($c->save()){
             $request->session()->flash('success', 'Dados atualizados com sucesso !');
@@ -240,7 +244,7 @@ class ContratosContoller extends Controller
             </div>";
         })
         ->editColumn('status', function(Contracts $contrato){
-            return $contrato->ativo = 1 ?"<span class='label bg-green'>Ativo</span>" : "<span class='label bg-red'>Inativo</span>";
+            return $contrato->ativo ?"<span class='label bg-green'>Ativo</span>" : "<span class='label bg-red'>Inativo</span>";
         })
         ->rawColumns(['action','status'])
         ->toJson();

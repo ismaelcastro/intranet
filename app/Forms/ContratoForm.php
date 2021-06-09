@@ -61,7 +61,9 @@ class ContratoForm extends Form
                 'empty_value' => '>> Tipo de Contrato <<'
             ])
             ->add('active', 'checkbox',[
-                'label' => 'Ativo'
+                'value' => 0,
+                'label' => 'Ativo',
+
             ])
             ->add('id_customers', 'select', [
                 'label' => 'Cliente',
