@@ -79,7 +79,7 @@
                             <th>Quantidade</th>
                             <th>Nº Serie</th>
                             <th>R$ Valor</th>
-                            <th>Contrato</th>
+
                             <th>Status</th>
                             <th style="width: 200px">Ações</th>
                         </thead>
@@ -93,12 +93,7 @@
                                 <td>{{$p->qtd}}</td>
                                 <td>{{$p->numSerie}}</td>
                                 <td>{{number_format($p->valor, 2)}}</td>
-                                <td>
-                                    @if(isset($p->contracts->numberContract))
-                                        {{$p->contracts->numberContract}}
-                                    @endif
 
-                                </td>
                                 <td>
                                     <span class="badge {{$p->active ? 'bg-green': 'bg-red'}}">
                                         {{$p->active ? 'Operacional' : 'Condenado'}}

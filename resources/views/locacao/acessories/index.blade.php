@@ -13,6 +13,53 @@
             </div>
             <div class="box-body">
                 <div class="row">
+                    <div class="col-md-2 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header">N° Contrato</h5>
+                            <span class="description-text">
+                                {{$p->contracts->numberContract}}
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-2 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header">Cliente</h5>
+                            <span class="description-text">
+                                {{$p->contracts->customer->name}}
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header">Descrição</h5>
+                            <span class="description-text">
+                                {{$p->contracts->description}}
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-2 border-right">
+
+                        <div class="description-block">
+                            <h5 class="description-header">Data de Inicio</h5>
+                            <span class="description-text">
+                                {{\Carbon\Carbon::parse($p->contracts->dtStart)->format("d/m/Y")}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 border-right">
+
+                        <div class="description-block">
+                            <h5 class="description-header">Data de Fim</h5>
+                            <span class="description-text">
+                                {{\Carbon\Carbon::parse($p->contracts->dtEnd)->format("d/m/Y")}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <button
                             type="button"
@@ -28,35 +75,55 @@
                         <div class="table-responsive">
                             <table id="contratos" class="table table-bordered table-striped">
                                 <thead>
-                                    <th>id</th>
-                                    <th>Cod.</th>
                                     <th>Cod. Alternativo</th>
-                                    <th>Descrição</th>
-                                    <th>Quantidade</th>
+                                    <th style="width: 150px">Descrição</th>
+                                    <th>QTD</th>
                                     <th>Nº Serie</th>
                                     <th>R$ Valor</th>
-                                    <th>Contrato</th>
                                     <th>Status</th>
-
+                                    <th>Ações</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($acessories as $item)
 
 
                                     <tr>
-                                       <td>{{$item->id}}</td>
-                                       <td>{{$item->codp}}</td>
                                        <td>{{$item->apelido }}</td>
                                        <td>{{$item->nome}}</td>
                                        <td>{{$item->qtd}}</td>
                                        <td>{{$item->numSerie}}</td>
                                        <td>{{number_format($item->valor, 2)}}</td>
-                                       <td>{{ $item->numberContract}}</td>
                                        <td>
                                             <span class="badge {{$item->active ? 'bg-green': 'bg-red'}}">
                                                 {{$item->active ? 'Operacional' : 'Condenado'}}
                                             </span>
                                        </td>
+                                       <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-info">Opções</button>
+                                            <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="{{route('produtos.edit', $item->id)}}">Editar</a></li>
+                                                <li><a href="{{ route('acessorios.show', $item->id)}}"> Ver Objeto Vinculados</a></li>
+                                                <li><a href="{{route('produtos.show', $item->id)}}">Detalhes</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#" data-toggle="modal" data-target="#modal-condenar">Condenar</a></li>
+
+                                            </ul>
+                                        </div>
+                                        <form method="POST" action="{{route('removeFromContract')}}">
+                                            @csrf
+                                            <button
+                                                name="product_id"
+                                                value="{{$item->id}}"
+                                                class="btn btn-sm btn-danger">
+                                                    Remover
+                                            </button>
+                                        </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
