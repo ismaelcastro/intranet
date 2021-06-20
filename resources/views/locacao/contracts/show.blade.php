@@ -117,7 +117,7 @@
                                             <li><a href="{{ route('acessorios.show', $p->id)}}"> Ver Objeto Vinculados</a></li>
                                             <li><a href="{{route('produtos.show', $p->id)}}">Detalhes</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#" data-toggle="modal" data-target="#modal-condenar">Condenar</a></li>
+                                            <li><a href="#" onclick="setIDFormCondenar({{$p->id}})" data-toggle="modal" data-target="#modal-condenar">Condenar</a></li>
 
                                         </ul>
                                     </div>
@@ -260,7 +260,9 @@
 $(document).ready(function(){
     $('.select2').select2();
 })
-
+function setIDFormCondenar(id){
+    $("[name='product_id']").val(id);
+}
 
 
 

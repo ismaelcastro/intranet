@@ -54,6 +54,10 @@ class SummaryObjController extends Controller
         DB::beginTransaction();
         $createSummary = SummaryObj::create($data);
         $product = Products::find($data['product_id']);
+        $product->objLinked->each(function(Products $acessory){
+            $acessory->id_product = null;
+            $acessory->save();
+        });
         $product->active = 0;
         $productsService->createLocMovOut($product->id, $product->id_contract, 'Patrimônio', 'Condenados');
         $product->id_contract = NULL;
