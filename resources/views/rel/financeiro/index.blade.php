@@ -99,7 +99,7 @@
                                         <th>Baixa</th>
                                         <th>Valor Bruto</th>
                                         <th>Valor Base</th>
-                                        {{-- <th>Forma de Rec.</th> --}}
+                                        <th>Forma de Rec.</th>
                                         <th>Juros</th>
                                         <th>Multa</th>
                                         <th>Valor Desconto</th>
@@ -231,7 +231,7 @@
                     {data:'dtBaixa', name:'dtBaixa'},
                     {data:'VlBruto', name:'VlBruto'},
                     {data:'vlBaseBruto', name:'vlBaseBruto'},
-                    // {data:'FormaRec', name:'FormaRec'},
+                    {data:'FormaRec', name:'FormaRec'},
                     {data:'Juros', name:'Juros', visible: false},
                     {data:'Multa', name:'Multa', visible: false},
                     {data:'VlDesc', name:'VlDesc', visible: false},
