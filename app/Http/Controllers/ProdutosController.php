@@ -28,7 +28,7 @@ class ProdutosController extends Controller
     {
         $data_string = array(
             'cdFilial'=> 0,
-            'cdLocal' => "8,16",
+            'cdLocal' => "7,8,16,15",
             'estoquezero' => "N",
         );
         $produtos = $CallistoAPI->getJson('listaInvetario', 'post', $data_string);
